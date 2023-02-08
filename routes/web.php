@@ -16,8 +16,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'] );
+Route::get('/', [HomeController::class, 'index'])->name("home");
 
-//Route::get('/login', [AuthController::class, 'login'] );
+Route::match(["GET", "POST"], '/login', [AuthController::class, 'login'])->name("login")->middleware("guest");
 
-Route::get('/register', [AuthController::class, 'register'] );
+Route::match(["GET", "POST"], "/register", [AuthController::class, "register"])->name("register")->middleware("guest");
