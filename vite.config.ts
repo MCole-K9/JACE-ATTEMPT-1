@@ -1,4 +1,5 @@
 import { ConfigEnv, defineConfig } from "vite";
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 
@@ -17,7 +18,12 @@ export default defineConfig(({ command }: ConfigEnv) => {
             },
         },
         plugins: [
-            vue(),
+            vue({
+                template: { transformAssetUrls }
+            }),
+            quasar({
+                sassVariables: 'resources/css/quasar-variables.sass'
+            }),
             laravel({
                 input: ["resources/css/app.css", "resources/js/app.ts"],
                 refresh: true,
