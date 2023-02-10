@@ -20,7 +20,7 @@ function register() {
 
 <template>
     <HomeLayout>
-        <section class="grid md:grid-cols-2 mt-10">
+        <!-- <section class="grid md:grid-cols-2 mt-10">
             <section>
             </section>
             <v-form @submit.prevent="register">
@@ -40,7 +40,7 @@ function register() {
                 <v-btn type="submit" class="w-full" color="bg-black">Register</v-btn>
             </v-form>
 
-        </section>
+        </section> -->
 
 
     </HomeLayout>
