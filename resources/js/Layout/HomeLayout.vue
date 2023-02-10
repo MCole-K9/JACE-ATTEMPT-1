@@ -2,6 +2,7 @@
 import { defineComponent, ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import AppBar from '../Components/AppBar.vue';
+import { Roles } from '../Lib/const';
 let drawer = ref(false);
 function setDrawer(bool: boolean) {
     drawer.value = bool;
@@ -35,6 +36,11 @@ let dialog = ref(false);
 function openDialog() {
     dialog.value = true;
 }
+
+const candidateRegisterLink = `/register?role=${Roles.Candidate}` ;
+const orgRepRegisterLink = `/register?role=${Roles.OrganizationRep}`;
+
+
 
 
 
@@ -94,14 +100,14 @@ function openDialog() {
             <!-- properly align the content for me if you can -->
             <q-card-section class="grid md:grid-cols-2 items-center align-middle gap-10 mt-52">
                 <q-card-section class="border-b-2">
-                    <Link href="register?role=2" class="flex justify-around">
+                    <Link :href="candidateRegisterLink" class="flex justify-around">
                        <h5> Sign up as a Candidate</h5>
                        <q-icon size="32px" name="arrow_right_alt" />
                     </Link>
                 </q-card-section>
 
                 <q-card-section class="q-pt-none border-b-2">
-                    <Link href="register?role=3" class="flex justify-around">
+                    <Link :href="orgRepRegisterLink" class="flex justify-around">
                        <h5> Sign up as an Organization Representative</h5>
                        <q-icon size="32px" name="arrow_right_alt" />
                     </Link>
