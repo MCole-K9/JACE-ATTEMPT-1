@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import HomeLayout from '../../Layout/HomeLayout.vue';
 import { router } from '@inertiajs/vue3';
+import { getUrl } from '../../Lib/helper';
+import { Roles } from '../../Lib/const';
 
 
 let form = reactive({
@@ -10,11 +12,24 @@ let form = reactive({
     email: '',
     password: '',
     confirm_password: '',
+    role: 2
 });
 
 function register() {
     router.post('/register', form);
 }
+
+onMounted(() => {
+    let url = getUrl();
+
+    let usrRole = url.searchParams.get("role");
+
+
+    if (usrRole && parseInt(usrRole) == Roles.Candidate || usrRole && parseInt(usrRole) == Roles.OrganizationRep) {
+        form.role = parseInt(usrRole);
+    }
+
+});
 
 </script>
 
