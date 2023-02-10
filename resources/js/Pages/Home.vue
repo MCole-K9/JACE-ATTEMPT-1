@@ -14,6 +14,7 @@
 <template>
     <HomeLayout>
         <h1 class="text-center text-2xl">Hello {{ name }} welcome to the Frontend Battlefield</h1>
+        <div class="bg-rose-500 sm:hidden">hello</div>
         <div class="grid grid-cols-3 p-10">
             <q-input outlined v-model="name" label="Name" />
             <div class="q-pa-md q-gutter-sm">
@@ -25,6 +26,7 @@
                 <q-btn color="deep-orange" glossy label="Deep Orange" />
                 <q-btn color="purple" label="Purple" />
                 <q-btn color="black" label="Black" />
+                
             </div>
         </div>
         <div class="q-pa-md" style="max-width: 400px">
@@ -60,6 +62,7 @@
             <q-btn label="Submit" type="submit" color="primary"/>
             <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
         </div>
+        
         </q-form>
 
         </div>
