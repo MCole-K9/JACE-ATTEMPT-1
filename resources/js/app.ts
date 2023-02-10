@@ -16,6 +16,7 @@ createInertiaApp({
       .use(Quasar, {
         config: {
           // can add quasar config here
+          dark: true
         },
         plugins: {
           // can add quasar plugins here 
