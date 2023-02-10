@@ -101,7 +101,7 @@ function openDialog() {
                 </q-card-section>
 
                 <q-card-section class="q-pt-none border-b-2">
-                    <Link href="register?role=2" class="flex justify-around">
+                    <Link href="register?role=3" class="flex justify-around">
                        <h5> Sign up as an Organization Representative</h5>
                        <q-icon size="32px" name="arrow_right_alt" />
                     </Link>
