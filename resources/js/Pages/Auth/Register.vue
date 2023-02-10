@@ -20,27 +20,27 @@ function register() {
 
 <template>
     <HomeLayout>
-        <!-- <section class="grid md:grid-cols-2 mt-10">
+        <section class="grid md:grid-cols-2 mt-10">
             <section>
             </section>
-            <v-form @submit.prevent="register">
+            <q-form @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
-                    <v-text-field v-model="form.first_name" label="First name"></v-text-field>
-                    <v-text-field v-model="form.last_name" label="Last name"></v-text-field>
+                    <q-input v-model="form.first_name" label="First name"></q-input>
+                    <q-input v-model="form.last_name" label="Last name"></q-input>
                     <div class="md:col-span-2">
-                        <v-text-field v-model="form.email" label="Email"></v-text-field>
+                        <q-input  v-model="form.email" label="Email"></q-input>
                     </div>
                     <div class="md:col-span-2">
-                        <v-text-field v-model="form.password" label="Password"></v-text-field>
+                        <q-input v-model="form.password" label="Password"></q-input>
                     </div>
                     <div class="md:col-span-2">
-                        <v-text-field v-model="form.confirm_password" label="Confirm Password"></v-text-field>
+                        <q-input v-model="form.confirm_password" label="Confirm Password"></q-input>
                     </div>
                 </div>
-                <v-btn type="submit" class="w-full" color="bg-black">Register</v-btn>
-            </v-form>
+                <q-btn  type="submit" class="full-width mt-3" >Register</q-btn>
+            </q-form>
 
-        </section> -->
+        </section>
 
 
     </HomeLayout>
