@@ -21,3 +21,6 @@ Route::get('/', [HomeController::class, 'index'])->name("home");
 Route::match(["GET", "POST"], '/login', [AuthController::class, 'login'])->name("login")->middleware("guest");
 
 Route::match(["GET", "POST"], "/register", [AuthController::class, "register"])->name("register")->middleware("guest");
+
+Route::get("/logout", [AuthController::class, "logout"])->name("logout")->middleware("auth");
+
