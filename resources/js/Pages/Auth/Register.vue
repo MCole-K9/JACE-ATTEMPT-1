@@ -11,22 +11,25 @@ let form = reactive({
     last_name: '',
     email: '',
     password: '',
-    confirm_password: '',
-    role: 2
+    role_id: 2
 });
+
+
 
 function register() {
     router.post('/register', form);
 }
 
 onMounted(() => {
+
+    //probably could have used usePage from @inertiajs/inertia-vue3
     let url = getUrl();
 
     let usrRole = url.searchParams.get("role");
 
 
     if (usrRole && parseInt(usrRole) == Roles.Candidate || usrRole && parseInt(usrRole) == Roles.OrganizationRep) {
-        form.role = parseInt(usrRole);
+        form.role_id = parseInt(usrRole);
     }
 
 });
@@ -43,13 +46,13 @@ onMounted(() => {
                     <q-input v-model="form.first_name" label="First name"></q-input>
                     <q-input v-model="form.last_name" label="Last name"></q-input>
                     <div class="md:col-span-2">
-                        <q-input  v-model="form.email" label="Email"></q-input>
+                        <q-input type="email"  v-model="form.email" label="Email"></q-input>
                     </div>
                     <div class="md:col-span-2">
-                        <q-input v-model="form.password" label="Password"></q-input>
+                        <q-input type="password" v-model="form.password" label="Password"></q-input>
                     </div>
                     <div class="md:col-span-2">
-                        <q-input v-model="form.confirm_password" label="Confirm Password"></q-input>
+                        <q-input type="password" v-model="form.confirm_password" label="Confirm Password"></q-input>
                     </div>
                 </div>
                 <q-btn  type="submit" class="full-width mt-3" >Register</q-btn>
