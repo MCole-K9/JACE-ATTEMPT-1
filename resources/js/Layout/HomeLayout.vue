@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { defineComponent, onMounted, ref } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
 import AppBar from '../Components/AppBar.vue';
 import { Roles } from '../Lib/const';
+import { userStore } from '../Stores/userStore';
+import { User } from '../Lib/types';
+
+const user = userStore();
+
 let drawer = ref(false);
 function setDrawer(bool: boolean) {
     drawer.value = bool;
@@ -39,6 +44,16 @@ function openDialog() {
 
 const candidateRegisterLink = `/register?role=${Roles.Candidate}` ;
 const orgRepRegisterLink = `/register?role=${Roles.OrganizationRep}`;
+
+
+
+
+onMounted(() => {
+    //need a better way to do this
+    //adding to each layout for now
+    //need to to figure out for when persisting layout
+   user.setUser(usePage().props?.user as User ?? null);
+});
 
 
 

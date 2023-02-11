@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { defineComponent, ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
+
+import { userStore } from '../Stores/userStore';
 defineComponent({
     name: 'AppBar',
 });
+
+const user = userStore();
 let drawer = ref(false);
 let emit = defineEmits<{
     (e: 'update:drawer', value: boolean): void
@@ -25,7 +29,7 @@ let emit = defineEmits<{
         <!-- <q-btn flat icon="home" class="touch-only lt-xs"/> -->
         </Link>
         <!-- <Link href="/register" class="hover:text-indigo-500"> -->
-        <q-btn @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind" class="gt-xs" />
+        <q-btn v-if="!user.user" @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind" class="gt-xs" />
         <!-- <q-btn flat stack icon="assignment_ind" class="lt-md"/> -->
         <!-- </Link> -->
         <Link href="/" class="hover:text-indigo-500">
@@ -40,6 +44,5 @@ let emit = defineEmits<{
         <q-btn flat label="Candidates" icon="people" stack class="gt-xs" />
         <!-- <q-btn flat icon="people" stack class="lt-md"/> -->
         </Link>
-
     </q-toolbar>
 </template>
