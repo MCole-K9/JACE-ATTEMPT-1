@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    protected function orgRep()
+    {
+        return $this->hasOne(OrgRep::class);
+    }
 }
