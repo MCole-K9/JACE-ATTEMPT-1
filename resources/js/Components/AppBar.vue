@@ -30,10 +30,7 @@ let emit = defineEmits<{
         </Link>
         <!-- <q-btn flat stack icon="assignment_ind" class="lt-md"/> -->
         <!-- </Link> -->
-        <Link href="/" class="hover:text-indigo-500">
-        <q-btn flat label="Dashboard" icon="dashboard" stack class="gt-xs" />
-        <!-- <q-btn flat icon="dashboard" stack class="lt-md"/> -->
-        </Link>
+
         <Link href="/">
         <q-btn flat label="Jobs" icon="work" stack class="gt-xs" />
         <!-- <q-btn flat icon="work" stack class="lt-md"/> -->
@@ -43,6 +40,6 @@ let emit = defineEmits<{
         <!-- <q-btn flat icon="people" stack class="lt-md"/> -->
         </Link>
         <q-btn v-if="!user.user" @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind" class="gt-xs" />
-        <q-btn v-if="user.user" @click="user.logOut()" flat label="Login" stack icon="login" class="gt-xs" />
+        <q-btn v-if="user.user" @click="user.logOut()" flat label="Logout" stack icon="logout" class="gt-xs" />
     </q-toolbar>
 </template>
