@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
+import { Link } from '@inertiajs/vue3';
 
 
 const leftDrawerOpen = ref(false)
@@ -29,7 +30,21 @@ function toggleLeftDrawer() {
         </q-header>
 
         <q-drawer show-if-above v-model="leftDrawerOpen" side="left" elevated>
-            <!-- drawer content -->
+            <q-scroll-area class="fit py-6 px-1">
+                <q-list>
+                    <Link href="/dashboard">
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="dashboard" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label>Dashboard</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                    </Link>
+                </q-list>
+            </q-scroll-area>
+
         </q-drawer>
 
         <q-page-container>
