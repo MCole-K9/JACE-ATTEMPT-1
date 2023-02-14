@@ -24,6 +24,10 @@
             <q-btn flat label="Candidates" icon="people" stack class="gt-xs"/>
             <!-- <q-btn flat icon="people" stack class="lt-md"/> -->
         </Link>
+        <Link href="/login">
+            <q-btn flat label="Login" icon="login" stack class="gt-xs"/>
+            <!-- <q-btn flat icon="people" stack class="lt-md"/> -->
+        </Link>
         
       </q-toolbar>
 </template>
