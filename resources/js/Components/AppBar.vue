@@ -19,32 +19,27 @@ let emit = defineEmits<{
 
 <template>
     <q-toolbar class="bg-gray-800 h-20 ">
-        <div class="sm:hidden"><q-btn flat round dense icon="menu" @click="emit('update:drawer', drawer = !drawer)"
-            class="q-mr-sm" /></div>
+        <div class="sm:hidden">
+          <q-btn flat round dense icon="menu" @click="emit('update:drawer', drawer = !drawer)" class="q-mr-sm" />
+        </div>
         <q-separator dark vertical inset class="touch-only" />
         <q-btn class="ml-2" flat label="Job Ace" />
         <q-space />
         <Link href="/" class="hover:text-indigo-500">
         <q-btn flat stack label="Home" icon="home" class="gt-xs" />
-        <!-- <q-btn flat icon="home" class="touch-only lt-xs"/> -->
         </Link>
-        <!-- <q-btn flat stack icon="assignment_ind" class="lt-md"/> -->
-        <!-- </Link> -->
-        <Link href="/" class="hover:text-indigo-500">
+        <Link href="/">
         <q-btn flat label="Jobs" icon="work" stack class="gt-xs" />
-        <!-- <q-btn flat icon="work" stack class="lt-md"/> -->
         </Link>
         <Link href="/" class="hover:text-indigo-500"> 
         <q-btn flat label="Candidates" icon="people" stack class="gt-xs" />
-        <!-- <q-btn flat icon="people" stack class="lt-md"/> -->
         </Link >
-        <q-btn class="hover:text-indigo-500 gt-xs" v-if="!user.user" @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind"/>
-        <q-btn class="hover:text-indigo-500 gt-xs" v-if="user.user" @click="user.logOut()" flat label="Login" stack icon="login" />
+        <q-btn v-if="!user.user" @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind" class="gt-xs" />
+        <q-btn v-if="user.user" @click="user.logOut()" flat label="Logout" stack icon="logout" class="gt-xs" />
         <q-btn icon="account_circle" class="hover:text-indigo-500" round size="lg"  >
           <q-menu>
             <div class="row no-wrap q-pa-md">
               <div class="column">
-                <!-- <div class="text-h6 q-mb-md">Settings</div> -->
                 <q-btn icon="dashboard" label="Dashboard" />
               </div>
               <q-separator vertical inset class="q-mx-lg" />
@@ -52,9 +47,7 @@ let emit = defineEmits<{
                 <q-avatar size="72px">
                   <img src="https://cdn.quasar.dev/img/avatar4.jpg">
                 </q-avatar>
-
                 <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
-
                 <q-btn
                   color="primary"
                   label="Logout"
