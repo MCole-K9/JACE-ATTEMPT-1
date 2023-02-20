@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrganizationController;
 
 
 /*
@@ -27,3 +28,5 @@ Route::get("/logout", [AuthController::class, "logout"])->name("logout")->middle
 
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard")->middleware("auth");
 
+
+Route::get("/organization", [OrganizationController::class, "index"])->name("organization")->middleware("auth");
