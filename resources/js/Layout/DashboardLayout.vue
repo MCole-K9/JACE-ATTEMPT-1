@@ -35,7 +35,7 @@ function toggleLeftDrawer() {
                     <Link href="/dashboard">
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
-                                <q-icon name="corporate_fare" />
+                                <q-icon name="dashboard" />
                             </q-item-section>
                             <q-item-section>
                                 <q-item-label>Dashboard</q-item-label>
@@ -45,7 +45,7 @@ function toggleLeftDrawer() {
                     <Link  href="/organization">
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
-                                <q-icon name="dashboard" />
+                                <q-icon name="corporate_fare" />
                             </q-item-section>
                             <q-item-section>
                                 <q-item-label>Organization</q-item-label>
