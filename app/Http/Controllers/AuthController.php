@@ -41,16 +41,12 @@ class AuthController extends Controller
             return Inertia::render('Auth/Register');
         }
 
-
-
-
-
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', ], // 'confirmed'
-            'role_id' => ['required', 'integer', 'min:1', 'max:2'],
+            'password' => ['required', 'string', 'min:6', ], // 'confirmed'
+            'role_id' => ['required', 'integer', 'min:2', 'max:3'],
         ]);
 
         User::create([
