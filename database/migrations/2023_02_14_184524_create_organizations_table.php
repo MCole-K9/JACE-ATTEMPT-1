@@ -18,8 +18,15 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique()->default(Str::uuid()->toString());
             $table->string('name');
-            $table->string('address');
-            $table->text('description');
+            $table->string('street_address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('zip');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('website');
+            $table->string('logo')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
 

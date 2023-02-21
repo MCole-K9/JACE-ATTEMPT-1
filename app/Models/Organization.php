@@ -11,8 +11,15 @@ class Organization extends Model
 
     protected $fillable = [
         'name',
-        'address',
+        'street_address',
+        'city',
+        'zip',
+        'state',
         'description',
+        'email',
+        'phone',
+        'website',
+        'logo',
     ];
 
     public function orgReps()
