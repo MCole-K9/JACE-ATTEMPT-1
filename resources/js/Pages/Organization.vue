@@ -3,6 +3,7 @@ import DashboardLayout from '../Layout/DashboardLayout.vue';
 import { Organization } from '../Lib/types';
 import { defineProps, reactive, ref } from 'vue';
 import { router } from '@inertiajs/core';
+import { usePage } from '@inertiajs/vue3';
 
 
 const props = defineProps<{
@@ -18,22 +19,25 @@ const tabOptions = {
 
 let tab = ref<keyof typeof tabOptions>('register');
 
-let newOrg = reactive({
-    name: '',
-    email: '',
-    phone: '',
-    website: '',
-    street_address: '',
-    city: '',
-    state: '',
-    zip: ''
+type NewOrg = Omit<Organization, "id" | "code" | "created_at" | "updated_at">;
+
+let org = reactive({
+    name: props.organization?.name ?? "",
+    email:  props.organization?.email ?? "",
+    website: props.organization?.website ?? "",
+    phone:  props.organization?.phone ?? "",
+    street_address: props.organization?.street_address ?? "",
+    city: props.organization?.city ?? "",
+    state: props.organization?.state ?? "",
+    zip: props.organization?.zip ?? "",
+
 });
 
 let org_code = ref('');
 
 function register() {
 
-    router.post('/organizations', newOrg);
+    router.post('/organization', org);
 
 }
 
@@ -61,14 +65,14 @@ function connect() {
                             <p class="my-2 text-2xl font-bold">Register a new organization.</p>
                             <q-form @submit.prevent="register" class="mx-auto">
                                 <div class="grid md:grid-cols-2 gap-4">
-                                    <q-input v-model="newOrg.name" label="Organization Name"></q-input>
-                                    <q-input v-model="newOrg.email" label="Email"></q-input>
-                                    <q-input type="url" v-model="newOrg.website" label="Website"></q-input>
-                                    <q-input v-model="newOrg.phone" label="Phone"></q-input>
-                                    <q-input v-model="newOrg.street_address" label="Street Address"></q-input>
-                                    <q-input v-model="newOrg.city" label="City"></q-input>
-                                    <q-input v-model="newOrg.state" label="State"></q-input>
-                                    <q-input v-model="newOrg.zip" label="Zip"></q-input>
+                                    <q-input v-model="org.name" label="Organization Name"></q-input>
+                                    <q-input v-model="org.email" label="Email"></q-input>
+                                    <q-input type="url" v-model="org.website" label="Website"></q-input>
+                                    <q-input v-model="org.phone" label="Phone"></q-input>
+                                    <q-input v-model="org.street_address" label="Street Address"></q-input>
+                                    <q-input v-model="org.city" label="City"></q-input>
+                                    <q-input v-model="org.state" label="State"></q-input>
+                                    <q-input v-model="org.zip" label="Zip"></q-input>
                                 </div>
                                 <q-btn type="submit" color="primary" class="mt-3">Register</q-btn>
 
@@ -87,6 +91,24 @@ function connect() {
                         </section>
                     </q-tab-panel>
                 </q-tab-panels>
+            </section>
+            <section v-else  id="organization">
+                <section class="text-center p-3">
+                    <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
+                    <q-form @submit.prevent="" class="mx-auto">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <q-input v-model="org.name" label="Organization Name"></q-input>
+                                    <q-input v-model="org.email" label="Email"></q-input>
+                                    <q-input type="url" v-model="org.website" label="Website"></q-input>
+                                    <q-input v-model="org.phone" label="Phone"></q-input>
+                                    <q-input v-model="org.street_address" label="Street Address"></q-input>
+                                    <q-input v-model="org.city" label="City"></q-input>
+                                    <q-input v-model="org.state" label="State"></q-input>
+                                    <q-input v-model="org.zip" label="Zip"></q-input>
+                        </div>
+                        <q-btn type="submit" color="primary" class="mt-3">Update</q-btn>
+                    </q-form>
+                </section>
             </section>
         </div>
     </DashboardLayout>

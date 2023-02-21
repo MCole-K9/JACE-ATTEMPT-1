@@ -29,4 +29,8 @@ Route::get("/logout", [AuthController::class, "logout"])->name("logout")->middle
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard")->middleware("auth");
 
 
-Route::get("/organization", [OrganizationController::class, "index"])->name("organization")->middleware("auth");
+Route::prefix("organization")->group(function () {
+    Route::get("/", [OrganizationController::class, "index"])->name("organization")->middleware("auth");
+    Route::post("/", [OrganizationController::class, "store"])->name("organization.store")->middleware("auth");
+    Route::put("/{id}", [OrganizationController::class, "update"])->name("organization.update")->middleware("auth");
+});

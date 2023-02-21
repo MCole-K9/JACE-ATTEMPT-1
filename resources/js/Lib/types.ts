@@ -10,13 +10,17 @@ export type User = {
 export type Organization = {
     id: number;
     name: string;
-    address: string;
+    street_address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string | undefined; // little lie rn
     code: string;
-    description: string;
-    // phone: string; need to add these to the migration
-    // email: string;
-    // website: string;
-    // logo: string;
+    description: string | undefined;
+    phone: string;
+    email: string;
+    website: string;
+    logo: string | undefined;
     created_at: Date;
     updated_at: Date;
 }
