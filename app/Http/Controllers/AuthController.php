@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrgRep;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +24,12 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
 
             return redirect()->route("home"); // redirect to dashboard after login
         }
-
-
     }
 
     public function register(Request $request)
@@ -41,21 +40,29 @@ class AuthController extends Controller
             return Inertia::render('Auth/Register');
         }
 
-        $request->validate([
+        $validatedFelids =  $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', ], // 'confirmed'
+            'password' => ['required', 'string', 'min:6',], // 'confirmed'
             'role_id' => ['required', 'integer', 'min:2', 'max:3'],
         ]);
 
-        User::create([
-            'first_name' => $request->input('first_name') ,
+        $user = User::create([
+            'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role_id' => (int)$request->input('role_id'),
         ]);
+
+        $user->role_id == 2
+            ?
+            // associate candidate with user
+            :
+            OrgRep::create(["user_id" => $user->id])
+            ;
+
 
 
         return redirect()->route("login");
