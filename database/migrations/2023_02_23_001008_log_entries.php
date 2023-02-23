@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('reason');
             $table->string('action');
-            $table->timestamp();
+            $table->timestamp('logged_at');
         });
     }
 
