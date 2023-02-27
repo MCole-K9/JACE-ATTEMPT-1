@@ -5,6 +5,7 @@ import AppBar from '../Components/AppBar.vue';
 import { Roles } from '../Lib/const';
 import { userStore } from '../Stores/userStore';
 import { User } from '../Lib/types';
+import { getUrl } from '../Lib/helper';
 
 const user = userStore();
 
@@ -88,8 +89,8 @@ onMounted(() => {
             </q-scroll-area>
         </q-drawer>
 
-        <q-page-container class="cont">
-            <q-page padding>
+        <q-page-container>
+            <q-page class="cont" :padding="getUrl().pathname != '/'">
                 <slot />
             </q-page>
         </q-page-container>
@@ -135,10 +136,12 @@ onMounted(() => {
 
 <style>
 .cont {
-    background: linear-gradient(-45deg, #f2c211, #1b5dac, #227C70);
+    background: linear-gradient(-45deg, #f2c111, #1b5dac);
+    /* background-color: #f2c211; */
+    z-index: 1;
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 @keyframes gradient {
