@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HomeLayout from '../../Layout/HomeLayout.vue';
 import { router } from '@inertiajs/vue3';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 
 const form = reactive({
@@ -14,6 +14,7 @@ function login() {
     router.post('/login', form);
 }
 
+let loading = ref(false);
 </script>
 
 
@@ -62,7 +63,7 @@ function login() {
                     <q-btn flat label="Register" />
                 </div>
 				<div>
-					<button class="w-full bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition-colors duration-300" type="submit">Log In</button>
+					<q-btn label="log in" class="full-width" :loading="loading" @click="loading = true" type="submit" color="blue"/>
 				</div>
 			</q-form>
 		</div>

@@ -35,11 +35,14 @@ let emit = defineEmits<{
         <q-btn flat label="Candidates" icon="people" stack class="gt-xs" />
         </Link >
         <q-btn v-if="!user.user" @click="emit('registerClicked')" flat label="Register" stack icon="assignment_ind" class="gt-xs" />
-        <q-btn v-if="user.user" @click="user.logOut()" flat label="Logout" stack icon="logout" class="gt-xs" />
-        <q-btn icon="account_circle" class="hover:text-indigo-500" round size="lg"  >
+        <Link v-if="!user.user" href="/login" class="hover:text-indigo-500"> 
+        <q-btn flat label="Login" icon="login" stack class="gt-xs" />
+        </Link >
+        <!-- <q-btn  @click="user.logOut()" flat label="Logout" stack icon="logout" class="gt-xs" /> -->
+        <q-btn v-if="user.user" icon="account_circle" class="hover:text-indigo-500" round size="lg" >
           <q-menu>
             <div class="row no-wrap q-pa-md">
-              <div class="column">
+              <div class="column w-fit">
                 <q-btn icon="dashboard" label="Dashboard" />
               </div>
               <q-separator vertical inset class="q-mx-lg" />
@@ -47,7 +50,7 @@ let emit = defineEmits<{
                 <q-avatar size="72px">
                   <img src="https://cdn.quasar.dev/img/avatar4.jpg">
                 </q-avatar>
-                <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+                <div class="text-subtitle q-mt-md q-mb-md w-36 text-center">{{ user.getFullName }}</div>
                 <q-btn
                   color="primary"
                   label="Logout"
