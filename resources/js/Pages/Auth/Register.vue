@@ -84,10 +84,10 @@ let loading = ref(false);
     <HomeLayout>
         <section class="flex flex-col items-center space-y-5 mt-10">
             <section class="flex flex-col space-y-5 text-center">
-                <h1 class="text-3xl font-bold">Register</h1>
-                <p class="text-gray-800">Register to get started (logo can go under)</p>
+                <h1 class="text-5xl font-bold">Register</h1>
+                <p class="text-gray-800 font-bold">Sign up to get started</p>
             </section>
-            <div class="w-full bg-gray-800 p-5 h-full rounded-lg max-w-5xl">
+            <div class="w-full bg-gray-800 p-10 h-full rounded-lg max-w-5xl">
             <q-form :ref="myForm" @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
                     <q-input v-model="form.first_name" label="First name" :error="usePage().props?.errors.first_name != undefined" :errorMessage="usePage().props?.errors.first_name"></q-input>
