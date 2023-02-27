@@ -40,7 +40,7 @@ let loading = ref(false);
             </q-form>
                 </div> -->
 
-        <!-- </section> --> -->
+        <!-- </section> -->
         <div class="h-full flex items-center justify-center">
             <!-- <section class="flex flex-col justify-center items-center w-full max-w-6xl h-96"></section> -->
 		<div class="max-w-md w-full bg-gray-800 p-6 rounded-md shadow-lg">
@@ -59,7 +59,7 @@ let loading = ref(false);
                     <q-btn flat label="Forgot password?" />
                 </div>
                 <div class="flex items-center justify-between">
-                    <q-btn flat label="Don't have an account?" />
+                    <q-btn  flat label="Don't have an account?" />
                     <q-btn flat label="Register" />
                 </div>
 				<div>

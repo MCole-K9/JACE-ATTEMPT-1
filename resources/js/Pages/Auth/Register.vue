@@ -77,13 +77,17 @@ onMounted(() => {
 
 });
 
+let loading = ref(false);
 </script>
 
 <template>
     <HomeLayout>
-        <section class="grid md:grid-cols-2 mt-10">
-            <section>
+        <section class="flex flex-col items-center space-y-5 mt-10">
+            <section class="flex flex-col space-y-5 text-center">
+                <h1 class="text-3xl font-bold">Register</h1>
+                <p class="text-gray-800">Register to get started (logo can go under)</p>
             </section>
+            <div class="w-full bg-gray-800 p-5 h-full rounded-lg max-w-5xl">
             <q-form :ref="myForm" @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
                     <q-input v-model="form.first_name" label="First name" :error="usePage().props?.errors.first_name != undefined" :errorMessage="usePage().props?.errors.first_name"></q-input>
@@ -98,10 +102,11 @@ onMounted(() => {
                         <q-input type="password" v-model="form.confirm_password" label="Confirm Password"></q-input>
                     </div>
                 </div>
-                <q-btn  type="submit" class="full-width mt-3" >Register</q-btn>
-                <q-btn  @click="log.info(errors)" >toggle</q-btn>
-                <p>{{ usePage().props?.errors }}</p>
+                <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn>
+                <!-- <q-btn  @click="log.info(errors)" >toggle</q-btn> -->
+               
             </q-form>
+            </div>
 
         </section>
 
