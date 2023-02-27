@@ -6,6 +6,7 @@ use App\Models\Organization;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class OrganizationController extends Controller
@@ -36,21 +37,40 @@ class OrganizationController extends Controller
         //Auth::user()->orgRep->organization()->create($validatedFields, ["name" => Str::title($validatedFields["name"]), "email" => Str::lower($validatedFields["email"])] );
 
         //not liking this, needs to go in a transaction or something
-        $org = Organization::create($validatedFields, ["name" => Str::title($validatedFields["name"]), "email" => Str::lower($validatedFields["email"])] );
+        $org = Organization::create($validatedFields, ["name" => Str::title($validatedFields["name"]), "email" => Str::lower($validatedFields["email"])]);
         Auth::user()->orgRep->organization()->associate($org);
+        Auth::user()->orgRep->org_role_id = 1;  //admin // hard coded for now
         Auth::user()->orgRep->save();
 
 
         return redirect()->route('organization');
-
-
-
     }
 
 
 
     public function update(Request $request, $id)
     {
+    }
+
+    public function connect(Request $request)
+    {
+
+        $validatedFields = $request->validate([
+            "organization_code" => ["required", "exists:organizations,code"],
+        ]);
+
+        $org = Organization::where('code', $validatedFields["organization_code"])->first();
+
+
+
+
+        Auth::user()->orgRep->organization()->associate($org);
+        Auth::user()->orgRep->org_role_id = 2;  //recruiter // hard coded for now
+        Auth::user()->orgRep->save();
+
+
+
+        return redirect()->route('organization');
     }
 
 

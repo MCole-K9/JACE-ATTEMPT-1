@@ -33,4 +33,5 @@ Route::prefix("organization")->group(function () {
     Route::get("/", [OrganizationController::class, "index"])->name("organization")->middleware("auth");
     Route::post("/", [OrganizationController::class, "store"])->name("organization.store")->middleware("auth");
     Route::put("/{id}", [OrganizationController::class, "update"])->name("organization.update")->middleware("auth");
+    Route::post("/connect", [OrganizationController::class, "connect"])->name("organization.connect")->middleware("auth");
 });
