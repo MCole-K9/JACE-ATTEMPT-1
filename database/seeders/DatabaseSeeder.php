@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\OrgRole;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 
@@ -26,6 +28,11 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Admin'],
             ['name' => 'Candidate'],
             ['name' => 'Organization Representative'],
+        ]);
+
+        OrgRole::factory()->createMany([
+            ['name' => 'Admin'],
+            ['name' => 'Recruiter'],
         ]);
     }
 }

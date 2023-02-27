@@ -19,6 +19,11 @@ class OrgRep extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function orgRole()
+    {
+        return $this->belongsTo(OrgRole::class);
+    }
+
     public function organization()
     {
         return $this->belongsTo(Organization::class);
