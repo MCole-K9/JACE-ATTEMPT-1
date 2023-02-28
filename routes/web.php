@@ -4,6 +4,10 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AboutController;
 
 
 /*
@@ -26,4 +30,12 @@ Route::match(["GET", "POST"], "/register", [AuthController::class, "register"])-
 Route::get("/logout", [AuthController::class, "logout"])->name("logout")->middleware("auth");
 
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard")->middleware("auth");
+
+Route::resource("/jobs", JobController::class)->middleware("guest");
+
+Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
+
+Route::get("/contact", [ContactController::class, "index"])->name("contact")->middleware("guest");
+
+Route::get("/about", [AboutController::class, "index"])->name("about")->middleware("guest");
 
