@@ -1,13 +1,29 @@
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
-import { Link } from '@inertiajs/vue3';
+import { ref, defineProps, onMounted } from 'vue'
+import { Link, usePage } from '@inertiajs/vue3';
+import { User } from '../Lib/types';
+import { userStore } from '../Stores/userStore';
 
-
+let user = userStore();
 const leftDrawerOpen = ref(false)
 
 function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+onMounted(() => {
+    //need a better way to do this
+    //adding to each layout for now
+    //need to to figure out for when persisting layout
+    // console.log(usePage().props?.user);
+
+   user.setUser(usePage().props?.user as User ?? null);
+
+
+});
+
+
+
 
 
 

@@ -53,7 +53,10 @@ onMounted(() => {
     //need a better way to do this
     //adding to each layout for now
     //need to to figure out for when persisting layout
+    //console.log(usePage().props);
+
    user.setUser(usePage().props?.user as User ?? null);
+
 });
 
 

@@ -4,7 +4,7 @@ import { Organization } from '../Lib/types';
 import { defineProps, reactive, ref } from 'vue';
 import { router } from '@inertiajs/core';
 import { usePage } from '@inertiajs/vue3';
-
+import { userStore } from '../Stores/userStore';
 
 const props = defineProps<{
     organization: Organization | null,

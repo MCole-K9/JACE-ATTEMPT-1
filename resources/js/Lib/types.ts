@@ -4,6 +4,10 @@ export type User = {
     last_name: string;
     email: string;
     role_id: number;
+    org_rep ?: {
+        org_role_id: number;
+        organization_id: number;
+    }
 }
 
 
