@@ -5,41 +5,14 @@ import HomeLayout from '../../Layout/HomeLayout.vue';
 import { router, usePage } from '@inertiajs/vue3';
 import { getUrl } from '../../Lib/helper';
 import { Roles } from '../../Lib/const';
-import { QForm } from 'quasar';
 import { Logger, ILogObj } from "tslog";
+import Input from '../../Components/Input.vue';
 
 const log: Logger<ILogObj> = new Logger();
 
 
 let myForm: any = ref();
 
-function validate () {
-    console.log(myForm);
-    (myForm as unknown as QForm).validate().then((success: any) => {
-      if (success) {
-        // yay, models are correct
-        console.log('yay');
-        
-      }
-      else {
-        // oh no, user has filled in
-        // at least one invalid value
-        console.log('oh no');
-      }
-    })
-    // myForm.value?.validate().then((success: any) => {
-    //   if (success) {
-    //     // yay, models are correct
-    //     console.log('yay');
-        
-    //   }
-    //   else {
-    //     // oh no, user has filled in
-    //     // at least one invalid value
-    //     console.log('oh no');
-    //   }
-    // })
-  }
 let form = reactive({
     first_name: '',
     last_name: '',
@@ -82,30 +55,32 @@ let loading = ref(false);
 
 <template>
     <HomeLayout>
-        <section class="flex flex-col items-center space-y-5 mt-10">
-            <section class="flex flex-col space-y-5 text-center">
-                <h1 class="text-5xl font-bold">Register</h1>
-                <p class="text-gray-800 font-bold">Sign up to get started</p>
-            </section>
-            <div class="w-full bg-gray-800 p-10 h-full rounded-lg max-w-5xl">
-            <q-form :ref="myForm" @submit.prevent="register" >
+        <section class="flex flex-col items-center space-y-5 pt-10">
+            
+            <div class="w-full bg-gray-100 p-10 h-full rounded-lg max-w-5xl">
+                <section class="flex flex-col text-center mb-10">
+                    <h1 class="text-3xl text-gray-1100 font-bold">Register</h1>
+                    <p class="text-gray-1100 font-bold">Sign up to get started</p>
+                </section>
+            <form :ref="myForm" @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
-                    <q-input v-model="form.first_name" label="First name" :error="usePage().props?.errors.first_name != undefined" :errorMessage="usePage().props?.errors.first_name"></q-input>
-                    <q-input v-model="form.last_name" label="Last name" :error="usePage().props?.errors.last_name != undefined" :errorMessage="usePage().props?.errors.last_name"></q-input>
+                    <Input @update:value="form.first_name = $event" :value="form.first_name" label="First name" :error="usePage().props?.errors.first_name != undefined" type="email" :errorMessage="usePage().props?.errors.first_name"></Input>
+                    <Input @update:value="form.last_name = $event" :value="form.last_name" label="Last name" :error="usePage().props?.errors.last_name != undefined" type="email" :errorMessage="usePage().props?.errors.last_name"></Input>
                     <div class="md:col-span-2">
-                        <q-input type="email"  v-model="form.email" label="Email" :error="usePage().props?.errors.email != undefined" :errorMessage="usePage().props?.errors.email"></q-input>
+                        <Input @update:value="form.email = $event" :value="form.email" label="Email" :error="usePage().props?.errors.email != undefined" type="email" :errorMessage="usePage().props?.errors.email"></Input>
                     </div>
                     <div class="md:col-span-2">
-                        <q-input type="password" v-model="form.password" label="Password" :error="usePage().props?.errors.password != undefined" :errorMessage="usePage().props?.errors.password"></q-input>
+                        <Input @update:value="form.password = $event" :value="form.password" label="Password" :error="usePage().props?.errors.password != undefined" type="password" :errorMessage="usePage().props?.errors.password"></Input>
                     </div>
                     <div class="md:col-span-2">
-                        <q-input type="password" v-model="form.confirm_password" label="Confirm Password"></q-input>
+                        <Input @update:value="form.confirm_password = $event" :value="form.confirm_password" label="Confirm Password" :error="usePage().props?.errors.confirm_password != undefined" type="password" :errorMessage="usePage().props?.errors.confirm_password"></Input>
                     </div>
                 </div>
-                <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn>
+                <!-- <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn> -->
+                <p class="text-error">{{  }}</p>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
                 <!-- <q-btn  @click="log.info(errors)" >toggle</q-btn> -->
-               
-            </q-form>
+            </form>
             </div>
 
         </section>
