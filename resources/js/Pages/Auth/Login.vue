@@ -2,6 +2,7 @@
 import HomeLayout from '../../Layout/HomeLayout.vue';
 import { router } from '@inertiajs/vue3';
 import { reactive, ref } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 
 const form = reactive({
@@ -21,51 +22,33 @@ let loading = ref(false);
 
 <template>
     <HomeLayout>
-        <!-- <section class="flex justify-center items-center pt-40">
-             <section>
-            </section> -->
-            <!-- <section class="flex flex-col justify-center items-center w-full max-w-6xl bg-gray-800 h-80"> -->
-                
-                
-            <!-- </section> -->
-            <!-- <h1 class="text-4xl font-bold">Login</h1>
-                <p class="text-gray-200 font-bold">Login to your account</p>
-                <div class="bg-gray-800 p-5">
-                    <q-form @submit.prevent="login">
-                <div class="flex flex-col space-y-2">
-                    <q-input v-model="form.email" label="Email"></q-input>
-                    <q-input type="password" v-model="form.password" label="Password"></q-input>
-                </div>
-                <q-btn type="submit" class="full-width mt-3">Login</q-btn>
-            </q-form>
-                </div> -->
-
-        <!-- </section> -->
         <div class="h-full flex items-center justify-center">
-            <!-- <section class="flex flex-col justify-center items-center w-full max-w-6xl h-96"></section> -->
-		<div class="max-w-md w-full bg-gray-800 p-6 rounded-md shadow-lg">
-            
-			<h1 class="text-3xl font-bold text-center mb-6">Log In</h1>
-            <p class="text-gray-200 font-bold text-center">Login to your account</p>
-			<q-form class="space-y-6" @submit.prevent="login">
+		<div class="max-w-md w-full mt-20 bg-gray-100 p-6 rounded-md shadow-lg">
+			<h1 class="text-3xl font-bold text-center">Log In</h1>
+            <p class="text-gray-1100 font-bold text-center">Login to your account</p>
+			<form class="space-y-6 mt-5" @submit.prevent="login">
 				<div>
-					<q-input v-model="form.email" label="Email"></q-input>
+                    <input v-model="form.email" class="input-ghost-primary input-block input" placeholder="Email" />
 				</div>
 				<div>
-                    <q-input type="password" v-model="form.password" label="Password"></q-input>
+                    <input type="password" v-model="form.password" class="input-ghost-primary input-block input" placeholder="Password" />
 				</div>
                 <div class="flex items-center justify-between">
-                    <q-checkbox v-model="form.remember" label="Remember me" />
-                    <q-btn flat label="Forgot password?" />
+                    <label class="flex cursor-pointer gap-2">
+                        <input type="checkbox" class="checkbox" v-model="form.remember"/>
+                        <span>Remember me?</span>
+                    </label>
+                    <Link class="link" href="/register">Don't have an account?</Link>
                 </div>
                 <div class="flex items-center justify-between">
-                    <q-btn  flat label="Don't have an account?" />
-                    <q-btn flat label="Register" />
+                    
+                    
                 </div>
 				<div>
-					<q-btn label="log in" class="full-width" :loading="loading" @click="loading = true" type="submit" color="blue"/>
+					<!-- <q-btn label="log in" class="full-width" :loading="loading" @click="loading = true" type="submit" color="blue"/> -->
+                    <button class="btn btn-block btn-primary">Login</button>
 				</div>
-			</q-form>
+			</form>
 		</div>
 	</div>
 

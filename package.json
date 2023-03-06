@@ -25,7 +25,7 @@
         "@inertiajs/vue3": "^1.0.0",
         "@quasar/extras": "^1.15.10",
         "pinia": "^2.0.30",
-        "quasar": "^2.11.5",
+        "rippleui": "^1.9.0",
         "tslog": "^4.7.2",
         "vue": "^3.2.36"
     }
