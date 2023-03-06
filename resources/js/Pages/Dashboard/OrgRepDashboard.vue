@@ -7,13 +7,7 @@ import DashboardLayout from '../../Layout/DashboardLayout.vue';
 <template>
 
     <DashboardLayout>
-        <div class="q-pa-md">
-            <q-card>
-                <q-card-section>
-                    <div class="text-h6">OrgRep Dashboard</div>
-                </q-card-section>
-            </q-card>
-        </div>
+        HEllo
     </DashboardLayout>
 
 </template>

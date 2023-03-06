@@ -17,7 +17,7 @@ onMounted(() => {
     //need to to figure out for when persisting layout
     // console.log(usePage().props?.user);
 
-   user.setUser(usePage().props?.user as User ?? null);
+    user.setUser(usePage().props?.user as User ?? null);
 
 
 });
@@ -29,7 +29,7 @@ onMounted(() => {
 
 </script>
 
-<template>
+<!-- <template>
     <q-layout view="hHh LpR fFf">
 
         <q-header elevated class="bg-primary text-white">
@@ -79,7 +79,62 @@ onMounted(() => {
 
     </q-layout>
 </template>
+ -->
 
 
 
+ <!-- <input type="checkbox" id="drawer-left" value={true} class="drawer-toggle" />
+
+ <label for="drawer-left" class="btn btn-primary">Open Left</label>
+ <label class="overlay" for="drawer-left"></label>
+ <div class="drawer">
+     <div class="drawer-content pt-10 flex flex-col h-full">
+         <label for="drawer-left" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+         <nav class="menu bg-gray-2 p-2 rounded-md">
+             <section class="menu-section">
+                 <ul class="menu-items">
+                     <Link href="/dashboard">
+                         <li class="menu-item">Dashboard</li>
+                     </Link>
+                     <Link  href="/organization">
+                         <li class="menu-item">Organization</li>
+                     </Link>
+                     <li class="menu-item">Projects</li>
+                     <li class="menu-item">Calendar</li>
+                 </ul>
+             </section>
+         </nav>
+
+     </div>
+ </div> -->
+
+<template>
+    <main class="grid grid-cols-12">
+        <aside class="hidden md:block md:col-span-2 transition-all ">
+            <div class="flex h-screen flex-col justify-between border-r ">
+                <div class="px-4 py-6">
+                    <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+                        Logo
+                    </span>
+                    <nav class="menu bg-gray-2 p-2 rounded-md">
+                        <section class="menu-section">
+                            <ul class="menu-items">
+                                <Link href="/dashboard">
+                                    <li class="menu-item">Dashboard</li>
+                                </Link>
+                                <Link href="/organization">
+                                    <li class="menu-item">Organization</li>
+                                </Link>
+                            </ul>
+                        </section>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+        <section class="col-span-full md:col-span-10 p-10">
+            <slot />
+        </section>
+
+    </main>
+</template>
 

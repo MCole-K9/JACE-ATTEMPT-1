@@ -6,13 +6,7 @@ import DashboardLayout from '../../Layout/DashboardLayout.vue';
 
 <template>
     <DashboardLayout>
-        <div class="q-pa-md">
-            <q-card>
-                <q-card-section>
-                    <div class="text-h6">Candidate Dashboard</div>
-                </q-card-section>
-            </q-card>
-        </div>
+        <h1>Candidate</h1>
     </DashboardLayout>
 </template>
 

@@ -5,6 +5,7 @@ import { defineProps, reactive, ref } from 'vue';
 import { router } from '@inertiajs/core';
 import { usePage } from '@inertiajs/vue3';
 import { userStore } from '../Stores/userStore';
+import Input from '../Components/Input.vue';
 
 const props = defineProps<{
     organization: Organization | null,
@@ -16,6 +17,12 @@ const tabOptions = {
 } as const;
 
 let tab = ref<keyof typeof tabOptions>('register');
+
+
+function changeTab(selected: keyof typeof tabOptions) {
+
+  tab.value = selected;
+}
 
 type NewOrg = Omit<Organization, "id" | "code" | "created_at" | "updated_at">;
 
@@ -51,65 +58,63 @@ function connect() {
 
 <template>
     <DashboardLayout>
-        <div class="q-pa-md">
-            <h3>Organization</h3>
-            <section id="register-connect" class="mt-5  mx-auto w-full " v-if="!props.organization">
-                <q-tabs v-model="tab" inline-label class="text-white shadow-2">
-                    <q-tab :name="tabOptions.register" icon="corporate_fare" label="Register Organization" />
-                    <q-tab :name="tabOptions.connect" icon="connect_without_connect" label="Connect To Organization" />
-                </q-tabs>
-                <q-separator />
-                <q-tab-panels v-model="tab">
-                    <q-tab-panel :name="tabOptions.register">
-                        <section class="text-center p-3">
-                            <p class="my-2 text-2xl font-bold">Register a new organization.</p>
-                            <q-form @submit.prevent="register" class="mx-auto">
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <q-input v-model="org.name" label="Organization Name"></q-input>
-                                    <q-input v-model="org.email" label="Email"></q-input>
-                                    <q-input type="url" v-model="org.website" label="Website"></q-input>
-                                    <q-input v-model="org.phone" label="Phone"></q-input>
-                                    <q-input v-model="org.street_address" label="Street Address"></q-input>
-                                    <q-input v-model="org.city" label="City"></q-input>
-                                    <q-input v-model="org.state" label="State"></q-input>
-                                    <q-input v-model="org.zip" label="Zip"></q-input>
-                                </div>
-                                <q-btn type="submit" color="primary" class="mt-3">Register</q-btn>
+    <h3>Organization</h3>
+    <section id="register-connect" class="mt-5  mx-auto w-full " v-if="!props.organization">
 
-                            </q-form>
-                        </section>
-                    </q-tab-panel>
-                    <q-tab-panel :name="tabOptions.connect">
-                        <section class="text-center p-8">
-                            <p class="mt-4 text-2xl font-bold">Connect to an existing organization.</p>
-                            <q-form @submit.prevent="connect">
-                                <q-input v-model="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code" label="Organization Code"></q-input>
-                                <q-btn type="submit" class="mt-4" color="primary" label="Connect" />
-                            </q-form>
-
-                        </section>
-                    </q-tab-panel>
-                </q-tab-panels>
-            </section>
-            <section v-else id="organization">
-                <section class="text-center p-3">
-                    <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
-                    <q-form @submit.prevent="" class="mx-auto">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <q-input v-model="org.name" label="Organization Name"></q-input>
-                            <q-input v-model="org.email" label="Email"></q-input>
-                            <q-input type="url" v-model="org.website" label="Website"></q-input>
-                            <q-input v-model="org.phone" label="Phone"></q-input>
-                            <q-input v-model="org.street_address" label="Street Address"></q-input>
-                            <q-input v-model="org.city" label="City"></q-input>
-                            <q-input v-model="org.state" label="State"></q-input>
-                            <q-input v-model="org.zip" label="Zip"></q-input>
-                        </div>
-                        <q-btn type="submit" color="primary" class="mt-3">Update</q-btn>
-                    </q-form>
-                </section>
-            </section>
+        <div class="tabs mx-auto ">
+            <btn :class="`tab tab-bordered px-6 ${tab == tabOptions.register ? 'tab-active' : '' } `" @click="changeTab(tabOptions.register)">Register Organization</btn>
+            <btn :class="`tab tab-bordered px-6 ${tab == tabOptions.connect ? 'tab-active' : '' } `" @click="changeTab(tabOptions.connect)">Connect To Organization</btn>
         </div>
+        <section id="tab-panel">
+            <section id="register" class="text-center p-3" v-if="tab === tabOptions.register">
+                <p class="my-3 text-2xl font-bold">Register a new organization.</p>
+
+                <form @submit.prevent="">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <Input label="Organization Name" type="text" :value="org.name" />
+                        <Input label="Email" type="email" :value="org.email" />
+                        <Input label="Website" type="url" :value="org.website" />
+                        <Input label="Phone" type="tel" :value="org.phone" />
+                        <Input label="Street Address" type="text" :value="org.street_address" />
+                        <Input label="City" type="text" :value="org.city" />
+                        <Input label="State" type="text" :value="org.state" />
+                        <Input label="Zip" type="text" :value="org.zip" />
+                    </div>
+
+                    <btn class="btn btn-primary mt-4 px-20" @click="register">Register</btn>
+                </form>
+            </section>
+            <section id="connect"  class="text-center p-3" v-else>
+                <p class="mt-4 text-2xl font-bold">Connect to an existing organization.</p>
+                <form @submit.prevent="">
+                    <Input label="Organization Code" type="text" :value="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code"  />
+                    <btn class="btn btn-primary mt-4 px-20" @click="connect">Connect</btn>
+                </form>
+            </section>
+        </section>
+
+
+
+        </section>
+        <section v-else id="organization">
+            <section class="text-center p-3">
+                <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
+                <form @submit.prevent="">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <Input label="Organization Name" type="text" :value="org.name" />
+                        <Input label="Email" type="email" :value="org.email" />
+                        <Input label="Website" type="url" :value="org.website" />
+                        <Input label="Phone" type="tel" :value="org.phone" />
+                        <Input label="Street Address" type="text" :value="org.street_address" />
+                        <Input label="City" type="text" :value="org.city" />
+                        <Input label="State" type="text" :value="org.state" />
+                        <Input label="Zip" type="text" :value="org.zip" />
+                    </div>
+
+                    <btn class="btn btn-primary mt-4 px-20" @click="">Update</btn>
+                </form>
+            </section>
+        </section>
     </DashboardLayout>
 </template>
 

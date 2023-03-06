@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 //create union type for input
-type InputType = 'text' | 'email' | 'password' | 'number' | 'date' | 'tel';
+type InputType = 'text' | 'email' | 'password' | 'number' | 'date' | 'tel' | 'url';
 
 const props = defineProps<{
     label: string;
