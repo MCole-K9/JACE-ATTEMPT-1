@@ -50,6 +50,20 @@ class OrganizationController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validatedFields = $request->validate([
+            "name" => ["required", "string", "max:255"],
+            "email" => ["required", "string", "email", "max:255"],
+            "phone" => ["required", "string", "max:255", "regex:/^([0-9\s\-\+\(\)]*)$/"],
+            "website" => ["required", "string", "max:255", "url"],
+            "street_address" => ["required", "string", "max:255"],
+            "city" => ["required", "string", "max:255"],
+            "state" => ["required", "string", "max:255"],
+            "zip" => ["required", "string", "max:255"],
+        ]);
+
+        Organization::where('id', $id)->update($validatedFields);
+
+        return redirect()->route('organization');
     }
 
     public function connect(Request $request)

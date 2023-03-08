@@ -26,6 +26,8 @@ function changeTab(selected: keyof typeof tabOptions) {
 
 type NewOrg = Omit<Organization, "id" | "code" | "created_at" | "updated_at">;
 
+const user = userStore();
+
 let org = reactive({
     name: props.organization?.name ?? "",
     email: props.organization?.email ?? "",
@@ -52,6 +54,10 @@ function connect() {
     router.post('/organization/connect', { organization_code: organization_code.value });
 }
 
+function updateOrg() {
+
+   router.put(`/organization/${props.organization?.id}`, org);
+}
 
 </script>
 
@@ -101,17 +107,17 @@ function connect() {
                 <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
                 <form @submit.prevent="">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Input label="Organization Name" type="text" :value="org.name" />
-                        <Input label="Email" type="email" :value="org.email" />
-                        <Input label="Website" type="url" :value="org.website" />
-                        <Input label="Phone" type="tel" :value="org.phone" />
-                        <Input label="Street Address" type="text" :value="org.street_address" />
-                        <Input label="City" type="text" :value="org.city" />
-                        <Input label="State" type="text" :value="org.state" />
-                        <Input label="Zip" type="text" :value="org.zip" />
+                        <Input label="Organization Name" type="text" :value="org.name" :disabled="!user.isOrgAdmin"  @update:value="org.name = $event" />
+                        <Input label="Email" type="email" :value="org.email" :disabled="!user.isOrgAdmin"  @update:value="org.name = $event" />
+                        <Input label="Website" type="url" :value="org.website" :disabled="!user.isOrgAdmin"  @update:value="org.website = $event" />
+                        <Input label="Phone" type="tel" :value="org.phone" :disabled="!user.isOrgAdmin"  @update:value="org.phone = $event" />
+                        <Input label="Street Address" type="text" :value="org.street_address" :disabled="!user.isOrgAdmin"  @update:value="org.street_address = $event" />
+                        <Input label="City" type="text" :value="org.city" :disabled="!user.isOrgAdmin"  @update:value="org.city = $event" />
+                        <Input label="State" type="text" :value="org.state" :disabled="!user.isOrgAdmin"  @update:value="org.state = $event" />
+                        <Input label="Zip" type="text" :value="org.zip" :disabled="!user.isOrgAdmin"  @update:value="org.zip = $event" />
                     </div>
 
-                    <btn class="btn btn-primary mt-4 px-20" @click="">Update</btn>
+                    <btn v-if="user.isOrgAdmin"  class="btn btn-primary mt-4 px-20" @click="updateOrg">Update</btn>
                 </form>
             </section>
         </section>
