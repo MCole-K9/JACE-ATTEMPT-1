@@ -56,7 +56,7 @@ onMounted(() => {
     //need to to figure out for when persisting layout
     //console.log(usePage().props);
 
-   user.setUser(usePage().props?.user as User ?? null);
+    user.setUser(usePage().props?.global?.user , usePage().props?.global?.org_rep);
 
 });
 
@@ -68,7 +68,7 @@ onMounted(() => {
     <AppBar @register-clicked="openDialog" @update:drawer="setDrawer" />
     <input type="checkbox" id="drawer-left" class="drawer-toggle" />
 
-    
+
     <label class="overlay" for="drawer-left"></label>
     <div class="drawer">
         <div class="drawer-content flex flex-col h-full">

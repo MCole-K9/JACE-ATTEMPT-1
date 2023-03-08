@@ -17,7 +17,12 @@ onMounted(() => {
     //need to to figure out for when persisting layout
     // console.log(usePage().props?.user);
 
-    user.setUser(usePage().props?.user as User ?? null);
+
+    user.setUser(usePage().props?.global?.user , usePage().props?.global?.org_rep);
+
+
+
+
 
 
 });

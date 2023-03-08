@@ -32,8 +32,15 @@ export const userStore = defineStore("user", {
         },
     },
     actions: {
-        setUser(user: User | null) {
+        setUser(user: User | null, org_rep: any = null) {
             this.user = user;
+            //need to rethink this whole thing
+            if(org_rep) {
+                this.user.org_rep = org_rep;
+            }
+
+
+
         },
         logOut() {
             //might move
