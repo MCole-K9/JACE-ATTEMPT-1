@@ -10,7 +10,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Infraction extends Model
 {   
     use HasFactory;
-    use LogsActivity;
 
     protected $table = 'infractions';
 

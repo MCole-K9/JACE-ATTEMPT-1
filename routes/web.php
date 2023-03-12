@@ -9,6 +9,9 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 
 /*
@@ -46,3 +49,30 @@ Route::prefix("organization")->group(function () {
     Route::put("/{id}", [OrganizationController::class, "update"])->name("organization.update")->middleware("auth");
     Route::post("/connect", [OrganizationController::class, "connect"])->name("organization.connect")->middleware("auth");
 });
+
+// API Token Routes
+
+Route::get("/tokens/generate", function (){
+
+    // might save other people some time: API Tokens are stored as a hash in the DB,
+    // but the key itself is supposed to be used plaintext
+    // so you'll get served the plaintext value, and you should use that in the header
+
+    // This closure doesn't need to do anything but return the page
+
+    return Inertia::render('GenerateAPIToken');
+})->middleware('auth');
+
+Route::post("/tokens/yourtoken", function(Request $request){
+
+    $user = Auth::user();
+
+    if (auth('sanctum')->check()){
+        auth()->user()->tokens()->delete();
+    }
+
+    $tokenString = $user->createToken($request->input('token'))->plainTextToken;
+    // This closure needs to:
+       
+    return Inertia::render('ShowAPIToken', ['tokenString' => $tokenString]);
+})->middleware('auth');

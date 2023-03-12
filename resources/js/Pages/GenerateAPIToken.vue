@@ -1,11 +1,36 @@
 <script setup lang="ts">
-    import {Head} from '@inertiajs/vue3';
+    import {Head, router} from '@inertiajs/vue3';
+    import {ref} from 'vue';
+    import {Ref} from 'vue';
 
+    const plaintextString: Ref<string> = ref('');
+
+    function postString(){
+        router.post('/tokens/yourtoken', {
+            token: plaintextString.value,
+        });
+    }
+
+
+    function generateString(){
+        // 1. Prompt the user for the text (perhaps include a random generator)
+    }
+
+    // 2. Make them click "generate token"
+    // 3. Take the entered string, pass it to the route closure to generate the Key
     
 </script>
 <template>
     <div>
-        <p>Do you want to generate a new API Token? This will delete your previous one.</p>
-        <button>Yes</button>
+        <p>Enter a new plaintext string and click "Create New Token" to generate a new API Token. Note: 
+            This deletes your old key.
+        </p>
+        <!--<p>{{ plaintextString }}</p>-->
+        <div>
+            <input v-model="plaintextString">
+            <button @click="postString">Create New Token</button>
+            <button @click="generateString">Randomly Generate Text</button>
+        </div>
+
     </div>
 </template>
