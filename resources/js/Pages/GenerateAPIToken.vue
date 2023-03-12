@@ -3,11 +3,11 @@
     import {ref} from 'vue';
     import {Ref} from 'vue';
 
-    const plaintextString: Ref<string> = ref('');
+    const tokenName: Ref<string> = ref('');
 
     function postString(){
         router.post('/tokens/yourtoken', {
-            token: plaintextString.value,
+            token: tokenName.value,
         });
     }
 
@@ -22,14 +22,13 @@
 </script>
 <template>
     <div>
-        <p>Enter a new plaintext string and click "Create New Token" to generate a new API Token. Note: 
+        <p>Enter a new name for the token and click "Create New Token" to generate a new API Token. Note: 
             This deletes your old key.
         </p>
         <!--<p>{{ plaintextString }}</p>-->
         <div>
-            <input v-model="plaintextString">
+            <input v-model="tokenName">
             <button @click="postString">Create New Token</button>
-            <button @click="generateString">Randomly Generate Text</button>
         </div>
 
     </div>

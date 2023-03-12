@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Infractions API endpoints. Reminder to self: Put the plaintext API token in the Bearer Auth part
 Route::apiResource('/infractions', InfractionController::class)->middleware('auth:sanctum');

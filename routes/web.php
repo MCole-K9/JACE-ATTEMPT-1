@@ -56,7 +56,7 @@ Route::get("/tokens/generate", function (){
 
     // might save other people some time: API Tokens are stored as a hash in the DB,
     // but the key itself is supposed to be used plaintext
-    // so you'll get served the plaintext value, and you should use that in the header
+    // so you have to explicitly get and pass the plaintext value
 
     // This closure doesn't need to do anything but return the page
 
@@ -72,7 +72,6 @@ Route::post("/tokens/yourtoken", function(Request $request){
     }
 
     $tokenString = $user->createToken($request->input('token'))->plainTextToken;
-    // This closure needs to:
        
     return Inertia::render('ShowAPIToken', ['tokenString' => $tokenString]);
 })->middleware('auth');
