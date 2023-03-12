@@ -75,3 +75,7 @@ Route::post("/tokens/yourtoken", function(Request $request){
        
     return Inertia::render('ShowAPIToken', ['tokenString' => $tokenString]);
 })->middleware('auth');
+
+Route::get("/tokens/yourtoken", function(){
+    return redirect('/');
+});
