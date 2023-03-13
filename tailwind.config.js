@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+/** @type {import('rippleui').Config} */
 module.exports = {
   mode: 'jit',
   purge: [
@@ -35,5 +36,27 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("rippleui")]
+  plugins: [require("rippleui")],
+  rippleui: {
+    themes: [
+			{
+				themeName: "light",
+				colorScheme: "light",
+        prefersColorScheme: true,
+				colors: {
+					primary: "#235264",
+					backgroundPrimary: "#964643",
+				},
+			},
+			{
+				themeName: "dark",
+				colorScheme: "dark",
+        prefersColorScheme: false,
+				colors: {
+					primary: "#573242",
+					backgroundPrimary: "#1a1a1a",
+				},
+			},
+		],
+  },
 }
