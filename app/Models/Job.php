@@ -5,34 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrgRep extends Model
+class Job extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'title',
+        'description',
+        'requirements',
+        'salary',
+        'is_visible',
+        'open_date',
+        'close_date',
+        'type',
+        'org_rep_id',
         'organization_id',
+        'job_category_id'
     ];
 
-    public function user()
+    public function orgRep()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function orgRole()
-    {
-        return $this->belongsTo(OrgRole::class);
+        return $this->belongsTo(OrgRep::class);
     }
 
     public function organization()
     {
         return $this->belongsTo(Organization::class);
     }
-
-    public function jobs()
-    {
-        return $this->hasMany(Job::class);
-    }
-
-
 }

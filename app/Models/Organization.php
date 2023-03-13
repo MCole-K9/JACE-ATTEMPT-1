@@ -26,4 +26,9 @@ class Organization extends Model
     {
         return $this->hasMany(OrgRep::class);
     }
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
 }
