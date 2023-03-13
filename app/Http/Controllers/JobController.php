@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class JobController extends Controller
@@ -12,8 +13,18 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(Auth::check() && Auth::user()->role_id == 3){
+            //render jobs for org rep
+
+            return Inertia::render("Job/ManageJobs", [
+                // "jobs" => Auth::user()->orgRep->jobs
+            ]);
+
+        }
+
+        //render home route with all jobs
         return Inertia::render("Jobs");
     }
 
@@ -24,7 +35,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render("Job/CreateJob");
     }
 
     /**

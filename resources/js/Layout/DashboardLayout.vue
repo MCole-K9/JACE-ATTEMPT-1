@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
     <main class="grid grid-cols-12">
-        <aside class="hidden md:block md:col-span-2 transition-all ">
+        <aside class="hidden md:block md:col-span-2 transition-all w-64 ">
             <div class="flex h-screen flex-col justify-between  ">
                 <div class="px-4 py-6">
                     <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-white">
@@ -42,6 +42,9 @@ onMounted(() => {
                                 </Link>
                                 <Link v-if="user.isOrgRep" href="/organization">
                                     <li class="menu-item">Organization</li>
+                                </Link>
+                                <Link v-if="user.isOrgRep" href="/jobs">
+                                    <li class="menu-item">Manage Jobs</li>
                                 </Link>
                             </ul>
                         </section>

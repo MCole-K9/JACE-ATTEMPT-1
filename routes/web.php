@@ -35,7 +35,7 @@ Route::get("/logout", [AuthController::class, "logout"])->name("logout")->middle
 
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard")->middleware("auth");
 
-Route::resource("/jobs", JobController::class)->middleware("guest");
+Route::resource("/jobs", JobController::class);
 
 Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
 
@@ -72,7 +72,7 @@ Route::post("/tokens/yourtoken", function(Request $request){
     }
 
     $tokenString = $user->createToken($request->input('token'))->plainTextToken;
-       
+
     return Inertia::render('ShowAPIToken', ['tokenString' => $tokenString]);
 })->middleware('auth');
 
