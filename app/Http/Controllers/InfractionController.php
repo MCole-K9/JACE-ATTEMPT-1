@@ -45,7 +45,7 @@ class InfractionController extends Controller
         $infraction = Infraction::create(['reason' => $input]);
 
         if ($infraction){
-            activity('created')->
+            activity('infraction')->
             performedOn($infraction)->
             causedBy($user)->
             log('Infraction Created for');
@@ -59,7 +59,9 @@ class InfractionController extends Controller
     }
 
     public function update(Request $request){
-        // this is an api route
+        $user = auth()->user();
+
+
     }
 
     public function edit(){
