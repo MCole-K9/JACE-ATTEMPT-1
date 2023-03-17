@@ -51,6 +51,9 @@ onMounted(() => {
 });
 
 let loading = ref(false);
+log.info("loading: ", loading.value);
+log.info("form: ", form);
+log.info("errors: ", usePage().props?.errors.first_name);
 </script>
 
 <template>
@@ -78,7 +81,7 @@ let loading = ref(false);
                 </div>
                 <!-- <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn> -->
                 <p class="text-error">{{  }}</p>
-                <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
+                <button type="submit" :class="`btn btn-primary btn-block mt-3 ${Object.keys(usePage().props?.errors as Object).length === 0 && loading ? 'btn-loading' : '' }`" @click="loading = true">Register</button>
                 <!-- <q-btn  @click="log.info(errors)" >toggle</q-btn> -->
             </form>
             </div>

@@ -46,7 +46,7 @@ let loading = ref(false);
                 </div>
 				<div>
 					<!-- <q-btn label="log in" class="full-width" :loading="loading" @click="loading = true" type="submit" color="blue"/> -->
-                    <button class="btn btn-block btn-primary">Login</button>
+                    <button :class="`btn btn-block btn-primary ${!loading || 'btn-loading'}`" @click="loading = true">Login</button>
 				</div>
 			</form>
 		</div>
