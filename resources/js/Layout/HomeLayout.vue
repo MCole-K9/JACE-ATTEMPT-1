@@ -126,7 +126,7 @@ onMounted(() => {
 
 <style>
 .bgGold {
-    background-color: #f2c111ad;
+    background-color: #f2c111;
     z-index: 1;
     background-size: 400% 400%;
 }
