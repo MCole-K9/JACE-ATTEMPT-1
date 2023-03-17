@@ -8,7 +8,8 @@ use App\Models\Infraction;
 class InfractionController extends Controller
 {
     public function index(){
-        $infractions = Infraction::get();
+        $infractions = Infraction::all();
+
 
         if ($infractions){
             return response($infractions, 200);
@@ -36,14 +37,31 @@ class InfractionController extends Controller
     }
 
     public function store(Request $request){
-        // this is an api route
-        
-        // for activitylogger, this needs to authenticate and authorize (can it pass in the API key, or something?)
-        // Also, can i use the API key to find the user ID?
+        $user = auth()->user();
+
+
+        // need to rewrite this to send and work with the type of object that generated the infraction
+        $input = $request->input('reason');
+        $infraction = Infraction::create(['reason' => $input]);
+
+        if ($infraction){
+            activity('infraction')->
+            performedOn($infraction)->
+            causedBy($user)->
+            log('Infraction Created for');
+
+            return response('Added Infraction', 201);
+        }
+        else {
+            return response('idk what to write yet', 403);
+        }
+
     }
 
     public function update(Request $request){
-        // this is an api route
+        $user = auth()->user();
+
+
     }
 
     public function edit(){
@@ -52,7 +70,12 @@ class InfractionController extends Controller
     }
 
     public function destroy(){
-        // this is an api route
+        $user = auth()->user();
+
+        // need to get the id from the url
+
+        
+
     }
 
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\InfractionController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -78,4 +79,9 @@ Route::post("/tokens/yourtoken", function(Request $request){
 
 Route::get("/tokens/yourtoken", function(){
     return redirect('/');
+});
+
+Route::get('/infractionslist', function(Request $request){
+
+    return Inertia::render('Infractions');
 });
