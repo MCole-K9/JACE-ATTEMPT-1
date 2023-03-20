@@ -77,14 +77,14 @@ function updateOrg() {
 
                 <form @submit.prevent="">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Input label="Organization Name" type="text" :value="org.name" />
-                        <Input label="Email" type="email" :value="org.email" />
-                        <Input label="Website" type="url" :value="org.website" />
-                        <Input label="Phone" type="tel" :value="org.phone" />
-                        <Input label="Street Address" type="text" :value="org.street_address" />
-                        <Input label="City" type="text" :value="org.city" />
-                        <Input label="State" type="text" :value="org.state" />
-                        <Input label="Zip" type="text" :value="org.zip" />
+                        <Input label="Organization Name" type="text" v-model="org.name" />
+                        <Input label="Email" type="email" v-model="org.email" />
+                        <Input label="Website" type="url" v-model="org.website" />
+                        <Input label="Phone" type="tel" v-model="org.phone" />
+                        <Input label="Street Address" type="text" v-model="org.street_address" />
+                        <Input label="City" type="text" v-model="org.city" />
+                        <Input label="State" type="text" v-model="org.state" />
+                        <Input label="Zip" type="text" v-model="org.zip" />
                     </div>
 
                     <btn class="btn btn-primary mt-4 px-20" @click="register">Register</btn>
@@ -93,7 +93,7 @@ function updateOrg() {
             <section id="connect"  class="text-center p-3" v-else>
                 <p class="mt-4 text-2xl font-bold">Connect to an existing organization.</p>
                 <form @submit.prevent="">
-                    <Input label="Organization Code" type="text" :value="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code"  />
+                    <Input label="Organization Code" type="text" v-model="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code"  />
                     <btn class="btn btn-primary mt-4 px-20" @click="connect">Connect</btn>
                 </form>
             </section>
@@ -107,14 +107,14 @@ function updateOrg() {
                 <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
                 <form @submit.prevent="">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Input label="Organization Name" type="text" :value="org.name" :disabled="!user.isOrgAdmin"  @update:value="org.name = $event" />
-                        <Input label="Email" type="email" :value="org.email" :disabled="!user.isOrgAdmin"  @update:value="org.name = $event" />
-                        <Input label="Website" type="url" :value="org.website" :disabled="!user.isOrgAdmin"  @update:value="org.website = $event" />
-                        <Input label="Phone" type="tel" :value="org.phone" :disabled="!user.isOrgAdmin"  @update:value="org.phone = $event" />
-                        <Input label="Street Address" type="text" :value="org.street_address" :disabled="!user.isOrgAdmin"  @update:value="org.street_address = $event" />
-                        <Input label="City" type="text" :value="org.city" :disabled="!user.isOrgAdmin"  @update:value="org.city = $event" />
-                        <Input label="State" type="text" :value="org.state" :disabled="!user.isOrgAdmin"  @update:value="org.state = $event" />
-                        <Input label="Zip" type="text" :value="org.zip" :disabled="!user.isOrgAdmin"  @update:value="org.zip = $event" />
+                        <Input label="Organization Name" type="text" v-model="org.name" :value="org.name" :disabled="!user.isOrgAdmin"   />
+                        <Input label="Email" type="email" v-model="org.email" :value="org.email" :disabled="!user.isOrgAdmin"  />
+                        <Input label="Website" type="url" v-model="org.website" :value="org.website" :disabled="!user.isOrgAdmin"  />
+                        <Input label="Phone" type="tel" v-model="org.phone" :value="org.phone" :disabled="!user.isOrgAdmin" />
+                        <Input label="Street Address" type="text" v-model="org.street_address" :value="org.street_address" :disabled="!user.isOrgAdmin" />
+                        <Input label="City" type="text" v-model="org.city" :value="org.city" :disabled="!user.isOrgAdmin"  />
+                        <Input label="State" type="text" v-model="org.state" :value="org.state" :disabled="!user.isOrgAdmin"  />
+                        <Input label="Zip" type="text" v-model="org.zip" :value="org.zip" :disabled="!user.isOrgAdmin"   />
                     </div>
 
                     <btn v-if="user.isOrgAdmin"  class="btn btn-primary mt-4 px-20" @click="updateOrg">Update</btn>
