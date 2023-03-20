@@ -59,7 +59,7 @@ log.info("errors: ", usePage().props?.errors.first_name);
 <template>
     <HomeLayout>
         <section class="flex flex-col items-center space-y-5 pt-10">
-            
+
             <div class="w-full bg-gray-100 p-10 h-full rounded-lg max-w-5xl">
                 <section class="flex flex-col text-center mb-10">
                     <h1 class="text-3xl text-gray-1100 font-bold">Register</h1>
@@ -67,16 +67,16 @@ log.info("errors: ", usePage().props?.errors.first_name);
                 </section>
             <form :ref="myForm" @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
-                    <Input @update:value="form.first_name = $event" :value="form.first_name" label="First name" :error="usePage().props?.errors.first_name != undefined" type="email" :errorMessage="usePage().props?.errors.first_name"></Input>
-                    <Input @update:value="form.last_name = $event" :value="form.last_name" label="Last name" :error="usePage().props?.errors.last_name != undefined" type="email" :errorMessage="usePage().props?.errors.last_name"></Input>
+                    <Input v-model="form.first_name" label="First name" type="text" :error="usePage().props?.errors.first_name != undefined"  :errorMsg="usePage().props?.errors.first_name" />
+                    <Input v-model="form.last_name"  label="Last name" type="text"  :error="usePage().props?.errors.last_name != undefined"  :errorMsg="usePage().props?.errors.last_name" />
                     <div class="md:col-span-2">
-                        <Input @update:value="form.email = $event" :value="form.email" label="Email" :error="usePage().props?.errors.email != undefined" type="email" :errorMessage="usePage().props?.errors.email"></Input>
+                        <Input v-model="form.email" label="Email" type="email" :error="usePage().props?.errors.email != undefined"  :errorMsg="usePage().props?.errors.email" />
                     </div>
                     <div class="md:col-span-2">
-                        <Input @update:value="form.password = $event" :value="form.password" label="Password" :error="usePage().props?.errors.password != undefined" type="password" :errorMessage="usePage().props?.errors.password"></Input>
+                        <Input v-model="form.password" label="Password" type="password" :error="usePage().props?.errors.password != undefined"  :errorMsg="usePage().props?.errors.password"/>
                     </div>
                     <div class="md:col-span-2">
-                        <Input @update:value="form.confirm_password = $event" :value="form.confirm_password" label="Confirm Password" :error="usePage().props?.errors.confirm_password != undefined" type="password" :errorMessage="usePage().props?.errors.confirm_password"></Input>
+                        <Input v-model="form.confirm_password" label="Confirm Password" type="password" :error="usePage().props?.errors.confirm_password != undefined"  :errorMsg="usePage().props?.errors.confirm_password" />
                     </div>
                 </div>
                 <!-- <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn> -->
