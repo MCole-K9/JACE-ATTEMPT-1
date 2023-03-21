@@ -81,14 +81,12 @@ Route::get("/tokens/yourtoken", function(){
     return redirect('/');
 });
 
-// "View all infractions" route
-Route::get('/administration/infractions', function(Request $request){
-
-    return Inertia::render('Infractions');
-});
-
 /// Admin Routes
 
 Route::get('/administration/logs', function(){
     return Inertia::render('ViewLogEntries');
+})->middleware('auth:sanctum');
+
+Route::get('/administration/infractions', function(Request $request){
+    return Inertia::render('Infractions');
 })->middleware('auth:sanctum');
