@@ -13,7 +13,7 @@
 
 
 <template>
-    <HomeLayout>
+    <HomeLayout background="bgGold">
       <SVGAnimation />
 
     
