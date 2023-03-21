@@ -6,7 +6,5 @@
     <DashboardLayout>
         <h1>Infractions</h1>
         <InfractionTable/>
-        
-
     </DashboardLayout>
 </template>
