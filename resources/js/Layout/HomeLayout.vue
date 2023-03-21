@@ -48,6 +48,10 @@ const candidateRegisterLink = `/register?role=${Roles.Candidate}` ;
 const orgRepRegisterLink = `/register?role=${Roles.OrganizationRep}`;
 
 
+const props = defineProps<{
+    padding?: string;
+    background?: string;
+}>();
 
 
 onMounted(() => {
@@ -119,7 +123,7 @@ onMounted(() => {
 </nav>
         </div>
     </div>
-    <section :class="`${getUrl().pathname != '/' ? 'bgBlue p-5' : 'bgGold'}`" style="min-height: calc(100vh - 80px);">
+    <section :class="(background ?? 'bgBlue') + ' ' + (padding ?? '')" style="min-height: calc(100vh - 80px);">
         <slot />
     </section>
 </template>
