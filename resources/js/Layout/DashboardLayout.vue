@@ -46,6 +46,15 @@ onMounted(() => {
                                 <Link v-if="user.isOrgRep" href="/jobs">
                                     <li class="menu-item">Manage Jobs</li>
                                 </Link>
+                                <Link v-if="user.isAdmin" href="/administration/logs">
+                                    <li>Logs</li>
+                                </Link>
+                                <Link v-if="user.isAdmin" href="/administration/infractions">
+                                    <li>Infractions</li>
+                                </Link>
+                                <Link href="/tokens/generate">
+                                    <li>Generate API Key</li>
+                                </Link>
                             </ul>
                         </section>
                     </nav>

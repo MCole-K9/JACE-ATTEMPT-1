@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('close_date');
             $table->string('type');
             $table->foreignId('org_rep_id')->constrained('org_reps');
-            $table->foreignId('organization_id')->constrained('organizations');
+            $table->foreignId('organization_id')->nullable()->constrained('organizations');
             //$table->foreignId('job_category_id')->constrained('job_categories');
             $table->timestamps();
         });

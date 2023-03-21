@@ -2,6 +2,7 @@
     import {Head, router} from '@inertiajs/vue3';
     import {ref} from 'vue';
     import {Ref} from 'vue';
+    import HomeLayout from '../Layout/DashboardLayout.vue';
 
     const tokenName: Ref<string> = ref('');
 
@@ -21,15 +22,17 @@
     
 </script>
 <template>
-    <div>
-        <p>Enter a new name for the token and click "Create New Token" to generate a new API Token. Note: 
-            This deletes your old key.
-        </p>
-        <!--<p>{{ plaintextString }}</p>-->
+    <HomeLayout>
         <div>
-            <input v-model="tokenName">
-            <button @click="postString">Create New Token</button>
+            <p>Enter a new name for the token and click "Create New Token" to generate a new API Token. Note: 
+                This deletes your old key.
+            </p>
+            <!--<p>{{ plaintextString }}</p>-->
+            <div>
+                <input v-model="tokenName" class="input">
+                <button @click="postString">Create New Token</button>
+            </div>
         </div>
-
-    </div>
+    </HomeLayout>
+    
 </template>

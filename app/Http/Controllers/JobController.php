@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -46,7 +47,28 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedField =  $request->validate([
+            "title" =>["required"],
+            "description" => ["required"],
+            // "location" => ["required"],
+            "salary" =>["required"],
+            "requirements" => ["required"],
+            "is_visible" => ["required"],
+            "type" => ["required"],
+            "open_date" => ["required", "date", "after_or_equal:today"],
+            "close_date" => ["required", "date", "after_or_equal:open_date"],
+        ]);
+
+        $job = Auth::user()->orgRep->jobs()->create($validatedField);
+
+
+        $job->organization()->associate(Auth::user()->orgRep->organization);
+
+        $job->save();
+
+        return redirect()->route("jobs.index");
+
+
     }
 
     /**
