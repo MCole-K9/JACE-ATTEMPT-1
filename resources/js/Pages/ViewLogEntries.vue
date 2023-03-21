@@ -6,8 +6,9 @@
 <template>
     <DashboardLayout>
         <h1>User Logs</h1>
-
         <LogTable/>
+
+        <!--what do i want this to do?-->
 
     </DashboardLayout>
 </template>

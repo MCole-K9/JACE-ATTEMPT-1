@@ -29,7 +29,7 @@
             </p>
             <!--<p>{{ plaintextString }}</p>-->
             <div>
-                <input v-model="tokenName">
+                <input v-model="tokenName" class="input">
                 <button @click="postString">Create New Token</button>
             </div>
         </div>
