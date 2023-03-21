@@ -1,14 +1,13 @@
 <script setup lang="ts">
     import LogTable from '../Components/LogTable.vue';
-    import HomeLayout from '../Layout/HomeLayout.vue';
+    import DashboardLayout from '../Layout/DashboardLayout.vue';
 
 </script>
 <template>
-    <HomeLayout>
-        <button class="btn">Idk bro just click me</button>
-
+    <DashboardLayout>
+        <h1>User Logs</h1>
 
         <LogTable/>
 
-    </HomeLayout>
+    </DashboardLayout>
 </template>

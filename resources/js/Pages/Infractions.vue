@@ -1,8 +1,12 @@
 <script setup lang="ts">
-    import HomeLayout from '../Layout/HomeLayout.vue';
+    import DashboardLayout from '../Layout/DashboardLayout.vue';
+    import InfractionTable from '../Components/InfractionTable.vue';
 </script>
 <template>
-    <HomeLayout>
-        <h1>This works?</h1>
-    </HomeLayout>
+    <DashboardLayout>
+        <h1>Infractions</h1>
+        <InfractionTable/>
+        
+
+    </DashboardLayout>
 </template>

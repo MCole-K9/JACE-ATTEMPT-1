@@ -82,7 +82,7 @@ Route::get("/tokens/yourtoken", function(){
 });
 
 // "View all infractions" route
-Route::get('/infractionslist', function(Request $request){
+Route::get('/administration/infractions', function(Request $request){
 
     return Inertia::render('Infractions');
 });
