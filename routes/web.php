@@ -81,7 +81,14 @@ Route::get("/tokens/yourtoken", function(){
     return redirect('/');
 });
 
+// "View all infractions" route
 Route::get('/infractionslist', function(Request $request){
 
     return Inertia::render('Infractions');
 });
+
+/// Admin Routes
+
+Route::get('/administration/logs', function(){
+    return Inertia::render('ViewLogEntries');
+})->middleware('auth:sanctum');

@@ -4,7 +4,7 @@
 
 <template>
     <DashboardLayout>
-        <h1>Is this even working?</h1>
+        <h1>Dashboard</h1>
     </DashboardLayout>
 </template>
 
