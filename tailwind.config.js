@@ -30,7 +30,7 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [require("rippleui")],
+    plugins: [require("rippleui"),require('@tailwindcss/typography'),],
     rippleui: {
         themes: [
             {
