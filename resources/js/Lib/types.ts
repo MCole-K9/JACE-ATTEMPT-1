@@ -4,11 +4,22 @@ export type User = {
     last_name: string;
     email: string;
     role_id: number;
+    created_at: Date;
+    updated_at: Date;
     org_rep ?: {
         org_role_id: number;
         organization_id: number;
     }
 }
+
+export type OrgRep = {
+    id: number;
+    user_id: number;
+    org_role_id: number;
+    organization_id: number;
+    created_at: Date;
+    updated_at: Date;
+    user?: User;
 
 
 export type Organization = {

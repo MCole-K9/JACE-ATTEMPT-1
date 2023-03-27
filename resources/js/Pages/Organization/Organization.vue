@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import DashboardLayout from '../Layout/DashboardLayout.vue';
-import { Organization } from '../Lib/types';
+import DashboardLayout from '../../Layout/DashboardLayout.vue';
+import { Organization } from '../../Lib/types';
 import { defineProps, reactive, ref } from 'vue';
 import { router } from '@inertiajs/core';
 import { usePage } from '@inertiajs/vue3';
-import { userStore } from '../Stores/userStore';
-import Input from '../Components/Input.vue';
+import { userStore } from '../../Stores/userStore';
+import Input from '../../Components/Input.vue';
 
 const props = defineProps<{
     organization: Organization | null,

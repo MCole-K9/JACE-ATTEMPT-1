@@ -13,7 +13,7 @@ use App\Http\Controllers\InfractionController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +49,7 @@ Route::prefix("organization")->group(function () {
     Route::post("/", [OrganizationController::class, "store"])->name("organization.store")->middleware("auth");
     Route::put("/{id}", [OrganizationController::class, "update"])->name("organization.update")->middleware("auth");
     Route::post("/connect", [OrganizationController::class, "connect"])->name("organization.connect")->middleware("auth");
+    Route::get("/manage-members", [OrganizationController::class, "members"])->name("organization.members")->middleware("auth");
 });
 
 // API Token Routes
