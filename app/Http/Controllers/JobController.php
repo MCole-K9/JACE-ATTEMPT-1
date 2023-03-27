@@ -20,7 +20,7 @@ class JobController extends Controller
             //render jobs for org rep
 
             return Inertia::render("Job/ManageJobs", [
-                // "jobs" => Auth::user()->orgRep->jobs
+                 "jobs" => Auth::user()->orgRep->jobs
             ]);
 
         }
@@ -90,7 +90,9 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Inertia::render("Job/CreateJob", [
+            "job" => Job::find($id)
+        ]);
     }
 
     /**
@@ -102,7 +104,24 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedField =  $request->validate([
+            "title" =>["required"],
+            "description" => ["required"],
+            // "location" => ["required"],
+            "salary" =>["required"],
+            "requirements" => ["required"],
+            "is_visible" => ["required"],
+            "type" => ["required"],
+            "open_date" => ["required", "date", "after_or_equal:today"],
+            "close_date" => ["required", "date", "after_or_equal:open_date"],
+        ]);
+
+        $job = Job::find($id);
+
+        $job->update($validatedField);
+
+
+        return redirect()->route("jobs.index");
     }
 
     /**

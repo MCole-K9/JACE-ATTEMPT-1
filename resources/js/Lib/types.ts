@@ -28,3 +28,20 @@ export type Organization = {
     created_at: Date;
     updated_at: Date;
 }
+
+export type Job = {
+    id: number;
+    title: string;
+    description: string;
+    location: string;
+    salary: number;
+    requirements: string;
+    type: string;
+    is_visible: boolean;
+    open_date: Date;
+    close_date: Date;
+    org_rep_id: number;
+    organization_id: number;
+    created_at: Date;
+    updated_at: Date;
+}

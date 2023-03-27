@@ -11,7 +11,7 @@ const props = defineProps<{
     type: InputType;
     error?: boolean;
     errorMsg?: string;
-    value?: string;
+    value?: string | number | Date;
 
 }>();
 
