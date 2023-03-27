@@ -13,15 +13,15 @@ const props = defineProps<{
 }>();
 
 const job = reactive({
-    title: props.job.title ?? '',
-    description: props.job.description ?? '',
-    requirements: props.job.requirements ?? '',
+    title: props.job ? props.job.title : '',
+    description: props.job ? props.job.description : '',
+    requirements: props.job ?  props.job.requirements : '',
     // location: '',
-    salary: props.job.salary ?? '',
-    type: ref( props.job.type ?? ''),
-    is_visible: Boolean(props.job.is_visible)  ?? false,
-    open_date: props.job.open_date ?? '',
-    close_date: props.job.close_date ?? '',
+    salary: props.job ? props.job.salary : '',
+    type: ref( props.job ? props.job.type : ''),
+    is_visible: props.job ? Boolean(props.job.is_visible)  : false,
+    open_date: props.job ? props.job.open_date : '',
+    close_date:props.job ?  props.job.close_date : '',
 });
 
 
