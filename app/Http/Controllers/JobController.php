@@ -18,8 +18,17 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
+        //if org rep is logged in
         if(Auth::check() && Auth::user()->role_id == 3){
-            //render jobs for org rep
+
+            $orgRep= Auth::user()->orgRep;
+
+            //if org rep is admin -> return all jobs
+            if($orgRep->org_role_id == 1){
+                return Inertia::render("Job/ManageJobs", [
+                    "jobs" => Auth::user()->orgRep->organization->jobs
+               ]);
+            }
             return Inertia::render("Job/ManageJobs", [
                  "jobs" => Auth::user()->orgRep->jobs
             ]);
