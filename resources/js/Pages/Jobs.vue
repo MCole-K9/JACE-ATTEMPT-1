@@ -18,7 +18,56 @@
             <section class="pt-5 xl:px-16 xl:py-10 grid grid-cols-4 gap-3 min-h-screen">
                <div class="h-1/1 bg-gray-200 col-span-1 rounded-xl hidden xl:flex p-5 flex-col space-y-3">
                   <span class="bg-white rounded-xl p-2 h-10 font-bold flex items-center justify-center w-full shadow-lg">Filter</span>
-                  <div class="bg-white rounded-xl h-96 w-full shadow-lg"></div>
+                  <div class="bg-white rounded-xl h-fit w-full shadow-lg p-5">
+                     <label class="form-label font-bold mb-2 text-base">Date Posted</label>
+                     <select class="select select-block">
+                        <option>Anytime</option>
+                        <option>Last 24 hours</option>
+                        <option>Last 3 days</option>
+                        <option>Last Week</option>
+                        <option>Last Month</option>
+                     </select>
+                     <div class="divider"></div>
+                     <label class="form-label font-bold mb-2 text-base">Job type</label>
+                     <div class="grid grid-cols-2 cursor-pointer gap-2">
+                           <label class="flex gap-x-2">
+                              <input type="checkbox" class="checkbox checkbox-success" />
+                              <span>Job Type 1</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="checkbox" class="checkbox checkbox-success" />
+                              <span>Job Type 2</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="checkbox" class="checkbox checkbox-success" />
+                              <span>Job Type 3</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="checkbox" class="checkbox checkbox-success" />
+                              <span>Job Type 4</span>
+                           </label>
+                        </div>
+                        <div class="divider"></div>
+                        <label class="form-label font-bold mb-2 text-base">Range Salary</label>
+                        <div class="grid grid-cols-2 cursor-pointer gap-2">
+                           <label class="flex gap-x-2">
+                              <input type="radio" class="radio-success radio" name="salary" />
+                              <span>Under $10,000</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="radio" class="radio-success radio" name="salary" />
+                              <span>$10,000 - $50,000</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="radio" class="radio-success radio" name="salary" />
+                              <span>$50,000 - $100,000</span>
+                           </label>
+                           <label class="flex gap-x-2">
+                              <input type="radio" class="radio-success radio" name="salary" />
+                              <span>$100,000+</span>
+                           </label>
+                        </div>
+                  </div>
                </div>
                <div class="h-1/1 p-5 bg-gray-200 xl:col-span-3 col-span-4 rounded-xl">
                   <section class="w-full justify-center flex">
@@ -60,6 +109,8 @@
    import HomeLayout from '../Layout/HomeLayout.vue';
    import JobCard from '../Components/JobCard.vue';
    
+   
+
    </script>
    
    <style scoped>
