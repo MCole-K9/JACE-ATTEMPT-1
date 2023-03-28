@@ -76,7 +76,7 @@
                      <button class="btn btn-primary rounded-l-none">Search</button>
                   </section>
                   <section class="space-y-5 flex flex-col">
-                     <JobCard v-for="i in 5" :key="i" />
+                     <JobCard v-for="j in jobs" :key="j.id" :job="j" />
                   </section>
                   <section class="flex justify-center pt-5">
                      <div class="pagination ">
@@ -108,6 +108,14 @@
    import { defineComponent } from 'vue';
    import HomeLayout from '../Layout/HomeLayout.vue';
    import JobCard from '../Components/JobCard.vue';
+   import { usePage } from '@inertiajs/vue3';
+   import { Logger } from 'tslog';
+   import type { Job } from '../Lib/types';
+   const log = new Logger();
+   log.info(usePage().props?.jobs);
+
+   let jobs: Job[] = usePage().props?.jobs as Job[];
+   // let orgs: any[] = usePage().props?.orgs as any[];
    
    
 

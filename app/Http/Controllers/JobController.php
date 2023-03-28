@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\Organization;
+use App\Http\Controllers\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -18,13 +20,14 @@ class JobController extends Controller
     {
         if(Auth::check() && Auth::user()->role_id == 3){
             //render jobs for org rep
-
             return Inertia::render("Job/ManageJobs", [
                  "jobs" => Auth::user()->orgRep->jobs
             ]);
-
+        }else{
+            return Inertia::render("Jobs", [
+                "jobs" => Job::with("organization")->get()
+            ]);
         }
-
         //render home route with all jobs
         return Inertia::render("Jobs");
     }
@@ -77,9 +80,9 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        
     }
 
     /**

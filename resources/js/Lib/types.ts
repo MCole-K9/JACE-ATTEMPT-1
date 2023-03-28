@@ -20,7 +20,7 @@ export type OrgRep = {
     created_at: Date;
     updated_at: Date;
     user?: User;
-
+}
 
 export type Organization = {
     id: number;
@@ -55,4 +55,5 @@ export type Job = {
     organization_id: number;
     created_at: Date;
     updated_at: Date;
+    organization?: Organization;
 }
