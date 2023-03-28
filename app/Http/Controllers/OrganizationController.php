@@ -14,7 +14,7 @@ class OrganizationController extends Controller
 
     public function index()
     {
-        return Inertia::render('Organization', [
+        return Inertia::render('Organization/Organization', [
             "organization" => Auth::user()->orgRep->organization ?? null,
         ]);
     }
@@ -85,6 +85,15 @@ class OrganizationController extends Controller
 
 
         return redirect()->route('organization');
+    }
+
+    public function members(Request $request){
+
+        $org = Auth::user()->orgRep->organization;
+        $users = $org->orgReps()->with('user')->get();
+        return Inertia::render('Organization/ManageMembers', [
+            "members" => $users,
+        ]);
     }
 
 

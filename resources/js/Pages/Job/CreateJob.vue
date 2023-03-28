@@ -6,18 +6,22 @@ import Input from '../../Components/Input.vue';
 import TinyMCE from '../../Components/TinyMCE.vue';
 import Editor  from '@tinymce/tinymce-vue';
 import { tinyMCEConfig } from '../../Lib/config';
+import { Job } from '../../Lib/types';
 
+const props = defineProps<{
+    job: Job
+}>();
 
 const job = reactive({
-    title: '',
-    description: '',
-    requirements: '',
+    title: props.job ? props.job.title : '',
+    description: props.job ? props.job.description : '',
+    requirements: props.job ?  props.job.requirements : '',
     // location: '',
-    salary: '',
-    type: ref(''),
-    is_visible: false,
-    open_date: '',
-    close_date: '',
+    salary: props.job ? props.job.salary : '',
+    type: ref( props.job ? props.job.type : ''),
+    is_visible: props.job ? Boolean(props.job.is_visible)  : false,
+    open_date: props.job ? props.job.open_date : '',
+    close_date:props.job ?  props.job.close_date : '',
 });
 
 
@@ -27,6 +31,23 @@ async function createJob() {
 
 }
 
+async function updateJob() {
+
+    router.put("/jobs/" + props.job.id, job);
+
+}
+
+function handleSubmit(){
+    if (props.job) {
+        console.log("update");
+
+        updateJob();
+    } else {
+        console.log("create");
+        createJob();
+    }
+}
+
 
 </script>
 
@@ -34,16 +55,14 @@ async function createJob() {
     <DashboardLayout>
         <!-- {{usePage().props?.errors}} -->
         <section class="grid grid-cols-3 gap-2 p-12">
-            <form @submit.prevent="createJob" action="" class="col-span-2 p-4">
+            <form @submit.prevent class="col-span-2 p-4">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2">
-                        {{ job.title  }}
                         <Input v-model="job.title" :value="job.title" :error="usePage().props?.errors.title != undefined" :error-msg="usePage().props?.errors.title"  type="text" label="Title" />
                     </div>
 
                     <div class="col-span-2">
                         <label for="description">Description</label>
-                        {{ job.description  }}
                         <Editor v-model="job.description"  :init="tinyMCEConfig" api-key="hello" />
                         <span class="text-red-600 text-sm">{{ usePage().props?.errors.description }}</span>
                     </div>
@@ -83,7 +102,6 @@ async function createJob() {
                 <div class="shadow">
                     <div class="bg-white p-4">
                         <h2 class="text-lg font-semibold">Publish</h2>
-
                         <div class="my-2">
                             <label for="status">Visibility</label>
                             <select v-model="job.is_visible" name="status" id="status" class="select">
@@ -93,7 +111,7 @@ async function createJob() {
                         </div>
 
                         <div class="flex  justify-end">
-                            <button @click="createJob" class="btn btn-primary">Save</button>
+                            <button @click="handleSubmit" class="btn btn-primary">Save</button>
                         </div>
 
                     </div>
