@@ -77,14 +77,14 @@ function updateOrg() {
 
                 <form @submit.prevent="">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Input label="Organization Name" type="text" v-model="org.name" />
-                        <Input label="Email" type="email" v-model="org.email" />
-                        <Input label="Website" type="url" v-model="org.website" />
-                        <Input label="Phone" type="tel" v-model="org.phone" />
-                        <Input label="Street Address" type="text" v-model="org.street_address" />
-                        <Input label="City" type="text" v-model="org.city" />
-                        <Input label="State" type="text" v-model="org.state" />
-                        <Input label="Zip" type="text" v-model="org.zip" />
+                        <Input label="Organization Name" type="text" v-model="org.name" v-bind:value="org.name"/>
+                        <Input label="Email" type="email" v-model="org.email" v-bind:value="org.email"/>
+                        <Input label="Website" type="url" v-model="org.website" v-bind:value="org.website"/>
+                        <Input label="Phone" type="tel" v-model="org.phone" v-bind:value="org.phone"/>
+                        <Input label="Street Address" type="text" v-model="org.street_address" v-bind:value="org.street_address"/>
+                        <Input label="City" type="text" v-model="org.city" v-bind:value="org.city"/>
+                        <Input label="State" type="text" v-model="org.state" v-bind:value="org.state"/>
+                        <Input label="Zip" type="text" v-model="org.zip" v-bind:value="org.zip"/>
                     </div>
 
                     <btn class="btn btn-primary mt-4 px-20" @click="register">Register</btn>
@@ -93,7 +93,7 @@ function updateOrg() {
             <section id="connect"  class="text-center p-3" v-else>
                 <p class="mt-4 text-2xl font-bold">Connect to an existing organization.</p>
                 <form @submit.prevent="">
-                    <Input label="Organization Code" type="text" v-model="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code"  />
+                    <Input label="Organization Code" type="text" v-model="organization_code" v-bind:value="organization_code" :error="usePage().props?.errors?.organization_code != undefined" :error-message="usePage().props?.errors?.organization_code"  />
                     <btn class="btn btn-primary mt-4 px-20" @click="connect">Connect</btn>
                 </form>
             </section>

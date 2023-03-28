@@ -19,7 +19,7 @@ let form = reactive({
     email: '',
     password: '',
     confirm_password: '',
-    role_id: 2
+    role_id: 3
 });
 
 let errors = reactive({
@@ -67,16 +67,16 @@ log.info("errors: ", usePage().props?.errors.first_name);
                 </section>
             <form :ref="myForm" @submit.prevent="register" >
                 <div class="grid md:grid-cols-2 gap-4">
-                    <Input v-model="form.first_name" label="First name" type="text" :error="usePage().props?.errors.first_name != undefined"  :errorMsg="usePage().props?.errors.first_name" />
-                    <Input v-model="form.last_name"  label="Last name" type="text"  :error="usePage().props?.errors.last_name != undefined"  :errorMsg="usePage().props?.errors.last_name" />
+                    <Input v-model="form.first_name" v-bind:value="form.first_name" label="First name" type="text" :error="usePage().props?.errors.first_name != undefined"  :errorMsg="usePage().props?.errors.first_name" />
+                    <Input v-model="form.last_name"  v-bind:value="form.last_name" label="Last name" type="text"  :error="usePage().props?.errors.last_name != undefined"  :errorMsg="usePage().props?.errors.last_name" />
                     <div class="md:col-span-2">
-                        <Input v-model="form.email" label="Email" type="email" :error="usePage().props?.errors.email != undefined"  :errorMsg="usePage().props?.errors.email" />
+                        <Input v-model="form.email" v-bind:value="form.email" label="Email" type="email" :error="usePage().props?.errors.email != undefined"  :errorMsg="usePage().props?.errors.email" />
                     </div>
                     <div class="md:col-span-2">
-                        <Input v-model="form.password" label="Password" type="password" :error="usePage().props?.errors.password != undefined"  :errorMsg="usePage().props?.errors.password"/>
+                        <Input v-model="form.password" v-bind:value="form.password" label="Password" type="password" :error="usePage().props?.errors.password != undefined"  :errorMsg="usePage().props?.errors.password"/>
                     </div>
                     <div class="md:col-span-2">
-                        <Input v-model="form.confirm_password" label="Confirm Password" type="password" :error="usePage().props?.errors.confirm_password != undefined"  :errorMsg="usePage().props?.errors.confirm_password" />
+                        <Input v-model="form.confirm_password" v-bind:value="form.confirm_password" label="Confirm Password" type="password" :error="usePage().props?.errors.confirm_password != undefined"  :errorMsg="usePage().props?.errors.confirm_password" />
                     </div>
                 </div>
                 <!-- <q-btn  type="submit" color="primary" class="full-width mt-3" @click="loading = true" :loading="loading">Register</q-btn> -->
