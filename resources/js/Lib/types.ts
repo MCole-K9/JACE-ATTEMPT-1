@@ -64,3 +64,8 @@ export type CustomRequest = {
     status: "Pending" | "Approved" | "Denied",
     user_id: number
 }
+
+export type pageRange = {
+    start: number;
+    end: number;
+}
