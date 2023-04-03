@@ -39,7 +39,7 @@
 
     <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
       <div class="mx-auto max-w-sm lg:max-w-none">
-        <p class="mt-4 text-center text-gray-1100 lg:text-left lg:text-lg">
+        <p class="mt-4 text-center text-white font-bold lg:text-left lg:text-lg">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
           natus quod eveniet aut perferendis distinctio iusto repudiandae,
           provident velit earum?
@@ -160,7 +160,7 @@
         class="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left"
       >
         <div>
-          <strong class="font-medium text-black"> Services </strong>
+          <strong class="font-bold text-white"> Services </strong>
 
           <nav
             aria-label="Footer Services Nav"
@@ -182,7 +182,7 @@
         </div>
 
         <div>
-          <strong class="font-medium text-black"> About </strong>
+          <strong class="font-bold text-white"> About </strong>
 
           <nav
             aria-label="Footer About Nav"
@@ -204,7 +204,7 @@
         </div>
 
         <div>
-          <strong class="font-medium text-black"> Support </strong>
+          <strong class="font-bold text-white"> Support </strong>
 
           <nav
             aria-label="Footer Support Nav"
