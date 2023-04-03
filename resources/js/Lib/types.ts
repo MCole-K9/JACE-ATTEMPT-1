@@ -57,3 +57,10 @@ export type Job = {
     updated_at: Date;
     organization?: Organization;
 }
+
+export type CustomRequest = {
+    type: "Member Removal" | "Role Change",
+    info: string,
+    status: "Pending" | "Approved" | "Denied",
+    user_id: number
+}

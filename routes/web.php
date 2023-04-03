@@ -9,7 +9,9 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\InfractionController;
+use App\Models\CustomRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -51,6 +53,8 @@ Route::prefix("organization")->group(function () {
     Route::post("/connect", [OrganizationController::class, "connect"])->name("organization.connect")->middleware("auth");
     Route::get("/manage-members", [OrganizationController::class, "members"])->name("organization.members")->middleware("auth");
 });
+
+Route::resource('/requests', CustomRequestController::class)->middleware('auth');
 
 // API Token Routes
 

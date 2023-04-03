@@ -1,21 +1,51 @@
 <script setup lang="ts">
 import DashboardLayout from '../../Layout/DashboardLayout.vue';
-
+import {router} from "@inertiajs/vue3"
 import { defineProps, reactive, ref } from 'vue';
-import { OrgRep} from '../../Lib/types';
+import { CustomRequest, OrgRep } from '../../Lib/types';
 import { OrgRoles } from '../../Lib/const';
+import { userStore } from '../../Stores/userStore';
 
 
 const props = defineProps<{
     members: OrgRep[];
 }>();
+
+
+const request = reactive<CustomRequest>({
+    type: "Role Change",
+    info: '',
+    status: 'Pending',
+    user_id: userStore().user?.id ?? 0,
+});
+
+const requestModal = ref(false);
+
+function confirmRequest(type:  CustomRequest['type'], user_id: CustomRequest['user_id']) {
+    request.type = type;
+    request.user_id = user_id;
+    request.info = `${getUserName(user_id)} from Org with ID: ${userStore().user?.org_rep?.organization_id}`;
+}
+
+function getUserName(user_id: number) {
+    const member = props.members.find(member => member.user_id === user_id);
+    return `${member?.user?.first_name} ${member?.user?.last_name}`;
+}
+
+function sendRequest() {
+
+    //todo: add role to be changed on request info
+    router.post("/requests", request);
+
+}
+
 </script>
 
 <template>
     <DashboardLayout>
 
         <div class="flex justify-between items-center">
-            <h1>Manage Users</h1>
+            <h1>Manage Members</h1>
             <button class="btn btn-primary">Invite Member</button>
         </div>
 
@@ -26,27 +56,61 @@ const props = defineProps<{
                         <th>Name</th>
                         <th>Role</th>
                         <th>Member Since</th>
-                        <th></th>
+                        <th>Actions (Request)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="member in members" :key="member.id">
                         <td>
-                            {{member.user?.first_name}} {{member.user?.last_name}}
+                            {{ member.user?.first_name }} {{ member.user?.last_name }}
                         </td>
                         <td>
-                            {{member.org_role_id === OrgRoles.Admin ? 'Admin' : 'Member'}}
+                            {{ member.org_role_id === OrgRoles.Admin ? 'Admin' : 'Member' }}
                         </td>
                         <td>
-                            {{member.created_at}}
+                            {{new Date(member.created_at).toDateString()}}
+                        </td>
+                        <td class="flex space-x-2">
+                            <label for="modal-1" class="btn btn-sm btn-primary" @click="confirmRequest('Role Change', member.user_id)">
+                                Change Role
+                            </label>
+                            <label for="modal-1" class="btn btn-sm btn-primary"
+                                @click="confirmRequest('Member Removal', member.user_id)">
+                                Remove
+                            </label>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+
+
+
+
+<!-- <label class="btn btn-primary" for="modal-1">Open Modal</label> -->
+<input class="modal-state" id="modal-1" type="checkbox" />
+<div class="modal">
+	<label class="modal-overlay" for="modal-1"></label>
+	<div class="modal-content flex flex-col gap-5">
+		<label for="modal-1" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="requestModal = false">✕</label>
+		<h2 class="text-xl">Request for {{ request.type }}</h2>
+		<span class="capitalize ">You are requesting  {{ request.type }} for {{ getUserName(request.user_id) }}</span>
+        <select class="select" v-if="request.type === 'Role Change'" name="" id="">
+            <option value="" disabled>Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Admin">Member</option>
+        </select>
+		<div class="flex gap-3">
+			<button class="btn btn-primary btn-block" @click="sendRequest">Confirm</button>
+			<label for="modal-1" class="btn btn-block " @click="requestModal=false">Cancel</label>
+		</div>
+	</div>
+</div>
+
+
     </DashboardLayout>
+
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
