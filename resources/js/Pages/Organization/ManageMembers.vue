@@ -35,6 +35,7 @@ function getUserName(user_id: number) {
 function sendRequest() {
 
     //todo: add role to be changed on request info
+    //todo: message to indicate request was sent
     router.post("/requests", request);
 
 }
