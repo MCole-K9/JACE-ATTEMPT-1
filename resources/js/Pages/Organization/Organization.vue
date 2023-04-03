@@ -64,7 +64,8 @@ function updateOrg() {
 
 <template>
     <DashboardLayout>
-    <h3>Organization</h3>
+    <h3 class="text-4xl text-center font-bold">Manage Organization</h3>
+    <p class="text-center mb-5">Edit your Organizations Details Below</p>
     <section id="register-connect" class="mt-5  mx-auto w-full " v-if="!props.organization">
 
         <div class="tabs mx-auto ">
@@ -104,10 +105,18 @@ function updateOrg() {
         </section>
         <section v-else id="organization">
             <section class="text-center p-3">
-                <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
-                <form @submit.prevent="">
+                <div class="bgBlue p-3 flex justify-between items-center rounded-lg text-white">
+                    <p class="my-2 text-2xl font-bold">Code: {{ props.organization.code }}</p>
+                    <button class="btn">
+                        <svg fill="none" stroke="currentColor" class="w-6 h-6" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"></path>
+                    </svg>
+                    </button>
+                </div>
+                
+                <form @submit.prevent="" class="my-5 p-5 bgGold text-white rounded-lg">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Input label="Organization Name" type="text" v-model="org.name" :value="org.name" :disabled="!user.isOrgAdmin"   />
+                        <Input label="Organization Name" type="text" v-model="org.name" :value="org.name" :disabled="!user.isOrgAdmin" />
                         <Input label="Email" type="email" v-model="org.email" :value="org.email" :disabled="!user.isOrgAdmin"  />
                         <Input label="Website" type="url" v-model="org.website" :value="org.website" :disabled="!user.isOrgAdmin"  />
                         <Input label="Phone" type="tel" v-model="org.phone" :value="org.phone" :disabled="!user.isOrgAdmin" />
