@@ -31,9 +31,9 @@ onMounted(() => {
         <aside class="hidden md:block md:col-span-2 transition-all w-64 ">
             <div class="flex h-screen flex-col justify-between bgBlue">
                 <div class="px-4 py-6 flex items-center flex-col">
-                    <span class="grid h-10 mb-5 text-black font-bold w-32 place-content-center rounded-lg bg-gray-100 text-xs">
+                    <Link class="grid h-10 mb-5 text-black font-bold w-32 place-content-center rounded-lg bg-gray-100 text-xs" href="/">
                         Job Ace
-                    </span>
+                    </Link>
                     <nav class="menu bgGold p-2 rounded-md">
                         <section class="menu-section">
                             <ul class="menu-items">
