@@ -1,5 +1,5 @@
 <template>
- <HomeLayout background="bg-white">
+ <HomeLayout background="bgGold">
   <section class=" flex justify-center bgBlue h-56 w-full items-center px-10">
     <article class="prose text-center text-white w-full">
         <h1 class="text-white">Find a candidate</h1>
@@ -7,7 +7,7 @@
     </article>
   </section>
   <section class="flex ">
-    <nav class="menu hidden lg:flex p-4 bg-gray-500 max-w-xs min-h-screen">
+    <nav class="menu hidden lg:flex p-4 bg-white max-w-xs min-h-screen">
     <section class="menu-section">
       <span class="menu-title">Main menu</span>
       <ul class="menu-items">
@@ -41,7 +41,7 @@
    <section class="p-10 w-full ">
     <section class="w-full justify-center flex">
                      <!-- <button class="flex xl:hidden btn btn-secondary mr-2">Filter</button> -->
-                     <input type="text" class="input input-block rounded-r-none" placeholder="Search for jobs" />
+                     <input type="text" class="input input-block rounded-r-none" placeholder="Search for a candidate" />
                      <button class="btn btn-primary rounded-l-none">Search</button>
                   </section>
                   <section class="py-10 grid grid-cols-2 xl:grid-cols-3 Cxl:grid-cols-4 gap-5">
@@ -73,7 +73,7 @@
                     <div class="bg-gray-500 w-full h-24 rounded-lg my-5">
 
                     </div>
-                    <button class="btn bgGold w-full">View</button>
+                    <button class="btn btn-primary w-full">View</button>
                     
                 </div>
                 
@@ -82,7 +82,7 @@
                      <div class="pagination ">
                      <button class="btn btn-ghost" @click="pagination.previousPage" :disabled="pagination.range.value.start == 0">
                         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2574 5.59165C11.9324 5.26665 11.4074 5.26665 11.0824 5.59165L7.25742 9.41665C6.93242 9.74165 6.93242 10.2667 7.25742 10.5917L11.0824 14.4167C11.4074 14.7417 11.9324 14.7417 12.2574 14.4167C12.5824 14.0917 12.5824 13.5667 12.2574 13.2417L9.02409 9.99998L12.2574 6.76665C12.5824 6.44165 12.5741 5.90832 12.2574 5.59165Z" fill="#969696" />
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2574 5.59165C11.9324 5.26665 11.4074 5.26665 11.0824 5.59165L7.25742 9.41665C6.93242 9.74165 6.93242 10.2667 7.25742 10.5917L11.0824 14.4167C11.4074 14.7417 11.9324 14.7417 12.2574 14.4167C12.5824 14.0917 12.5824 13.5667 12.2574 13.2417L9.02409 9.99998L12.2574 6.76665C12.5824 6.44165 12.5741 5.90832 12.2574 5.59165Z" fill="#000" />
                         </svg>
                      </button>
                      <!-- <button class="btn btn-active">1</button> -->
@@ -90,7 +90,7 @@
                      <!-- <button class="btn">3</button> -->
                      <button class="btn btn-ghost" @click="pagination.nextPage" :disabled="pagination.currentPageNumber.value == pagination.numberOfPages">
                         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd" clip-rule="evenodd" d="M7.74375 5.2448C7.41875 5.5698 7.41875 6.0948 7.74375 6.4198L10.9771 9.65314L7.74375 12.8865C7.41875 13.2115 7.41875 13.7365 7.74375 14.0615C8.06875 14.3865 8.59375 14.3865 8.91875 14.0615L12.7437 10.2365C13.0687 9.91147 13.0687 9.38647 12.7437 9.06147L8.91875 5.23647C8.60208 4.9198 8.06875 4.9198 7.74375 5.2448Z" fill="#969696" />
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M7.74375 5.2448C7.41875 5.5698 7.41875 6.0948 7.74375 6.4198L10.9771 9.65314L7.74375 12.8865C7.41875 13.2115 7.41875 13.7365 7.74375 14.0615C8.06875 14.3865 8.59375 14.3865 8.91875 14.0615L12.7437 10.2365C13.0687 9.91147 13.0687 9.38647 12.7437 9.06147L8.91875 5.23647C8.60208 4.9198 8.06875 4.9198 7.74375 5.2448Z" fill="#000" />
                         </svg>
                      </button>
                   </div>
