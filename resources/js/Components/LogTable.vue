@@ -1,6 +1,8 @@
 <script setup lang="ts">
+    import {Head} from '@inertiajs/vue3';
+    import {UserActivityLog} from '../Lib/types';
 
-    // create a prop for this
+    defineProps<{logs: UserActivityLog[]}>();
 
 </script>
 <template>
@@ -16,12 +18,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>test</td>
-                    <td>test2</td>
-                    <td>test3</td>
-                    <td>test4</td>
-                    <td>test5</td>
+                <tr v-for="log in logs">
+                    <td>{{log.name}}</td>
+                    <td>{{log.description}}</td>
+                    <td>{{log.subject}}</td>
+                    <td>{{log.causer}}</td>
+                    <td>{{log.timestamp}}</td>
                 </tr>
             </tbody>
         </table>
