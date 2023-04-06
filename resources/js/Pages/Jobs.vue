@@ -77,7 +77,7 @@
                      <button class="btn btn-primary rounded-l-none">Search</button>
                   </section>
                   <section class="space-y-5 flex flex-col">
-                     <JobCard v-for="j in pagination.currentPageArray" :key="j.id" :job="j" />
+                     <JobCard v-for="j in pagination.currentPageArray.value" :key="j.id" :job="j" />
                   </section>
                   <section class="flex justify-center pt-5">
                      <div class="pagination ">
