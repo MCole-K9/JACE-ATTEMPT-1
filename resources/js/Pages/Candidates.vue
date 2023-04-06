@@ -41,17 +41,23 @@
    <section class="p-10 w-full ">
     <section class="w-full justify-center flex">
                      <!-- <button class="flex xl:hidden btn btn-secondary mr-2">Filter</button> -->
-                     <input type="text" class="input input-block rounded-r-none" placeholder="Search for a candidate" />
+                     <input type="text" class="input input-block rounded-r-none" placeholder="Search for a candidate" id="search" @input="searchCandidates" />
                      <button class="btn btn-primary rounded-l-none">Search</button>
                   </section>
-                  <section class="py-10 grid grid-cols-2 xl:grid-cols-3 Cxl:grid-cols-4 gap-5">
-                    <div class="w-full border border-gray-200 rounded-lg bg-white outline outline-gray-500 shadow-xl relative p-5" v-for="i in 10">
+                  <section class="py-10 flex justify-center" v-if="pagination.data.value.length == 0">
+                    <article class="prose text-center text-white w-full">
+                      <h1 class="text-white m-2">No Results Found</h1>
+                      <p>Check your spelling or try searching for something else.</p>
+                  </article>
+                  </section>
+                  <section class="py-10 grid grid-cols-2 xl:grid-cols-3 Cxl:grid-cols-4 gap-5" v-show="pagination.data.value.length != 0">
+                    <div class="w-full border border-gray-200 rounded-lg bg-white outline outline-gray-500 shadow-xl relative p-5" v-for="c in pagination.currentPageArray.value">
                     <div class="flex justify-between">
                       <div class="flex items-center">
-                          <img class="w-16 h-16 mb-3 rounded-full shadow-lg" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="Bonnie image"/>
+                          <img class="w-16 h-16 mb-3 rounded-full shadow-lg" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="user avatar"/>
                           <span class="ml-3 -mt-3">
-                            <h5 class="text-lg font-bold text-black">Bonnie Green</h5>
-                            <p class="text-sm text-gray-1100">Visual Designer</p> 
+                            <h5 class="text-lg font-bold text-black">{{c.first_name}} {{ c.last_name }}</h5>
+                            <p class="text-sm text-gray-1100">{{ c.email }}</p> 
                           </span>
                           
                           <!-- <div class="flex mt-4 space-x-3 md:mt-6">
@@ -78,7 +84,7 @@
                 </div>
                 
                   </section>
-                  <section class="flex justify-center pt-5">
+                  <section class="flex justify-center pt-5" v-show="pagination.data.value.length != 0" >
                      <div class="pagination ">
                      <button class="btn btn-ghost" @click="pagination.previousPage" :disabled="pagination.range.value.start == 0">
                         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,9 +115,40 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue';
 import HomeLayout from '../Layout/HomeLayout.vue';
+import { ref } from 'vue';
 import { Pagination } from '../Lib/handlePagination';
+import { User } from '../Lib/types';
+import { usePage } from '@inertiajs/vue3';
+import { Logger } from 'tslog';
+const log = new Logger();
 
-let pagination = new Pagination([1,2,3,4,5,6,7,8,9],3);
+
+const page = usePage();
+
+// log.info(page.props?.candidates);
+
+let candidates = ref<User[]>(page.props?.candidates as User[]);
+
+
+
+let pagination = new Pagination<User>(candidates.value, 12);
+
+function searchCandidates() {
+  log.info('searching');
+   let search = document.getElementById('search') as HTMLInputElement;
+   let searchValue = search.value.split(' ');
+   let filteredCandidates = candidates.value.filter((candidate) => {
+    for(let i = 0; i < searchValue.length; i++){
+      if(candidate.first_name.toLowerCase().includes(searchValue[i].toLowerCase()) || candidate.last_name.toLowerCase().includes(searchValue[i].toLowerCase()) || candidate.email.toLowerCase().includes(searchValue[i].toLowerCase())){
+        return true;
+      }
+    }
+   });
+   log.info(filteredCandidates);
+   pagination.data.value = filteredCandidates;
+   pagination.updateNumberOfPages();
+   pagination.goToPage(1);
+}
 
 </script>
 
