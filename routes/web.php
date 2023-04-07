@@ -11,6 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\InfractionController;
+use App\Http\Controllers\ProfileController;
 use App\Models\CustomRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,8 @@ Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard
 Route::resource("/jobs", JobController::class);
 
 Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
+
+Route::get("/profile", [ProfileController::class, "index"])->name("profile")->middleware("auth");
 
 Route::get("/contact", [ContactController::class, "index"])->name("contact")->middleware("guest");
 
