@@ -1,5 +1,10 @@
 <script setup lang="ts">
     import DashboardLayout from '../Layout/DashboardLayout.vue';
+    import {Log} from '../Lib/types';
+
+    defineProps<{infractionLogs: Log[]}>();
+
+
 </script>
 <template>
     <div class="flex w-full overflow-x-auto">
@@ -15,13 +20,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
+                <tr v-for="infractionLog in infractionLogs">
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
