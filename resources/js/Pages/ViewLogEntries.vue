@@ -5,19 +5,39 @@
     import {Head} from '@inertiajs/vue3';
     import type {UserActivityLog} from '../Lib/types';
     import {ref, type Ref} from 'vue';
+    import Papa from 'papaparse';
 
     const props = defineProps<{logs: UserActivityLog[]}>();
     const isLogArchive: Ref<boolean> = ref(false);
+    const logFile: Ref<UserActivityLog[] | undefined> = ref();
 
+    
     function ExportLogs(){
 
     };
 
-    function UploadLogsCsv(){
+    function UploadLogsCsv(event: Event){
+        let file = (event.target as HTMLInputElement).files?.item(0);
 
-    };
+        if (file){
+            var reader = new FileReader();
+            reader.readAsText(file);
 
-    function convertToCsv(){
+            reader.onload = ()=>{
+
+                // This feels like hack-y narrowing, but i cannot bother rn
+                if (reader.result){
+                    if (typeof reader.result === "string"){
+                        var readerResult = reader.result;
+
+                        Papa.parse(readerResult, {header: true, complete: (results, file)=>{
+                            console.log(results.data);
+                        }});
+                    }
+                }
+
+            }
+        }
 
     };
 </script>
@@ -39,7 +59,7 @@
         <LogTable :logs="logs" v-if="!isLogArchive"/>
 
         <!--(Ideally) should only show if the user selects a csv file-->
-        <LogArchiveTable v-if="isLogArchive"/>
+        <LogArchiveTable :logs="logFile" v-if="isLogArchive"/>
 
     </DashboardLayout>
 </template>

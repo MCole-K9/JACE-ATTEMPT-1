@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import type {UserActivityLog} from '../Lib/types';
 
+    defineProps<{logs: UserActivityLog[] | undefined}>();
+
 </script>
 <template>
     <div class="flex w-full overflow-x-auto">
@@ -15,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr v-for="log in logs">
                     <td></td>
                     <td></td>
                     <td></td>
