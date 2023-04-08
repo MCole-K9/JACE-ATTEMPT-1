@@ -2,7 +2,7 @@
     import LogTable from '../Components/LogTable.vue';
     import LogArchiveTable from '../Components/LogArchiveTable.vue';
     import DashboardLayout from '../Layout/DashboardLayout.vue';
-    import {Head} from '@inertiajs/vue3';
+    import {Head, router} from '@inertiajs/vue3';
     import type {UserActivityLog} from '../Lib/types';
     import {ref, type Ref} from 'vue';
     import Papa from 'papaparse';
@@ -13,7 +13,11 @@
 
     
     function ExportLogs(){
-
+        // i am legitimately surprised this works
+        const url = window.location.origin;
+        var link = document.createElement('a');
+        link.href = `${url}/api/logs/download`;
+        link.click();
     };
 
     function UploadLogsCsv(event: Event){
@@ -32,6 +36,8 @@
 
                         Papa.parse(readerResult, {header: true, complete: (results, file)=>{
                             console.log(results.data);
+
+                            isLogArchive.value = true;
                         }});
                     }
                 }
