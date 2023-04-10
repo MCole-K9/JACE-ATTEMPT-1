@@ -10,6 +10,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CustomRequestController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\InfractionController;
 use App\Models\CustomRequest;
 use Inertia\Inertia;
@@ -56,6 +57,10 @@ Route::prefix("organization")->group(function () {
 
 Route::resource('/requests', CustomRequestController::class)->middleware('auth');
 
+
+Route::prefix("mail")->group(function () {
+    Route::get("/invitation-wqr", [EmailController::class, "sendOrgInvitationWithQRCode"])->name("mail.invitation-wqr")->middleware("auth");
+});
 // API Token Routes
 
 Route::get("/tokens/generate", function (){
