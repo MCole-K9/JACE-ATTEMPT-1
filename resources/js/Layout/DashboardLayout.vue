@@ -50,12 +50,12 @@ onMounted(() => {
                                     <li class="menu-item">Manage Members</li>
                                 </Link>
                                 <Link v-if="user.isAdmin" href="/administration/logs">
-                                    <li>Logs</li>
+                                    <li class="menu-item">Logs</li>
                                 </Link>
                                 <Link v-if="user.isAdmin" href="/administration/infractions">
-                                    <li class="menu-item" >Infractions</li>
+                                    <li class="menu-item">Infractions</li>
                                 </Link>
-                                <Link href="/tokens/generate">
+                                <Link v-if="user.isAdmin" href="/tokens/generate">
                                     <li class="menu-item" >Generate API Key</li>
                                 </Link>
                             </ul>

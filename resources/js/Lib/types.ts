@@ -69,3 +69,19 @@ export type pageRange = {
     start: number;
     end: number;
 }
+
+export type UserActivityLog = {
+    id: number;
+    name: string;
+    description: string;
+    subject: number;
+    causer: number;
+    timestamp: string;
+
+}
+
+// absolutely too lazy rn to write the full definition, just putting it here for now
+
+export type InfractionLog = {
+    id: number;
+}

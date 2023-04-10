@@ -17,9 +17,28 @@
                   </div>
                   <div class="px-6 py-4 flex justify-between items-center">
                      <span class="text-xs text-gray-800 font-semibold">Date posted: {{job.open_date}}</span>
-                     <button class="btn btn-success">Apply now</button>
+                     <!-- <button class="btn btn-success">Apply now</button> -->
+                     <label class="btn btn-success" for="drawer-right">Apply Now</label>
                   </div>
                   </section>
+                  <input type="checkbox" id="drawer-right" class="drawer-toggle" />
+
+                  <!-- <label for="drawer-right" class="btn btn-primary">Open Right</label> -->
+                  <label class="overlay" for="drawer-right"></label>
+                  <div class="drawer drawer-right">
+                     <div class="drawer-content pt-10 flex flex-col h-full">
+                        <label for="drawer-right" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+                        <div>
+                           <h2 class="text-xl font-medium">Create your account</h2>
+                           <input class="input py-1.5 my-3" placeholder="Type here..." />
+                        </div>
+                        <div class="h-full flex flex-row justify-end items-end gap-2">
+                           <button class="btn btn-ghost">Cancel</button>
+                           <button class="btn btn-primary">Create</button>
+                        </div>
+                     </div>
+                  </div>
+
 </template>
 
 <script setup lang="ts">

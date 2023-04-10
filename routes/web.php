@@ -12,11 +12,13 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\InfractionController;
+use App\Http\Controllers\ProfileController;
 use App\Models\CustomRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
+use Spatie\Activitylog\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,8 @@ Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard
 Route::resource("/jobs", JobController::class);
 
 Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
+
+Route::get("/profile", [ProfileController::class, "index"])->name("profile")->middleware("auth");
 
 Route::get("/contact", [ContactController::class, "index"])->name("contact")->middleware("guest");
 
@@ -94,7 +98,14 @@ Route::get("/tokens/yourtoken", function(){
 /// Admin Routes
 
 Route::get('/administration/logs', function(){
-    return Inertia::render('ViewLogEntries');
+    return Inertia::render('ViewLogEntries', ['logs' => Activity::all()->map(function($logs){
+        return ['id' => $logs->id,
+                'name' => $logs->log_name,
+                'description' => $logs->description,
+                'subject' => $logs->subject_id,
+                'causer' => $logs->causer_id,
+                'timestamp' => $logs->created_at];
+    })]);
 })->middleware('auth:sanctum');
 
 Route::get('/administration/infractions', function(Request $request){

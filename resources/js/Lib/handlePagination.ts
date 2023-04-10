@@ -1,25 +1,25 @@
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { pageRange } from "./types";
 export class Pagination<T>{
-    public data : T[] = [] as T[];
-    public currentPageArray : T[] = [] as T[];
+    public data = ref<T[]>() as Ref<T[]>;
+    public currentPageArray = ref<T[]>() as Ref<T[]>;
     public amountPerPage = ref<number>(2);
     public currentPageNumber = ref<number>(1);
-    public numberOfPages: number = Math.ceil(this.data.length / 2);
+    public numberOfPages: number = 0;
     public range = ref<pageRange>({start: 0, end: 0});
     constructor(data: T[], amountPerPage: number){
-        this.data = data;
+        this.data.value = data;
         this.amountPerPage.value = amountPerPage;
-        this.numberOfPages = Math.ceil(this.data.length / this.amountPerPage.value);
+        this.numberOfPages = Math.ceil(this.data.value.length / this.amountPerPage.value);
         this.range.value = {start: 0, end: this.amountPerPage.value};
-        this.currentPageArray = this.data.slice(this.range.value.start, this.range.value.end);
+        this.currentPageArray.value = this.data.value.slice(this.range.value.start, this.range.value.end);
     }
     public nextPage(){
         if(this.currentPageNumber.value < this.numberOfPages){
             this.currentPageNumber.value++;
             this.range.value.start += this.amountPerPage.value;
             this.range.value.end += this.amountPerPage.value;
-            this.currentPageArray = this.data.slice(this.range.value.start, this.range.value.end);
+            this.currentPageArray.value = this.data.value.slice(this.range.value.start, this.range.value.end);
         }
     }
     public previousPage(){
@@ -27,7 +27,7 @@ export class Pagination<T>{
             this.currentPageNumber.value--;
             this.range.value.start -= this.amountPerPage.value;
             this.range.value.end -= this.amountPerPage.value;
-            this.currentPageArray = this.data.slice(this.range.value.start, this.range.value.end);
+            this.currentPageArray.value = this.data.value.slice(this.range.value.start, this.range.value.end);
         }  
     }
     public goToPage(pageNumber: number){
@@ -35,8 +35,19 @@ export class Pagination<T>{
             this.currentPageNumber.value = pageNumber;
             this.range.value.start = (pageNumber - 1) * this.amountPerPage.value;
             this.range.value.end = pageNumber * this.amountPerPage.value;
-            this.currentPageArray = this.data.slice(this.range.value.start, this.range.value.end);
+            this.currentPageArray.value = this.data.value.slice(this.range.value.start, this.range.value.end);
         }
+    }
+
+    public changeAmountPerPage(amount: number){
+        this.amountPerPage.value = amount;
+        this.numberOfPages = Math.ceil(this.data.value.length / this.amountPerPage.value);
+        this.range.value = {start: 0, end: this.amountPerPage.value};
+        this.currentPageArray.value = this.data.value.slice(this.range.value.start, this.range.value.end);
+    }
+
+    public updateNumberOfPages(){
+        this.numberOfPages = Math.ceil(this.data.value.length / this.amountPerPage.value);
     }
         
     // constructor(data : T){
