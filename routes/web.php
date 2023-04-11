@@ -63,7 +63,8 @@ Route::resource('/requests', CustomRequestController::class)->middleware('auth')
 
 
 Route::prefix("mail")->group(function () {
-    Route::get("/invitation-wqr", [EmailController::class, "sendOrgInvitationWithQRCode"])->name("mail.invitation-wqr")->middleware("auth");
+    Route::get('qr-code', [EmailController::class, "qrCode"])->name("mail.qr-code");
+    Route::post("/invitation-wqr", [EmailController::class, "sendOrgInvitationWithQRCode"])->name("mail.invitation-wqr")->middleware("auth");
 });
 // API Token Routes
 

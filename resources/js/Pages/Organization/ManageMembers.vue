@@ -5,6 +5,7 @@ import { defineProps, reactive, ref } from 'vue';
 import { CustomRequest, OrgRep } from '../../Lib/types';
 import { OrgRoles } from '../../Lib/const';
 import { userStore } from '../../Stores/userStore';
+import Input from '../../Components/Input.vue';
 
 
 const props = defineProps<{
@@ -18,6 +19,10 @@ const request = reactive<CustomRequest>({
     status: 'Pending',
     user_id: userStore().user?.id ?? 0,
 });
+
+const invitation = reactive({
+    email: '',
+})
 
 const requestModal = ref(false);
 
@@ -38,7 +43,14 @@ function sendRequest() {
     //todo: message to indicate request was sent
     router.post("/requests", request);
 
+
 }
+
+function sendInvitation() {
+
+    router.post("/mail/invitation-wqr", invitation);
+}
+
 
 </script>
 
@@ -47,7 +59,7 @@ function sendRequest() {
 
         <div class="flex justify-between items-center">
             <h1>Manage Members</h1>
-            <button class="btn btn-primary">Invite Member</button>
+            <label class="btn btn-primary" for="invitation-modal">Invite Member</label>
         </div>
 
         <div class="flex w-full overflow-x-auto my-5">
@@ -104,8 +116,20 @@ function sendRequest() {
         </select>
 		<div class="flex gap-3">
 			<button class="btn btn-primary btn-block" @click="sendRequest">Confirm</button>
-			<label for="modal-1" class="btn btn-block " @click="requestModal=false">Cancel</label>
+			<label for="modal-1" class="btn btn-block " >Cancel</label>
 		</div>
+	</div>
+</div>
+
+<input class="modal-state" id="invitation-modal" type="checkbox" />
+<div class="modal">
+	<label class="modal-overlay" for="invitation-modal"></label>
+	<div class="modal-content flex flex-col gap-5">
+		<label for="invitation-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+		<h2 class="text-xl">Member Invitation</h2>
+        <Input label="Email" type="email" v-model="invitation.email" :value="invitation.email" />
+        <button class="btn btn-primary btn-block" @click="sendInvitation">Send Invitation</button>
+
 	</div>
 </div>
 
