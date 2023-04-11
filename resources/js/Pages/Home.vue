@@ -13,7 +13,7 @@ import { Link } from '@inertiajs/vue3';
 
     document.addEventListener("scroll", () => {
         let scrollPosition = window.scrollY;
-        console.log(scrollPosition);
+        // console.log(scrollPosition);
         if (scrollPosition > 220) {
             show.value = true;
         } else {

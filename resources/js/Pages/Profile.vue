@@ -18,9 +18,9 @@
       </div>
     </div>
     <div class="relative">
-      <div class="w-48 h-48 bg-gray-800 mx-auto rounded-full shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500 relative">
+      <div class="w-44 h-44 bg-gray-800 mx-auto rounded-full shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500 relative">
 
-        <img :src="profileUrl" alt="profile_picture">
+        <img :src="profileUrl" class="rounded-full aspect-square" alt="profile_picture">
    
     <div class="dropdown dropdown-hover absolute bottom-0 right-3">
         <label class="btn btn-circle">
@@ -70,18 +70,29 @@ import HomeLayout from '../Layout/HomeLayout.vue';
   import { openUploadModal } from "@upload-io/vue-uploader";
   import type { UploadWidgetResult } from "uploader";
   import type { PreventableEvent } from "@upload-io/vue-uploader";
+  
 import { ref } from 'vue';
+import { Logger } from 'tslog';
+
 
   let profileUrl = ref<string>('');
+  let logger = new Logger();
   // Initialize once (at the start of your app).
-  const uploader = Uploader({ apiKey: "public_kW15bD7FEoSdPpyfcwPiPUtS4UUa" }); // Your real API key.
+  const uploader = Uploader({ apiKey:  "public_kW15bD7FEoSdPpyfcwPiPUtS4UUa"}); // Your real API key.
 
   function uploadFile(event: PreventableEvent) {
         openUploadModal({
           event,
           uploader,
           options: {
-            multi: false
+            multi: false,
+            editor: {
+              images:{
+                crop: true,
+                cropRatio: 1,
+                cropShape: "circ",
+              }
+            }
           },
           onComplete: (files: UploadWidgetResult[]) => {
             // if (files.length === 0) {
