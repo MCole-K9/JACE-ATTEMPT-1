@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Job Ace'),
 
     /*
     |--------------------------------------------------------------------------
@@ -186,6 +186,10 @@ return [
          * Package Service Providers...
          */
 
+         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+         Intervention\Image\ImageServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -210,6 +214,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
     ])->toArray(),
 
 ];
