@@ -6,7 +6,6 @@
     import type {UserActivityLog} from '../Lib/types';
     import {ref, type Ref} from 'vue';
     import Papa from 'papaparse';
-import { objectToString } from '@vue/shared';
 
     const props = defineProps<{logs: UserActivityLog[]}>();
     const isLogArchive: Ref<boolean> = ref(false);
@@ -29,6 +28,9 @@ import { objectToString } from '@vue/shared';
         let a = document.createElement('a');
         a.href = URL.createObjectURL(logsBlob);
         a.click();
+
+        // idk if this is important. adding it though
+        URL.revokeObjectURL(a.href);
     };
 
     function UploadLogsCsv(event: Event){
