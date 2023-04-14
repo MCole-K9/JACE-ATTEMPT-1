@@ -36,18 +36,26 @@
             <tbody>
                 <tr>
                     <td>
+
                     </td>
                     <td>
+
                     </td>
                     <td>
+
                     </td>
                     <td>
+
                     </td>
                     <td>
+                
                     </td>
                     <td>
-                        <button>Approve Request</button>
-                        <button>Deny Request</button>
+
+                    </td>
+                    <td>
+                        <button class="btn" @click="">Approve Request</button>
+                        <button class="btn" @click="">Deny Request</button>
                     </td>
                 </tr>
             </tbody>

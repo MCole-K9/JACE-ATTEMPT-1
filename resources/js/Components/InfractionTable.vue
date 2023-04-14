@@ -24,6 +24,9 @@
                     <th>
                         Timestamp
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +36,7 @@
                     <td>{{ infraction.receiver }}</td>
                     <td>{{ infraction.reason }}</td>
                     <td>{{ infraction.timestamp }}</td>
+                    <td><button class="btn">Pick an Action</button></td>
                 </tr>
             </tbody>
         </table>

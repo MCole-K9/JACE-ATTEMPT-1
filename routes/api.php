@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Infraction;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,8 @@ Route::middleware('auth:sanctum')->get('/logs/download', function(Request $reque
     fclose($file);
 
     return response()->download('exported_logs.csv','exported_logs.csv', ['Content-Type: text/csv']);
+});
+
+Route::middleware('auth:sanctum')->post('/infractions/report', function (Request $request){
+
 });

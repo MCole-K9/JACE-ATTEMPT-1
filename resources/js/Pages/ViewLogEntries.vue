@@ -12,6 +12,7 @@
     const logFile: Ref<UserActivityLog[] | undefined> = ref();
     const isCurrentLogTab: Ref<Boolean> = ref(true);
     
+    
     function viewLogArchiveTab(){
         isCurrentLogTab.value = false;
     }

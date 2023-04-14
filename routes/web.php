@@ -116,7 +116,7 @@ Route::get('/administration/infractions', function(Request $request){
                 'issuer' => $infractions->issuer_id,
                 'receiver' => $infractions->receiver_id,
                 'reason' => $infractions->reason,
-                'timestamp' => $infractions->timestamp];
+                'timestamp' => $infractions->created_at];
     })]);
 })->middleware('auth:sanctum');
 
