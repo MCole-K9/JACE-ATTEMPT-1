@@ -55,8 +55,12 @@ onMounted(() => {
                                 <Link v-if="user.isAdmin" href="/administration/infractions">
                                     <li class="menu-item">Infractions</li>
                                 </Link>
+                                <!--For now, I think it's fine that the API key is available to all users-->
                                 <Link v-if="user.isAdmin" href="/tokens/generate">
                                     <li class="menu-item" >Generate API Key</li>
+                                </Link>
+                                <Link v-if="user.isAdmin" href="">
+                                    <li class="menu-item">View Organization Requests</li>
                                 </Link>
                             </ul>
                         </section>

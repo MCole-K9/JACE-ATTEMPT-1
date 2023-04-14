@@ -80,8 +80,10 @@ export type UserActivityLog = {
 
 }
 
-// absolutely too lazy rn to write the full definition, just putting it here for now
-
 export type InfractionLog = {
     id: number;
+    issuer: string;
+    receiver: string;
+    reason: string;
+    timestamp: string;
 }

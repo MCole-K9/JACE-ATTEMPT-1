@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Infraction;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,5 +111,15 @@ Route::get('/administration/logs', function(){
 })->middleware('auth:sanctum');
 
 Route::get('/administration/infractions', function(Request $request){
-    return Inertia::render('Infractions');
+    return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infractions){
+        return ['id' => $infractions->id,
+                'issuer' => $infractions->issuer_id,
+                'receiver' => $infractions->receiver_id,
+                'reason' => $infractions->reason,
+                'timestamp' => $infractions->timestamp];
+    })]);
+})->middleware('auth:sanctum');
+
+Route::get('/administration/orgrequests', function (Request $request) {
+    return Inertia::render('OrganizationRequests');
 })->middleware('auth:sanctum');
