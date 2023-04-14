@@ -18,26 +18,15 @@
                   <div class="px-6 py-4 flex justify-between items-center">
                      <span class="text-xs text-gray-800 font-semibold">Date posted: {{job.open_date}}</span>
                      <!-- <button class="btn btn-success">Apply now</button> -->
-                     <label class="btn btn-success" for="drawer-right">Apply Now</label>
+                     <button class="btn btn-success" @click="$emit('jobSelected',job)">View 
+                        <svg  class="ml-2 w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                     </button>
                   </div>
                   </section>
-                  <input type="checkbox" id="drawer-right" class="drawer-toggle" />
-
-                  <!-- <label for="drawer-right" class="btn btn-primary">Open Right</label> -->
-                  <label class="overlay" for="drawer-right"></label>
-                  <div class="drawer drawer-right">
-                     <div class="drawer-content pt-10 flex flex-col h-full">
-                        <label for="drawer-right" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
-                        <div>
-                           <h2 class="text-xl font-medium">Create your account</h2>
-                           <input class="input py-1.5 my-3" placeholder="Type here..." />
-                        </div>
-                        <div class="h-full flex flex-row justify-end items-end gap-2">
-                           <button class="btn btn-ghost">Cancel</button>
-                           <button class="btn btn-primary">Create</button>
-                        </div>
-                     </div>
-                  </div>
+                  
 
 </template>
 

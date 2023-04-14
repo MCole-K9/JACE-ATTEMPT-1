@@ -73,11 +73,11 @@
                <div class="h-1/1 p-5 bg-gray-200 xl:col-span-3 col-span-4 rounded-xl">
                   <section class="w-full justify-center flex">
                      <button class="flex xl:hidden btn btn-secondary mr-2">Filter</button>
-                     <input type="text" class="input input-block max-w-3xl rounded-r-none" placeholder="Search for jobs" />
+                     <input type="text" class="input w-full max-w-3xl rounded-r-none" placeholder="Search for jobs" />
                      <button class="btn btn-primary rounded-l-none">Search</button>
                   </section>
                   <section class="space-y-5 flex flex-col">
-                     <JobCard v-for="j in pagination.currentPageArray.value" :key="j.id" :job="j" />
+                     <JobCard v-for="j in pagination.currentPageArray.value" :key="j.id" :job="j" @jobSelected="jobSelected" />
                   </section>
                   <section class="flex justify-center pt-5">
                      <div class="pagination ">
@@ -96,7 +96,25 @@
                      </button>
                   </div>
                   </section>
-                  
+                  <label id="displayJob" for="modal-2"></label>
+
+                  <input class="modal-state" id="modal-2" type="checkbox" />
+                  <div class="modal w-screen">
+                     <label class="modal-overlay" for="modal-2"></label>
+                     <div class="modal-content flex flex-col gap-5 max-w-3xl">
+                        <label for="modal-2" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+                        <h2 class="text-xl">Job Name</h2>
+                        <div class="flex gap-3">
+                           <div class="flex flex-col gap-2">
+                              <h3 class="text-lg">Job Description</h3>
+                              <p class= "text-gray-1100">Lorem ipsum dolo sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam tincidunt, nunc elit aliquet nisl, sed aliquet nisl nunc sit amet lorem. Sed euismod, nunc ut aliquam tincidunt, nunc elit aliquet nisl, sed aliquet nisl nunc sit amet lorem.</p>
+                           </div>
+                        </div>
+                        <div class="flex gap-3">
+                           <button class="btn btn-primary btn-block">Send Enquiry</button>
+                        </div>
+                     </div>
+                  </div>
 
                   
                </div>
@@ -114,12 +132,20 @@
    import {Pagination} from '../Lib/handlePagination';
    
    const log = new Logger();
-   log.info(usePage().props?.jobs);
+   // log.info(usePage().props?.jobs);
 
    let jobs: Job[] = usePage().props?.jobs as Job[];
    let pagination = new Pagination(jobs, 2);// just add the data and an int of how much objects u want on a given page, see the temple for front end implementation
    
+   function jobSelected(job: Job) {
+      log.info(job);
+      modalToggle(); 
+   }
 
+   function modalToggle() {
+      let modal = document.getElementById('displayJob');
+      modal?.click();
+   }
    </script>
    
    <style scoped>
