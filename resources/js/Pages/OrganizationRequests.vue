@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import DashboardLayout from '../Layout/DashboardLayout.vue';
 
+    defineProps<{}>();
 </script>
 <template>
     <DashboardLayout>
@@ -27,12 +28,26 @@
                     <th>
                         Timestamp
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <button>Approve Request</button>
+                        <button>Deny Request</button>
                     </td>
                 </tr>
             </tbody>

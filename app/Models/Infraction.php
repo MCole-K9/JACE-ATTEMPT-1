@@ -15,7 +15,7 @@ class Infraction extends Model
 
     protected $table = 'infractions';
 
-    protected $fillable = ['reason'];
+    protected $fillable = ['reason', 'issuer_id', 'receiver_id'];
 
     protected function receiver(): BelongsTo {
         return $this->belongsTo(User::class, 'receiver_id', 'id');

@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('infractions', function (Blueprint $table){
-            $table->bigIncrements('issuer_id');
-            $table->bigIncrements('receiver_id');
+            if (!Schema::hasColumns('infractions', ['issuer_id', 'receiver_id'])){
+                $table->unsignedBigInteger('issuer_id');
+                $table->unsignedBigInteger('receiver_id');
+            }
 
             $table->foreign('issuer_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('receiver_id')->references('id')->on('users')->cascadeOnDelete();
@@ -30,8 +32,17 @@ return new class extends Migration
     public function down()
     {
         Schema::table('infractions', function (Blueprint $table) {
-            $table->dropForeign('issuer_id');
-            $table->dropForeign('receiver_id');
+            if (Schema::hasColumn('infractions', 'issuer_id')){
+                $table->dropForeign('issuer_id');
+                $table->dropForeign('receiver_id');
+            }
+            
+            if (Schema::hasColumn('infractions', 'issuer_id')){
+                Schema::dropColumns('infractions', 'issuer_id');
+            }
+            if (Schema::hasColumn('infractions', 'receiver_id')){
+                Schema::dropColumns('infractions', 'receiver_id');
+            }
         });
     }
 };

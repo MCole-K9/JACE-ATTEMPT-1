@@ -1,5 +1,7 @@
 <script setup lang="ts">
+    import {InfractionLog} from '../Lib/types';
 
+    defineProps<{infractions: InfractionLog[]}>();
 
 </script>
 <template>
@@ -25,12 +27,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr v-for="infraction in infractions">
+                    <td>{{ infraction.id }}</td>
+                    <td>{{ infraction.issuer }}</td>
+                    <td>{{ infraction.receiver }}</td>
+                    <td>{{ infraction.reason }}</td>
+                    <td>{{ infraction.timestamp }}</td>
                 </tr>
             </tbody>
         </table>
