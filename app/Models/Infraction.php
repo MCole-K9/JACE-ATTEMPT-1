@@ -15,5 +15,7 @@ class Infraction extends Model
 
     protected $fillable = ['reason'];
 
+    
+
 
 }

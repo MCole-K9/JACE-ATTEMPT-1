@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('infractions', function (Blueprint $table) {
-            $table->id();
-            $table->string('reason');
-            $table->timestamps();
+        Schema::table('infractions', function (Blueprint $table){
+            $table->bigIncrements('issuer_id');
+            $table->bigIncrements('receiver_id');
+
+            $table->foreign('issuer_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('receiver_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
@@ -28,7 +30,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('infractions', function (Blueprint $table) {
-            $table->drop('infractions');
+            $table->dropForeign('issuer_id');
+            $table->dropForeign('receiver_id');
         });
     }
 };

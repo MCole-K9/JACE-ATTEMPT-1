@@ -1,23 +1,28 @@
 <script setup lang="ts">
-
+    import DashboardLayout from '../Layout/DashboardLayout.vue';
 
 </script>
 <template>
-    <div class="flex w-full overflow-x-auto">
-        <table class="table table-zebra table-hover">
+    <DashboardLayout>
+        <h1>View Organization Requests</h1>
+
+        <table>
             <thead>
                 <tr>
                     <th>
                         ID
                     </th>
                     <th>
-                        Issuer
+                        Request Type
                     </th>
                     <th>
-                        Receiver
+                        Information
                     </th>
                     <th>
-                        Reason
+                        Status
+                    </th>
+                    <th>
+                        User ID
                     </th>
                     <th>
                         Timestamp
@@ -26,11 +31,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>
+
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-
+    </DashboardLayout>
 </template>
