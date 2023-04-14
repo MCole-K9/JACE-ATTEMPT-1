@@ -6,7 +6,7 @@
     <DashboardLayout>
         <h1>View Organization Requests</h1>
 
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>

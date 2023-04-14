@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Infraction;
+
 
 class User extends Authenticatable
 {
@@ -53,5 +56,13 @@ class User extends Authenticatable
     protected function orgRep()
     {
         return $this->hasOne(OrgRep::class);
+    }
+
+    protected function receivedInfractions(): HasOne {
+        return $this->hasOne(Infraction::class, 'receiver_id', 'id');
+    }
+
+    protected function issuedInfraction(): HasOne {
+        return $this->hasOne(Infraction::class, 'issuer_id', 'id');
     }
 }
