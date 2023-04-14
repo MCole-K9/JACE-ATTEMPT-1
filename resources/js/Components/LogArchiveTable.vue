@@ -18,11 +18,11 @@
             </thead>
             <tbody>
                 <tr v-for="log in logs">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ log.name }}</td>
+                    <td>{{ log.description }}</td>
+                    <td>{{ log.subject }}</td>
+                    <td>{{ log.causer }}</td>
+                    <td>{{ log.timestamp }}</td>
                 </tr>
             </tbody>
         </table>
