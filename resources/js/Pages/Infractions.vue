@@ -19,8 +19,8 @@
                 return response.blob();
             }
             else {
-                return new Promise((response, reject) => {
-                    reject("idk why response.status isn't working");
+                return new Promise((resolve, reject) => {
+                    reject(response);
                 })
             }
         }).then(reportBlob => {
@@ -32,7 +32,8 @@
 
             URL.revokeObjectURL(a.href);
         }).catch(error => {
-            console.log("IT'S BROKE." + error);
+            console.log("IT'S BROKE.");
+            console.log(error);
         });
     }
 
@@ -56,7 +57,7 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-            <button class="btn">Download Report</button>
+            <button class="btn" @click="downloadReport">Download Report</button>
         </div>
         <InfractionTable :infractions="infractions"/>
     </DashboardLayout>

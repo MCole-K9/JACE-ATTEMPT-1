@@ -6,6 +6,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\Infraction;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,23 @@ Route::middleware('auth:sanctum')->get('/logs/download', function(Request $reque
 Route::middleware('auth:sanctum')->post('/infractions/report', function (Request $request){
     $option = $request->getContent();
 
-    // idk how i'm going to get this work
+    // Get all infractions in a collection
+    // (Possibly) turn them into an array
+    // create a new pdf file
+    // create page
+    // write to it
+    // send that shit over
+    // close the file?
+    
+    $fpdf = new Fpdf('L', 'mm', 'A4');
+    $fpdf->SetFont('Times New Roman', '', 12);
+    $fpdf->SetAuthor('Joe Mama');
+    $fpdf->AddPage();
+    $fpdf->Cell(0, 0, 'This is a test', 0, 0, 'center');
+    $fpdf->Output('F', 'infractions_report' + $option + date('Y'));
+
+    return response()->download('infractions_report-' + $option + date('Y'), 
+        'infractions_report-' + $option + date('Y'),
+    ['Content-Type' => 'application/pdf']);
+
 });
