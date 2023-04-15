@@ -52,5 +52,7 @@ Route::middleware('auth:sanctum')->get('/logs/download', function(Request $reque
 });
 
 Route::middleware('auth:sanctum')->post('/infractions/report', function (Request $request){
+    $option = $request->getContent();
 
+    // idk how i'm going to get this work
 });

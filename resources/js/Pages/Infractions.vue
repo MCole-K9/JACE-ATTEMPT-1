@@ -14,7 +14,7 @@
         let request = fetch('/api/infractions/report', {
             method: 'post',
             body: option,
-        }).then((response) => {
+        }).then(response => {
             if (response.ok && response.status == 200){
                 return response.blob();
             }
@@ -23,7 +23,7 @@
                     reject("idk why response.status isn't working");
                 })
             }
-        }).then((reportBlob) => {
+        }).then(reportBlob => {
             let reportFile = reportBlob as Blob
             let a = document.createElement('a');
             a.href = URL.createObjectURL(reportFile);
@@ -31,8 +31,8 @@
             a.click();
 
             URL.revokeObjectURL(a.href);
-        }).catch((error) => {
-            // i'm probably going to add some error catching thing here, i guess
+        }).catch(error => {
+            console.log("IT'S BROKE." + error);
         });
     }
 
@@ -42,7 +42,7 @@
         <h1>Infractions</h1>
         <div>
             <p>Download Infraction Report for Month:</p>
-            <select id="monthSelector">
+            <select id="monthSelector" class="select">
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
