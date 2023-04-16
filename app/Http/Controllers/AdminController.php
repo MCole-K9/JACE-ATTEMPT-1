@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\Infraction;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use App\InfractionPdf;
 
 class AdminController extends Controller
 {
@@ -55,7 +56,6 @@ class AdminController extends Controller
         $fpdf->SetCreator('Job Ace');
 
         $fpdf->AddPage();
-        $fpdf->Header(); // need to design a header for this
         
         $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
         $fpdf->Cell(50, 40, 'test'); 
