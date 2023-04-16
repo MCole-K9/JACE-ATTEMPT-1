@@ -40,6 +40,15 @@ class AdminController extends Controller
     
         // bare-minimum test works, at least.
         $fpdf = new Fpdf('L', 'mm', 'A4');
+        $fpdf->SetAuthor('Joe Mama');
+        $fpdf->SetCreator('Job Ace');
+
+        $fpdf->AddPage();
+        $fpdf->Header(); // need to design a header for this
+        
+        $fpdf->SetFont('Courier', 'B', 18);
+        $fpdf->Text(0,0,'test');
+        // $fpdf->Cell(50, 40, 'test'); // this is what causes the problem
         $fpdf->Output('F', 'report.pdf');
     
         return response()->download('report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
