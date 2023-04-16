@@ -10,10 +10,22 @@
         let selector: HTMLSelectElement = document.getElementById('monthSelector') as HTMLSelectElement;
         let option: string = selector.options[selector.selectedIndex].value;
 
-        // yes, i am writing this in promise-style, just to make sure i actually understand this
-        let request = fetch('/api/infractions/report', {
-            method: 'post',
-            body: option,
+        // couldn't get this working with X-XSRF-TOKEN, but it works with gettin the csrf token. i 
+        // don't know why
+        let request = fetch('/api/csrf').then(response => {
+            if (response.status == 200 && response.ok){
+                return response.text();
+            }
+        }).then(csrf => {
+            return fetch('/api/infractions/report', {
+                method: 'post',
+                body: option,
+                headers: {
+                    'X-CSRF-TOKEN': csrf as string,
+                    'Content-Type': 'text/plain'
+                },
+                credentials: 'same-origin'
+            });
         }).then(response => {
             if (response.ok && response.status == 200){
                 return response.blob();
@@ -27,12 +39,13 @@
             let reportFile = reportBlob as Blob
             let a = document.createElement('a');
             a.href = URL.createObjectURL(reportFile);
+            a.download = `infraction_report-${option}-${new Date().getFullYear()}.pdf`;
 
             a.click();
 
             URL.revokeObjectURL(a.href);
         }).catch(error => {
-            console.log("IT'S BROKE.");
+            // something is wrong with the pdf generation, because this generates a 500 error
             console.log(error);
         });
     }
@@ -44,15 +57,15 @@
         <div>
             <p>Download Infraction Report for Month:</p>
             <select id="monthSelector" class="select">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
                 <option value="10">October</option>
                 <option value="11">November</option>
                 <option value="12">December</option>

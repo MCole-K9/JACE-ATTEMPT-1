@@ -75,3 +75,14 @@ Route::middleware('auth:sanctum')->post('/infractions/report', function (Request
     ['Content-Type' => 'application/pdf']);
 
 });
+
+Route::middleware('auth:sanctum')->get('/csrf', function (){
+    $user = auth()->user();
+
+    if ($user){
+        return response(csrf_token(), 200, ['Content-Type' => 'text/plain']);
+    }
+    else {
+        return response('', 401);
+    }
+});

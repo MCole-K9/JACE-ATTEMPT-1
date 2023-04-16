@@ -28,6 +28,7 @@
 
         let a = document.createElement('a');
         a.href = URL.createObjectURL(logsBlob);
+        a.download = 'exported_logs.csv';
         a.click();
 
         // idk if this is important. adding it though
