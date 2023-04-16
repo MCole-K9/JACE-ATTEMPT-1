@@ -50,6 +50,9 @@ class AdminController extends Controller
         }
         
         $option = $request->getContent();
+        $year = strval(getdate()['year']);
+        $filename = 'report-'.$option.'-'.$year.'.pdf';
+
 
         $fpdf = new InfractionPdf('L', 'mm', 'A4');
         $fpdf->month = $option;
@@ -60,9 +63,9 @@ class AdminController extends Controller
         
         $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
         $fpdf->Cell(50, 40, 'test'); 
-        $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\report.pdf');
+        $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename);
     
-        return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
+        return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename, 'test.pdf', ['Content-Type' => 'application/pdf']);
     
         // Get all infractions in a collection
         // (Possibly) turn them into an array
