@@ -10,7 +10,15 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 class AdminController extends Controller
 {
     function getActivityLogs (Request $request){
-        $file = fopen('exported_logs.csv', 'w');
+        // fine i guess i'll just make the folder myself
+        if (!is_dir($_SERVER['DOCUMENT_ROOT'] . '\activitylogs')){
+            mkdir($_SERVER['DOCUMENT_ROOT'] . '\activitylogs');
+        }
+
+        // i am very annoyed that the string concatenation operator is '.'
+        // i am also very annoyed that fopen will not just create the folder that it needs
+        // i am ALSO very annoyed that this is configured to put server root in /public. but okay.
+        $file = fopen($_SERVER['DOCUMENT_ROOT'] . '\activitylogs\exported_logs.csv', 'w');
         
         // need to figure out how to make this not just plop a file directly into the directory
         // probably just make a gitignore'd folder and then make all exports there (when i wake up)
@@ -32,10 +40,14 @@ class AdminController extends Controller
     
         fclose($file);
     
-        return response()->download('exported_logs.csv','exported_logs.csv', ['Content-Type: text/csv']);
+        return response()->download($_SERVER['DOCUMENT_ROOT'] . '\activitylogs\exported_logs.csv','exported_logs.csv', ['Content-Type: text/csv']);
     }
 
     function getInfractionReport (Request $request){
+        if (!is_dir($_SERVER['DOCUMENT_ROOT'] . '\infractionreports')){
+            mkdir($_SERVER['DOCUMENT_ROOT'] . '\infractionreports');
+        }
+        
         $option = $request->getContent();
 
         $fpdf = new Fpdf('L', 'mm', 'A4');
@@ -46,11 +58,10 @@ class AdminController extends Controller
         $fpdf->Header(); // need to design a header for this
         
         $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
-        $fpdf->Text(0,0,'test');
         $fpdf->Cell(50, 40, 'test'); 
-        $fpdf->Output('F', 'report.pdf');
+        $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\report.pdf');
     
-        return response()->download('report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
+        return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
     
         // Get all infractions in a collection
         // (Possibly) turn them into an array

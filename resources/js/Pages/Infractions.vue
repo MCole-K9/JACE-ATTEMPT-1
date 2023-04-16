@@ -45,7 +45,7 @@
 
             URL.revokeObjectURL(a.href);
         }).catch(error => {
-            // something is wrong with the pdf generation, because this generates a 500 error
+            // this needs to be rewritten to actually show the error in some way for production
             console.log(error);
         });
     }
