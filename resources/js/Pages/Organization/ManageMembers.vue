@@ -26,11 +26,12 @@ const invitation = reactive({
 
 const requestModal = ref(false);
 const invitationModal = ref(false);
+const changeRoleTo = ref("");
 
 function confirmRequest(type:  CustomRequest['type'], user_id: CustomRequest['user_id']) {
     request.type = type;
     request.user_id = user_id;
-    request.info = `${getUserName(user_id)} from Org with ID: ${userStore().user?.org_rep?.organization_id}`;
+    request.info = `${getUserName(user_id)} from Org with ID: ${userStore().user?.org_rep?.organization_id} ${type === 'Role Change' ? `to ${changeRoleTo.value}`   : ''}`;
 }
 
 function getUserName(user_id: number) {
@@ -122,10 +123,11 @@ function sendInvitation() {
 		<label for="modal-1" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</label>
 		<h2 class="text-xl">Request for {{ request.type }}</h2>
 		<span class="capitalize ">You are requesting  {{ request.type }} for {{ getUserName(request.user_id) }}</span>
-        <select class="select" v-if="request.type === 'Role Change'" name="" id="">
+        {{ changeRoleTo }}
+        <select class="select" v-model="changeRoleTo" v-if="request.type === 'Role Change'" name="" id="">
             <option value="" disabled>Select Role</option>
             <option value="Admin">Admin</option>
-            <option value="Admin">Member</option>
+            <option value="Member">Member</option>
         </select>
 		<div class="flex gap-3">
 			<button class="btn btn-primary btn-block" @click="sendRequest">Confirm</button>
