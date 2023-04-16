@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\Infraction;
 use Codedge\Fpdf\Fpdf\Fpdf;
-use App\InfractionPdf;
+use App\Custom\InfractionPdf;
 
 class AdminController extends Controller
 {
@@ -51,7 +51,8 @@ class AdminController extends Controller
         
         $option = $request->getContent();
 
-        $fpdf = new Fpdf('L', 'mm', 'A4');
+        $fpdf = new InfractionPdf('L', 'mm', 'A4');
+        $fpdf->month = $option;
         $fpdf->SetAuthor('Joe Mama');
         $fpdf->SetCreator('Job Ace');
 
