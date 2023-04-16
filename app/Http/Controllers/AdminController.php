@@ -37,8 +37,7 @@ class AdminController extends Controller
 
     function getInfractionReport (Request $request){
         $option = $request->getContent();
-    
-        // bare-minimum test works, at least.
+
         $fpdf = new Fpdf('L', 'mm', 'A4');
         $fpdf->SetAuthor('Joe Mama');
         $fpdf->SetCreator('Job Ace');
@@ -46,24 +45,15 @@ class AdminController extends Controller
         $fpdf->AddPage();
         $fpdf->Header(); // need to design a header for this
         
-        $fpdf->SetFont('Courier', 'B', 18);
+        $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
         $fpdf->Text(0,0,'test');
-        // $fpdf->Cell(50, 40, 'test'); // this is what causes the problem
+        $fpdf->Cell(50, 40, 'test'); 
         $fpdf->Output('F', 'report.pdf');
     
         return response()->download('report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
     
         // Get all infractions in a collection
         // (Possibly) turn them into an array
-        // create a new pdf file
-        // create page
-        // write to it
-        // send that shit over
-        // close the file?
-        
-        // the problem is here, somehow
-        
-    
     
     }
 }
