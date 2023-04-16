@@ -25,6 +25,7 @@ const invitation = reactive({
 })
 
 const requestModal = ref(false);
+const invitationModal = ref(false);
 
 function confirmRequest(type:  CustomRequest['type'], user_id: CustomRequest['user_id']) {
     request.type = type;
@@ -41,14 +42,26 @@ function sendRequest() {
 
     //todo: add role to be changed on request info
     //todo: message to indicate request was sent
-    router.post("/requests", request);
+    router.post("/requests", request, {
+        onFinish: () => {
+            requestModal.value = false;
+            alert("Request Sent");
+        }
+    });
 
 
 }
 
 function sendInvitation() {
 
-    router.post("/mail/invitation-wqr", invitation);
+   router.post("/mail/invitation-wqr", invitation, {
+    onFinish: () => {
+        invitationModal.value = false;
+        alert("Invitation Sent");
+    }
+   });
+
+
 }
 
 
@@ -102,11 +115,11 @@ function sendInvitation() {
 
 
 <!-- <label class="btn btn-primary" for="modal-1">Open Modal</label> -->
-<input class="modal-state" id="modal-1" type="checkbox" />
+<input class="modal-state" id="modal-1" type="checkbox" :checked="requestModal" @change="requestModal = !requestModal"/>
 <div class="modal">
 	<label class="modal-overlay" for="modal-1"></label>
 	<div class="modal-content flex flex-col gap-5">
-		<label for="modal-1" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="requestModal = false">✕</label>
+		<label for="modal-1" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</label>
 		<h2 class="text-xl">Request for {{ request.type }}</h2>
 		<span class="capitalize ">You are requesting  {{ request.type }} for {{ getUserName(request.user_id) }}</span>
         <select class="select" v-if="request.type === 'Role Change'" name="" id="">
@@ -121,7 +134,7 @@ function sendInvitation() {
 	</div>
 </div>
 
-<input class="modal-state" id="invitation-modal" type="checkbox" />
+<input class="modal-state" id="invitation-modal" type="checkbox" :checked="invitationModal" @change="invitationModal = !invitationModal"/>
 <div class="modal">
 	<label class="modal-overlay" for="invitation-modal"></label>
 	<div class="modal-content flex flex-col gap-5">
