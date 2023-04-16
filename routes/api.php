@@ -55,6 +55,12 @@ Route::middleware('auth:sanctum')->get('/logs/download', function(Request $reque
 Route::middleware('auth:sanctum')->post('/infractions/report', function (Request $request){
     $option = $request->getContent();
 
+    // bare-minimum test works, at least.
+    $fpdf = new Fpdf('L', 'mm', 'A4');
+    $fpdf->Output('F', 'report.pdf');
+
+    return response()->download('report.pdf', 'test.pdf', ['Content-Type' => 'application/pdf']);
+
     // Get all infractions in a collection
     // (Possibly) turn them into an array
     // create a new pdf file
@@ -63,16 +69,9 @@ Route::middleware('auth:sanctum')->post('/infractions/report', function (Request
     // send that shit over
     // close the file?
     
-    $fpdf = new Fpdf('L', 'mm', 'A4');
-    $fpdf->SetFont('Times New Roman', '', 12);
-    $fpdf->SetAuthor('Joe Mama');
-    $fpdf->AddPage();
-    $fpdf->Cell(0, 0, 'This is a test', 0, 0, 'center');
-    $fpdf->Output('F', 'infractions_report' + $option + date('Y'));
+    // the problem is here, somehow
+    
 
-    return response()->download('infractions_report-' + $option + date('Y'), 
-        'infractions_report-' + $option + date('Y'),
-    ['Content-Type' => 'application/pdf']);
 
 });
 
