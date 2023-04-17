@@ -32,7 +32,7 @@
             <tbody>
                 <tr v-for="infraction in infractions">
                     <td>{{ infraction.id }}</td>
-                    <td>{{ infraction.issuerName }}(ID: {{ infraction.issuerId }})</td>
+                    <td>{{ infraction.issuerName }} (ID: {{ infraction.issuerId }})</td>
                     <td>{{ infraction.receiverName }} (ID: {{ infraction.receiverId }})</td>
                     <td>{{ infraction.reason }}</td>
                     <td>{{ infraction.timestamp }}</td>

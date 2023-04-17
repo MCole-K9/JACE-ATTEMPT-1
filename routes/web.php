@@ -119,13 +119,19 @@ Route::get('/administration/logs', function(){
 
 Route::get('/administration/infractions', function(Request $request){
     $infractions = Infraction::all();
+    foreach($infractions as $infraction){
+        $infraction->receiver()->get();
+        $infraction->issuer()->get();
+    }
 
-    return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infractions){
-        return ['id' => $infractions->id,
-                'issuerId' => $infractions->issuer_id,
-                'receiverId' => $infractions->receiver_id,
-                'reason' => $infractions->reason,
-                'timestamp' => $infractions->created_at];
+    return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infraction){
+        return ['id' => $infraction->id,
+                'issuerId' => $infraction->issuer_id,
+                'issuerName' => $infraction->issuer->first_name . ' ' . $infraction->issuer->last_name,
+                'receiverId' => $infraction->receiver_id,
+                'receiverName' => $infraction->receiver->first_name . ' ' . $infraction->receiver->last_name,
+                'reason' => $infraction->reason,
+                'timestamp' => $infraction->created_at];
     })]);
 })->middleware('auth:sanctum');
 
