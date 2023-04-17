@@ -27,8 +27,6 @@ class AdminController extends Controller
         foreach ($activities as $activity){
             $activity->causer()->get();
         }
-
-                
     
         $logsCollection = $activities->map(function ($activity){
             return ['id' => $activity->id,

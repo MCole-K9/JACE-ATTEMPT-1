@@ -76,7 +76,7 @@ export type UserActivityLog = {
     description: string;
     subject: number;
     causer: number;
-    causerName?: string;
+    causerName: string;
     timestamp: string;
 
 }
@@ -84,9 +84,9 @@ export type UserActivityLog = {
 export type InfractionLog = {
     id: number;
     issuerId: string;
-    issuerName?: string;
+    issuerName: string;
     receiverId: string;
-    receiverName?: string;
+    receiverName: string;
     reason: string;
     timestamp: string;
 }
