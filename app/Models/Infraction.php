@@ -17,11 +17,11 @@ class Infraction extends Model
 
     protected $fillable = ['reason', 'issuer_id', 'receiver_id'];
 
-    protected function receiver(): BelongsTo {
+    public function receiver(): BelongsTo {
         return $this->belongsTo(User::class, 'receiver_id', 'id');
     }
 
-    protected function issuer(): BelongsTo {
+    public function issuer(): BelongsTo {
         return $this->belongsTo(User::class, 'issuer_id', 'id');
     }
 

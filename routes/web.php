@@ -100,17 +100,26 @@ Route::get("/tokens/yourtoken", function(){
 /// Admin Routes
 
 Route::get('/administration/logs', function(){
-    return Inertia::render('ViewLogEntries', ['logs' => Activity::all()->map(function($logs){
-        return ['id' => $logs->id,
-                'name' => $logs->log_name,
-                'description' => $logs->description,
-                'subject' => $logs->subject_id,
-                'causer' => $logs->causer_id,
-                'timestamp' => $logs->created_at];
+    // fairly sure at this point that i need to foreach the Activity::all()
+    $activities = Activity::all();
+    foreach ($activities as $activity){
+        $activity->causer()->get();
+    }
+
+    return Inertia::render('ViewLogEntries', ['logs' => $activities->map(function($log){
+        return ['id' => $log->id,
+                'name' => $log->log_name,
+                'description' => $log->description,
+                'subject' => $log->subject_id,
+                'causer' => $log->causer_id,
+                'causerName' => $log->causer->first_name . ' ' . $log->causer->last_name,
+                'timestamp' => $log->created_at];
     })]);
 })->middleware('auth:sanctum');
 
 Route::get('/administration/infractions', function(Request $request){
+    $infractions = Infraction::all();
+
     return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infractions){
         return ['id' => $infractions->id,
                 'issuerId' => $infractions->issuer_id,
