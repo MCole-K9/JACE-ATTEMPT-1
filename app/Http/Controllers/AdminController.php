@@ -24,6 +24,11 @@ class AdminController extends Controller
         // need to figure out how to make this not just plop a file directly into the directory
         // probably just make a gitignore'd folder and then make all exports there (when i wake up)
         $activities = Activity::all();
+        foreach ($activities as $activity){
+            $activity->causer()->get();
+        }
+
+                
     
         $logsCollection = $activities->map(function ($activity){
             return ['id' => $activity->id,
@@ -31,6 +36,7 @@ class AdminController extends Controller
                     'description' => $activity->description,
                     'subject' => $activity->subject_id,
                     'causer' => $activity->causer_id,
+                    'causerName' => $activity->causer->first_name . ' ' . $activity->causer->last_name,
                     'timestamp' => $activity->created_at];
         });
     

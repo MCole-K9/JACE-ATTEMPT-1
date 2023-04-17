@@ -53,7 +53,7 @@
                             console.log(results.data);
 
                             // this is somehow even more hackier, but it's typesafe at least ig
-                            type resultsObject = {0: number, 1: string, 2: string, 3: number, 4: number, 5: string}
+                            type resultsObject = {0: number, 1: string, 2: string, 3: number, 4: number, 5: string, 6: string}
 
                             let resultsArray: Array<resultsObject> = results.data as resultsObject[];
                             let logsArray: UserActivityLog[] = [];
@@ -66,7 +66,8 @@
                                 activityRecord.description = row['2'];
                                 activityRecord.subject = row['3'];
                                 activityRecord.causer = row['4']
-                                activityRecord.timestamp = row['5'];
+                                activityRecord.causerName = row['5'];
+                                activityRecord.timestamp = row['6'];
 
                                 logsArray.push(activityRecord);
                             });
