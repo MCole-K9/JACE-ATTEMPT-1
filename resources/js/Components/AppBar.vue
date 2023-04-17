@@ -80,4 +80,5 @@ let emit = defineEmits<{
     </div>
     <Avatar v-if="user.user" />
   </div>
+
 </template>

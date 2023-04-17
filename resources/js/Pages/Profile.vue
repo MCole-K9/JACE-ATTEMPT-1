@@ -20,7 +20,7 @@
     <div class="relative">
       <div class="w-44 h-44 bg-gray-700 outline outline-primary mx-auto rounded-full shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500 relative">
 
-        <img :src="profileUrl" class="rounded-full aspect-square">
+        <img :src="user.getAvatarUrl" class="rounded-full aspect-square">
    
     <div class="dropdown dropdown-hover absolute bottom-0 right-3">
         <label class="btn btn-circle btn-primary">
@@ -65,9 +65,21 @@ import HomeLayout from '../Layout/HomeLayout.vue';
   import { openUploadModal } from "@upload-io/vue-uploader";
   import type { UploadWidgetResult } from "uploader";
   import type { PreventableEvent } from "@upload-io/vue-uploader";
+  import { userStore } from '../Stores/userStore'
+  import { router } from '@inertiajs/vue3';
+  import { ref } from 'vue';
+  import { Logger } from 'tslog';
+  const user  = userStore();
+  console.log(user.getAvatarUrl);
   
-import { ref } from 'vue';
-import { Logger } from 'tslog';
+  
+  function updateAvatar(url:string) {
+    router.post('/profile', 
+       {
+        avatar_url: url
+      }
+    )
+  }
 
 
   let profileUrl = ref<string>('');
@@ -97,7 +109,10 @@ import { Logger } from 'tslog';
             // }
             console.log(files[0].fileUrl);
             
-            profileUrl.value = files[0].fileUrl;
+            // profileUrl.value = files[0].fileUrl;
+            // user.avatar_url = files[0].fileUrl;
+            updateAvatar(files[0].fileUrl);
+
           }
         })
       }

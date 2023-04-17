@@ -47,6 +47,7 @@ Route::resource("/jobs", JobController::class);
 Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
 
 Route::get("/profile", [ProfileController::class, "index"])->name("profile")->middleware("auth");
+Route::post("/profile", [ProfileController::class, "updateAvatar"])->name("profile.updateAvatar")->middleware("auth");
 
 Route::get("/contact", [ContactController::class, "index"])->name("contact")->middleware("guest");
 

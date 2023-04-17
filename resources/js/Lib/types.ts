@@ -6,6 +6,7 @@ export type User = {
     role_id: number;
     created_at: Date;
     updated_at: Date;
+    avatar_url: string;
     org_rep ?: {
         org_role_id: number;
         organization_id: number;

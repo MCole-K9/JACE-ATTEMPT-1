@@ -14,7 +14,9 @@ export const userStore = defineStore("user", {
         getFullName(): string {
             return this.user?.first_name + " " + this.user?.last_name;
         },
-
+        getAvatarUrl(): string {
+            return this.user?.avatar_url as string;
+        },
         isAdmin(): boolean {
             return this.user?.role_id === Roles.Admin;
         },

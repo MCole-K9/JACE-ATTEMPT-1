@@ -27,7 +27,7 @@ onMounted(() => {
 
 
 <template>
-    <main class="grid grid-cols-12">
+    <main class="flex">
         <aside class="hidden md:block md:col-span-2 transition-all w-64 ">
             <div class="flex h-screen flex-col justify-between bgBlue">
                 <div class="px-4 py-6 flex items-center flex-col">
@@ -68,7 +68,7 @@ onMounted(() => {
                 </div>
             </div>
         </aside>
-        <section class="col-span-full md:col-span-10 p-10">
+        <section class="w-full p-10">
             <slot />
         </section>
     </main>

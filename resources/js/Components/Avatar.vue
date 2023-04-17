@@ -3,7 +3,7 @@
 			<div class="dropdown-container">
 				<div class="dropdown">
 					<label class="btn btn-ghost flex cursor-pointer px-0" tabindex="0">
-						<img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="avatar" />
+						<img :src="user.getAvatarUrl" alt="avatar" />
 					</label>
 					<div class="dropdown-menu dropdown-menu-bottom-left">
                         <label class="text-xs text-center"> Signed In As</label>
@@ -32,6 +32,7 @@
 import { Link } from '@inertiajs/vue3';
 import { userStore } from '../Stores/userStore';
 const user = userStore();
+
 </script>
 
 <style scoped>
