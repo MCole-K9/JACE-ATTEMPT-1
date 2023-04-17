@@ -21,8 +21,6 @@ class AdminController extends Controller
         // i am ALSO very annoyed that this is configured to put server root in /public. but okay.
         $file = fopen($_SERVER['DOCUMENT_ROOT'] . '\activitylogs\exported_logs.csv', 'w');
         
-        // need to figure out how to make this not just plop a file directly into the directory
-        // probably just make a gitignore'd folder and then make all exports there (when i wake up)
         $activities = Activity::all();
         foreach ($activities as $activity){
             $activity->causer()->get();
@@ -37,7 +35,6 @@ class AdminController extends Controller
                     'causerName' => $activity->causer->first_name . ' ' . $activity->causer->last_name,
                     'timestamp' => $activity->created_at];
         });
-    
     
         foreach($logsCollection as $record){
             fputcsv($file, $record);
@@ -56,6 +53,8 @@ class AdminController extends Controller
         $option = $request->getContent();
         $year = strval(getdate()['year']);
         $filename = 'infraction_report-'.$option.'-'.$year.'.pdf';
+        $infractionsRecords = InfractionController::getAllFormattedInfractions();
+
 
         $fpdf = new InfractionPdf('L', 'mm', 'A4');
         $fpdf->month = $option;
@@ -69,9 +68,7 @@ class AdminController extends Controller
         $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename);
     
         return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename, 'test.pdf', ['Content-Type' => 'application/pdf']);
-    
-        // Get all infractions in a collection
-        // (Possibly) turn them into an array
+
     
     }
 }

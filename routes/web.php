@@ -119,21 +119,7 @@ Route::get('/administration/logs', function(){
 })->middleware('auth:sanctum');
 
 Route::get('/administration/infractions', function(Request $request){
-    $infractions = Infraction::all();
-    foreach($infractions as $infraction){
-        $infraction->receiver()->get();
-        $infraction->issuer()->get();
-    }
-
-    return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infraction){
-        return ['id' => $infraction->id,
-                'issuerId' => $infraction->issuer_id,
-                'issuerName' => $infraction->issuer->first_name . ' ' . $infraction->issuer->last_name,
-                'receiverId' => $infraction->receiver_id,
-                'receiverName' => $infraction->receiver->first_name . ' ' . $infraction->receiver->last_name,
-                'reason' => $infraction->reason,
-                'timestamp' => $infraction->created_at];
-    })]);
+    return Inertia::render('Infractions', InfractionController::getAllFormattedInfractions());
 })->middleware('auth:sanctum');
 
 Route::get('/administration/orgrequests', function (Request $request) {
