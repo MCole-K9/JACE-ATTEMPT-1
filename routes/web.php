@@ -113,8 +113,8 @@ Route::get('/administration/logs', function(){
 Route::get('/administration/infractions', function(Request $request){
     return Inertia::render('Infractions', ['infractions' => Infraction::all()->map(function ($infractions){
         return ['id' => $infractions->id,
-                'issuer' => $infractions->issuer_id,
-                'receiver' => $infractions->receiver_id,
+                'issuerId' => $infractions->issuer_id,
+                'receiverId' => $infractions->receiver_id,
                 'reason' => $infractions->reason,
                 'timestamp' => $infractions->created_at];
     })]);

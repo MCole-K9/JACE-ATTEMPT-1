@@ -22,7 +22,7 @@
                     <td>{{log.name}}</td>
                     <td>{{log.description}}</td>
                     <td>{{log.subject}}</td>
-                    <td>{{log.causer}}</td>
+                    <td>{{log.causerName}} (ID: {{log.causer}})</td>
                     <td>{{log.timestamp}}</td>
                 </tr>
             </tbody>

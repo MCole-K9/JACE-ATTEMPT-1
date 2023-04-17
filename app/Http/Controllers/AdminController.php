@@ -51,8 +51,7 @@ class AdminController extends Controller
         
         $option = $request->getContent();
         $year = strval(getdate()['year']);
-        $filename = 'report-'.$option.'-'.$year.'.pdf';
-
+        $filename = 'infraction_report-'.$option.'-'.$year.'.pdf';
 
         $fpdf = new InfractionPdf('L', 'mm', 'A4');
         $fpdf->month = $option;
