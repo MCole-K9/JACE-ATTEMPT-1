@@ -40,7 +40,10 @@ class InfractionController extends Controller
 
         // need to rewrite this to send and work with the type of object that generated the infraction
         $input = $request->input('reason');
-        $infraction = Infraction::create(['reason' => $input]);
+        $infraction = Infraction::create([
+            'reason' => $input, 
+            'issuer_id' => $user->getAuthIdentifier(), 
+            'receiver_id' => 4]);
 
         if ($infraction){
             activity('infraction')->

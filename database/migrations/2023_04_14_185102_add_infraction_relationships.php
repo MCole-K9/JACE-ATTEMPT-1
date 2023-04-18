@@ -32,17 +32,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('infractions', function (Blueprint $table) {
-            if (Schema::hasColumn('infractions', 'issuer_id')){
-                $table->dropForeign('issuer_id');
-                $table->dropForeign('receiver_id');
-            }
-            
-            if (Schema::hasColumn('infractions', 'issuer_id')){
-                Schema::dropColumns('infractions', 'issuer_id');
-            }
-            if (Schema::hasColumn('infractions', 'receiver_id')){
-                Schema::dropColumns('infractions', 'receiver_id');
-            }
+            $table->dropConstrainedForeignId('issuer_id');
+            $table->dropConstrainedForeignId('receiver_id');
+ 
         });
     }
 };
