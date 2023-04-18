@@ -53,8 +53,7 @@ class AdminController extends Controller
         $option = $request->getContent();
         $year = strval(getdate()['year']);
         $filename = 'infraction_report-'.$option.'-'.$year.'.pdf';
-        $infractionsRecords = InfractionController::getAllFormattedInfractions();
-
+        $infractionsRecords = InfractionController::getAllFormattedInfractions()['infractions'];
 
         $fpdf = new InfractionPdf('L', 'mm', 'A4');
         $fpdf->month = $option;
@@ -62,9 +61,42 @@ class AdminController extends Controller
         $fpdf->SetCreator('Job Ace');
 
         $fpdf->AddPage();
-        
-        $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
-        $fpdf->Cell(50, 40, 'test'); 
+        $fpdf->createTableHeaders();
+
+        $header_widths = $fpdf->getColumnWidths();
+
+        $fpdf->SetFont('Times', '', 12);
+        foreach($infractionsRecords as $record){
+
+            for($i = 0; $i < 5; $i++){
+                $field = '';
+
+                switch ($i){
+                    case 0:
+                        $field = $record['id'];
+                        break;
+                    case 1:
+                        $field = $record['issuerName'];
+                        break;
+                    case 2:
+                        $field = $record['receiverName'];
+                        break;
+                    case 3:
+                        $field = $record['reason'];
+                        break;
+                    case 4:
+                        $field = $record['timestamp'];
+                        break;
+                    default:
+                        // this shouldn't be happening
+                        break;
+                }
+
+                $fpdf->Cell($header_widths[$i], 10, $field, 0, 0, 'C');
+            }
+            $fpdf->Ln();
+        }
+
         $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename);
     
         return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename, 'test.pdf', ['Content-Type' => 'application/pdf']);
