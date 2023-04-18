@@ -88,7 +88,7 @@ class AdminController extends Controller
                         $field = $record['timestamp'];
                         break;
                     default:
-                        // this shouldn't be happening
+                        // this shouldn't be possible
                         break;
                 }
 
