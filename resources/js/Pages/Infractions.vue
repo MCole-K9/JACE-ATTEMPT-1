@@ -2,15 +2,18 @@
     import DashboardLayout from '../Layout/DashboardLayout.vue';
     import InfractionTable from '../Components/InfractionTable.vue';
     import {InfractionLog} from '../Lib/types';
+    import InfractionLogsModal from '../Components/InfractionLogsModal.vue'
+    import {ref, type Ref} from 'vue';
     import {Head} from '@inertiajs/vue3';
 
     defineProps<{infractions: InfractionLog[]}>();
+    const isModalVisible: Ref<boolean> = ref(false);
 
     function downloadReport(){
         let selector: HTMLSelectElement = document.getElementById('monthSelector') as HTMLSelectElement;
         let option: string = selector.options[selector.selectedIndex].value;
 
-        // couldn't get this working with X-XSRF-TOKEN, but it works with gettin the csrf token. i 
+        // couldn't get this working with X-XSRF-TOKEN, but it works with getting the csrf token. i 
         // don't know why
         let request = fetch('/api/csrf').then(response => {
             if (response.status == 200 && response.ok){
@@ -50,6 +53,14 @@
         });
     }
 
+    function raiseModal(){
+        isModalVisible.value = true;
+    }
+
+    function closeModal(){
+        isModalVisible.value = false;
+    }
+
 </script>
 <template>
     <DashboardLayout>
@@ -72,6 +83,7 @@
             </select>
             <button class="btn" @click="downloadReport">Download Report</button>
         </div>
-        <InfractionTable :infractions="infractions"/>
+        <InfractionTable :infractions="infractions" @action-pick="raiseModal"/>
+        <InfractionLogsModal :is-visible="isModalVisible" @close-modal="closeModal" />
     </DashboardLayout>
 </template>

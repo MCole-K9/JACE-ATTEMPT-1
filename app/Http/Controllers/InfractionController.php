@@ -39,7 +39,6 @@ class InfractionController extends Controller
     public function store(Request $request){
         $user = auth()->user();
 
-
         // need to rewrite this to send and work with the type of object that generated the infraction
         $input = $request->input('reason');
         $infraction = Infraction::create(['reason' => $input]);
@@ -69,21 +68,30 @@ class InfractionController extends Controller
         // ... which i'm not sure i want in the first place
     }
 
-    public function destroy(){
+    public function destroy(Request $request){
         $user = auth()->user();
+        $record = $request->getContent();
 
-        // need to get the id from the url
-
-        
-
+        $target = Infraction::find($record);
+        $target->delete();
     }
 
+    public static function getAllFormattedInfractions(){
+        $infractions = Infraction::all();
 
-    /* To do:
-    * - Everything: Authenticate for Admin
-    * - Create Infractions Page (Authenticate for Admin)
-    * - Add foreign key relationships with other entities (also, make *some* of the other necessary entities)
-    * - integrate model with activity logger
-    * - uhhh...
-    */
+        foreach ($infractions as $infraction){
+            $infraction->issuer()->get();
+            $infraction->receiver()->get();
+        }
+
+        return ['infractions' => $infractions->map(function ($infraction){
+            return ['id' => $infraction->id,
+                    'issuerId' => $infraction->issuer_id,
+                    'issuerName' => $infraction->issuer->first_name . ' ' . $infraction->issuer->last_name,
+                    'receiverId' => $infraction->receiver_id,
+                    'receiverName' => $infraction->receiver->first_name . ' ' . $infraction->receiver->last_name,
+                    'reason' => $infraction->reason,
+                    'timestamp' => $infraction->created_at];
+        })];
+    }
 }

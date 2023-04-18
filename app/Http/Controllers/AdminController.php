@@ -21,8 +21,6 @@ class AdminController extends Controller
         // i am ALSO very annoyed that this is configured to put server root in /public. but okay.
         $file = fopen($_SERVER['DOCUMENT_ROOT'] . '\activitylogs\exported_logs.csv', 'w');
         
-        // need to figure out how to make this not just plop a file directly into the directory
-        // probably just make a gitignore'd folder and then make all exports there (when i wake up)
         $activities = Activity::all();
         foreach ($activities as $activity){
             $activity->causer()->get();
@@ -37,7 +35,6 @@ class AdminController extends Controller
                     'causerName' => $activity->causer->first_name . ' ' . $activity->causer->last_name,
                     'timestamp' => $activity->created_at];
         });
-    
     
         foreach($logsCollection as $record){
             fputcsv($file, $record);
@@ -56,6 +53,7 @@ class AdminController extends Controller
         $option = $request->getContent();
         $year = strval(getdate()['year']);
         $filename = 'infraction_report-'.$option.'-'.$year.'.pdf';
+        $infractionsRecords = InfractionController::getAllFormattedInfractions()['infractions'];
 
         $fpdf = new InfractionPdf('L', 'mm', 'A4');
         $fpdf->month = $option;
@@ -63,15 +61,46 @@ class AdminController extends Controller
         $fpdf->SetCreator('Job Ace');
 
         $fpdf->AddPage();
-        
-        $fpdf->SetFont('Times', '', 12); // it's 'Times' according to the docs
-        $fpdf->Cell(50, 40, 'test'); 
+        $fpdf->createTableHeaders();
+
+        $header_widths = $fpdf->getColumnWidths();
+
+        $fpdf->SetFont('Times', '', 12);
+        foreach($infractionsRecords as $record){
+
+            for($i = 0; $i < 5; $i++){
+                $field = '';
+
+                switch ($i){
+                    case 0:
+                        $field = $record['id'];
+                        break;
+                    case 1:
+                        $field = $record['issuerName'].' ('.$record['issuerId'].')' ;
+                        break;
+                    case 2:
+                        $field = $record['receiverName'].' ('.$record['receiverId'].')';
+                        break;
+                    case 3:
+                        $field = $record['reason'];
+                        break;
+                    case 4:
+                        $field = $record['timestamp'];
+                        break;
+                    default:
+                        // this shouldn't be happening
+                        break;
+                }
+
+                $fpdf->Cell($header_widths[$i], 10, $field, 0, 0, 'C');
+            }
+            $fpdf->Ln();
+        }
+
         $fpdf->Output('F', $_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename);
     
         return response()->download($_SERVER['DOCUMENT_ROOT'] . '\infractionreports\\'.$filename, 'test.pdf', ['Content-Type' => 'application/pdf']);
-    
-        // Get all infractions in a collection
-        // (Possibly) turn them into an array
+
     
     }
 }

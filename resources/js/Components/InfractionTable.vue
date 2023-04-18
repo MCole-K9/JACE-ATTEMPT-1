@@ -2,6 +2,7 @@
     import {InfractionLog} from '../Lib/types';
 
     defineProps<{infractions: InfractionLog[]}>();
+    defineEmits<{(e: 'actionPick'): void}>();
 
 </script>
 <template>
@@ -36,7 +37,7 @@
                     <td>{{ infraction.receiverName }} (ID: {{ infraction.receiverId }})</td>
                     <td>{{ infraction.reason }}</td>
                     <td>{{ infraction.timestamp }}</td>
-                    <td><button class="btn">Pick an Action</button></td>
+                    <td><button class="btn" @click="$emit('actionPick')">Pick an Action</button></td>
                 </tr>
             </tbody>
         </table>
