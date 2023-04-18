@@ -56,6 +56,11 @@ const props = defineProps<{
 }>();
 
 
+defineExpose({
+    toggleRegisterModal,
+    setDrawer
+});
+
 onMounted(() => {
     //need a better way to do this
     //adding to each layout for now
