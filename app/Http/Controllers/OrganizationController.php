@@ -33,8 +33,6 @@ class OrganizationController extends Controller
             "zip" => ["required", "string", "max:255"],
         ]);
 
-        //mass assignment
-        //Auth::user()->orgRep->organization()->create($validatedFields, ["name" => Str::title($validatedFields["name"]), "email" => Str::lower($validatedFields["email"])] );
 
         //not liking this, needs to go in a transaction or something
         $org = Organization::create($validatedFields, ["name" => Str::title($validatedFields["name"]), "email" => Str::lower($validatedFields["email"])]);

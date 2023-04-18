@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique()->default(Str::uuid()->toString());
+            $table->string('code')->unique()->default(Str::random(12));
             $table->string('name');
             $table->string('street_address');
             $table->string('city');
