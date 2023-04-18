@@ -10,7 +10,6 @@ class InfractionController extends Controller
     public function index(){
         $infractions = Infraction::all();
 
-
         if ($infractions){
             return response($infractions, 200);
         }
@@ -52,7 +51,7 @@ class InfractionController extends Controller
             return response('Added Infraction', 201);
         }
         else {
-            return response('idk what to write yet', 403);
+            return response('Add Infraction: Not Authorized', 403);
         }
 
     }
