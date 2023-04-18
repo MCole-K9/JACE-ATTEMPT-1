@@ -44,7 +44,7 @@ Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard
 
 Route::resource("/jobs", JobController::class);
 
-Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("guest");
+Route::get("/candidates", [CandidateController::class, "index"])->name("candidates")->middleware("auth");
 
 Route::get("/profile", [ProfileController::class, "index"])->name("profile")->middleware("auth");
 Route::post("/profile", [ProfileController::class, "updateAvatar"])->name("profile.updateAvatar")->middleware("auth");

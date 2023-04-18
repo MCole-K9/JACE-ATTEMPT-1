@@ -8,7 +8,7 @@
   plugins: [require('@tailwindcss/forms')]
 -->
 
-<footer aria-label="Site Footer" class="bg-gray-900">
+<footer aria-label="Site Footer" class="bg-white">
   <div class="mx-auto max-w-screen-xl px-4 pt-8 pb-4 sm:px-6 lg:px-8">
     <!-- <div class="mx-auto max-w-md">
       <strong
@@ -39,7 +39,7 @@
 
     <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
       <div class="mx-auto max-w-sm lg:max-w-none">
-        <p class="mt-4 text-center text-white font-bold lg:text-left lg:text-lg">
+        <p class="mt-4 text-center text-black font-bold lg:text-left lg:text-lg">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium
           natus quod eveniet aut perferendis distinctio iusto repudiandae,
           provident velit earum?
@@ -166,16 +166,16 @@
             aria-label="Footer Services Nav"
             class="mt-6 flex flex-col space-y-1"
           >
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               Marketing
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               Graphic Design
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               App Development
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               Web Development
             </a>
           </nav>
@@ -188,16 +188,16 @@
             aria-label="Footer About Nav"
             class="mt-6 flex flex-col space-y-1"
           >
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/about">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/about">
               About
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/jobs">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/jobs">
               Jobs
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/organization">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/organization">
               Organizations
             </a>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               Our Team
             </a>
           </nav>
@@ -210,11 +210,11 @@
             aria-label="Footer Support Nav"
             class="mt-6 flex flex-col space-y-1"
           >
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/">
               FAQs
             </a>
 
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="/contact">
+            <a class="text-gray-1100 transition hover:text-gray-700" href="/contact">
               Contact
             </a>
           </nav>
@@ -224,22 +224,7 @@
 
     <div class="mt-16 border-t border-gray-100 pt-8">
       <p class="text-center text-xs leading-relaxed text-gray-500">
-        © Company 2022. All rights reserved.
-
-        <br />
-
-        Created with
-        <a
-          href=""
-          class="text-gray-700 underline transition hover:text-gray-700/75"
-          >Laravel</a
-        >
-        and
-        <a
-          href=""
-          class="text-gray-700 underline transition hover:text-gray-700/75"
-          >Laravel Livewire</a
-        >.
+        © Job Ace 2023. All rights reserved.
       </p>
     </div>
   </div>

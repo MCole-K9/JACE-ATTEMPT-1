@@ -3,7 +3,7 @@
 			<div class="dropdown-container">
 				<div class="dropdown">
 					<label class="btn btn-ghost flex cursor-pointer px-0" tabindex="0">
-						<img :src="user.getAvatarUrl" alt="avatar" />
+						<img :src="user.getAvatarUrl ?? (user.profileChanged ? user.getTempAvatarUrl : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png')" alt="avatar" />
 					</label>
 					<div class="dropdown-menu dropdown-menu-bottom-left">
                         <label class="text-xs text-center"> Signed In As</label>
