@@ -20,7 +20,7 @@
     <div class="relative">
       <div class="w-44 h-44 bg-gray-700 outline outline-primary mx-auto rounded-full shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500 relative">
 
-        <img :src="user.getAvatarUrl" class="rounded-full aspect-square">
+        <img :key="avatarChanged" :src="user.getAvatarUrl ?? 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png'" class="rounded-full aspect-square">
    
     <div class="dropdown dropdown-hover absolute bottom-0 right-3">
         <label class="btn btn-circle btn-primary">
@@ -69,21 +69,23 @@ import HomeLayout from '../Layout/HomeLayout.vue';
   import { router } from '@inertiajs/vue3';
   import { ref } from 'vue';
   import { Logger } from 'tslog';
+  let logger = new Logger();
   const user  = userStore();
+  let profileUrl = ref<string>(user.getAvatarUrl);
+let avatarChanged = ref<number>(0);
   console.log(user.getAvatarUrl);
   
   
   function updateAvatar(url:string) {
-    router.post('/profile', 
-       {
-        avatar_url: url
-      }
-    )
+    router.post('/profile', {avatar_url: url})
+    
   }
 
+  // function setAvatarVariable() {
+  //   profileUrl.value = user.getAvatarUrl ?? (user.profileChanged ? user.getTempAvatarUrl : 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png');
+  // }
 
-  let profileUrl = ref<string>('');
-  let logger = new Logger();
+  // setAvatarVariable();
   // Initialize once (at the start of your app).
   const uploader = Uploader({ apiKey:  "public_kW15bD7FEoSdPpyfcwPiPUtS4UUa"}); // Your real API key.
 
@@ -112,7 +114,9 @@ import HomeLayout from '../Layout/HomeLayout.vue';
             // profileUrl.value = files[0].fileUrl;
             // user.avatar_url = files[0].fileUrl;
             updateAvatar(files[0].fileUrl);
-
+              user.setAvatarUrl(files[0].fileUrl)
+              // location.reload();
+              avatarChanged.value++;
           }
         })
       }

@@ -9,6 +9,7 @@ let user: User | null = null;
 export const userStore = defineStore("user", {
     state: () => ({
         user: user,
+        profileChanged: false,
     }),
     getters: {
         getFullName(): string {
@@ -16,6 +17,9 @@ export const userStore = defineStore("user", {
         },
         getAvatarUrl(): string {
             return this.user?.avatar_url as string;
+        },
+        getTempAvatarUrl(): string | undefined {
+            return this.user?.temp_avatar_url;
         },
         isAdmin(): boolean {
             return this.user?.role_id === Roles.Admin;
@@ -43,6 +47,9 @@ export const userStore = defineStore("user", {
 
 
 
+        },
+        setAvatarUrl(url: string) {
+            this.user!.avatar_url = url;
         },
         logOut() {
             //might move

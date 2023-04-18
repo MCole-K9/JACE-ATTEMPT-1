@@ -22,9 +22,7 @@ class ProfileController extends Controller
             'avatar_url' => 'nullable|url',
         ]);
         User::where('id', Auth::user()->id)->update($validatedFields);
-        // $user = User::find(Auth::user()->id);
-        // $user->avatar_url = $request->avatar_url;
-        // $user->save();
-        return redirect()->route('profile');
+        // return redirect()->back();
+        
     }
 }

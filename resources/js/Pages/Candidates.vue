@@ -54,7 +54,7 @@
                     <div class="w-full border border-gray-200 rounded-lg bg-white outline outline-gray-500 shadow-xl relative p-5" v-for="c in pagination.currentPageArray.value">
                     <div class="flex justify-between">
                       <div class="flex items-center">
-                          <img class="w-16 h-16 mb-3 rounded-full shadow-lg" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="user avatar"/>
+                          <img class="w-16 h-16 mb-3 rounded-full shadow-lg" :src="c.avatar_url ?? 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png'" alt="user avatar"/>
                           <span class="ml-3 -mt-3">
                             <h5 class="text-lg font-bold text-black">{{c.first_name}} {{ c.last_name }}</h5>
                             <p class="text-sm text-gray-1100">{{ c.email }}</p> 
@@ -113,14 +113,16 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from 'vue';
 import HomeLayout from '../Layout/HomeLayout.vue';
 import { ref } from 'vue';
 import { Pagination } from '../Lib/handlePagination';
 import { User } from '../Lib/types';
 import { usePage } from '@inertiajs/vue3';
+import {userStore} from '../Stores/userStore';
 import { Logger } from 'tslog';
 const log = new Logger();
+const user = userStore();
+
 
 
 const page = usePage();
