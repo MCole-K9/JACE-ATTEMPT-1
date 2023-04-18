@@ -76,10 +76,10 @@ class AdminController extends Controller
                         $field = $record['id'];
                         break;
                     case 1:
-                        $field = $record['issuerName'];
+                        $field = $record['issuerName'].' ('.$record['issuerId'].')' ;
                         break;
                     case 2:
-                        $field = $record['receiverName'];
+                        $field = $record['receiverName'].' ('.$record['receiverId'].')';
                         break;
                     case 3:
                         $field = $record['reason'];
