@@ -19,15 +19,8 @@ let form = reactive({
     email: '',
     password: '',
     confirm_password: '',
-    role_id: 3
-});
-
-let errors = reactive({
-    first_name: (usePage().props?.errors.first_name != undefined),
-    last_name: (usePage().props?.errors.last_name != undefined),
-    email: computed(() => usePage().props?.errors.email ? true : false).value,
-    password: computed(() => usePage().props?.errors.password ? true : false).value,
-    role_id: computed(() => usePage().props?.errors.role_id ? true : false).value,
+    role_id: 3,
+    org: <string | null>(null),
 });
 
 let bool = ref(true);
@@ -44,9 +37,12 @@ onMounted(() => {
     let usrRole = url.searchParams.get("role");
 
 
+
     if (usrRole && parseInt(usrRole) == Roles.Candidate || usrRole && parseInt(usrRole) == Roles.OrganizationRep) {
         form.role_id = parseInt(usrRole);
     }
+
+    form.org = url.searchParams.get("org");
 
 });
 
