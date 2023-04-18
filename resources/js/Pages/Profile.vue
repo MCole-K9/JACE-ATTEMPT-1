@@ -42,10 +42,13 @@
   </div>
 
   <div class="mt-20 text-center border-b pb-12">
-    <h1 class="text-4xl font-medium text-gray-1100">John Doe</h1>
-    <p class="font-light text-gray-1100 mt-3">Bucharest, Romania</p>
+    <h1 class="text-4xl font-medium text-gray-1100">{{user.getFullName}}</h1>
+    <!-- <p class="font-light text-gray-1100 mt-3">Bucharest, Romania</p> -->
 
-    <p class="mt-8 text-gray-1100">Solution Manager - Creative Tim Officer</p>
+    <p class="mt-8 text-gray-1100" v-if="user.isAdmin">Candidate</p>
+    <p class="mt-8 text-gray-1100" v-if="user.isOrgRep">Organization Representative</p>
+    <p class="mt-8 text-gray-1100" v-if="user.isOrgAdmin">Organization Admin</p>
+    <p class="mt-8 text-gray-1100" v-if="user.isAdmin">Admin</p>
     <p class="mt-2 text-gray-1100">University of Computer Science</p>
   </div>
 
