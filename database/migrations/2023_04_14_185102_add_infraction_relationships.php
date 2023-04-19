@@ -34,7 +34,6 @@ return new class extends Migration
         Schema::table('infractions', function (Blueprint $table) {
             $table->dropConstrainedForeignId('issuer_id');
             $table->dropConstrainedForeignId('receiver_id');
- 
         });
     }
 };

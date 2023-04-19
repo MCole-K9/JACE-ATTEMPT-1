@@ -49,6 +49,7 @@ class InfractionController extends Controller
             activity('infraction')->
             performedOn($infraction)->
             causedBy($user)->
+            
             log('Infraction Created for');
 
             return response('Added Infraction', 201);
